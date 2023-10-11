@@ -38,7 +38,7 @@ const Navbar = () => {
                 <a class="nav-link" href="#" data-uri="/game">A propos</a>
               </li>
               <li class="nav-item">
-                <a class="btn btn-primary" href="#" data-uri="/new">Login/Register</a>
+                <a class="btn btn-primary" href="#" data-uri="/login">Login/Register</a>
               </li>                        
             </ul>
           </div>
