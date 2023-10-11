@@ -11,7 +11,7 @@ import { Navbar as BootstrapNavbar } from 'bootstrap';
 const Navbar = () => {
   const navbarWrapper = document.querySelector('#navbarWrapper');
   const navbar = `
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 bg-body-tertiary rounded">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Add your brand here</a>
           <button
@@ -26,15 +26,19 @@ const Navbar = () => {
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <form class="form-inline mx-auto d-flex">
+              <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
+              <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Rechercher</button>
+            </form>
+            <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#" data-uri="/">Home</a>
+                <a class="nav-link" aria-current="page" href="#" data-uri="/">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" data-uri="/game">Game</a>
+                <a class="nav-link" href="#" data-uri="/game">A propos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" data-uri="/new">New Page</a>
+                <a class="btn btn-primary" href="#" data-uri="/new">Login/Register</a>
               </li>                        
             </ul>
           </div>
