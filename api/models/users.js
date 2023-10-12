@@ -60,35 +60,12 @@ async function register(username, password) {
   return authenticatedUser;
 }
 
-async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passwordSite) {
-  const users = parse(jsonDbPath, defaultUsers);
-  const index = userFromUserId(usersId);
-  const userFound = users[index];
-  console.log(userFound);
-  const newAccount = {
-    url: urlSite, site: siteName, login: usernameSite, mot_de_passe: passwordSite,
-  };
-
-  userFound.sites.push(newAccount);
-  users[index] = userFound;
-  serialize(jsonDbPath, users);
-  return userFound;
-}
-
 function readOneUserFromUsername(username) {
   const users = parse(jsonDbPath, defaultUsers);
   const indexOfUserFound = users.findIndex((user) => user.username === username);
   if (indexOfUserFound < 0) return undefined;
 
   return users[indexOfUserFound];
-}
-
-function userFromUserId(userId) {
-  const users = parse(jsonDbPath, defaultUsers);
-  const indexOfUserFound = users.findIndex((user) => user.id === userId);
-  if (indexOfUserFound < 0) return undefined;
-  console.log(indexOfUserFound);
-  return parseInt(indexOfUserFound, 10);
 }
 
 async function createOneUser(username, password) {
@@ -116,6 +93,30 @@ function getNextId() {
   const lastId = users[lastItemIndex]?.id;
   const nextId = lastId + 1;
   return nextId;
+}
+
+// Method needed to add a password on the data base
+
+async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passwordSite) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const index = userFromUserId(usersId);
+  const userFound = users[index];
+  const newAccount = {
+    url: urlSite, site: siteName, login: usernameSite, mot_de_passe: passwordSite,
+  };
+
+  userFound.sites.push(newAccount);
+  users[index] = userFound;
+  serialize(jsonDbPath, users);
+  return userFound;
+}
+
+// Function needed to find one index of a user
+function userFromUserId(userId) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const indexOfUserFound = users.findIndex((user) => user.id === userId);
+  if (indexOfUserFound < 0) return undefined;
+  return parseInt(indexOfUserFound, 10);
 }
 
 module.exports = {

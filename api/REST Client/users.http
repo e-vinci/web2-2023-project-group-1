@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:3000
+
+###Ajout d'un site avec un mot de passe 
+POST {{baseUrl}}/users/addSite
+Content-Type: application/json
+
+{
+"userId":"1",
+"urlSite":"test01",
+"siteName":"testSite1",
+"usernameSite":"Useraname1",
+"passwordSite":"patate05"
+}

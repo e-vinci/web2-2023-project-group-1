@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
   res.json({ users: [{ name: 'e-baron' }] });
 });
 
+/* POST add 1 site to my db */
 router.post('/addSite', (req) => {
   const usersId = parseInt(req.body.userId, 10);
   const { urlSite } = req.body;
