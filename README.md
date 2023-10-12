@@ -1,7 +1,7 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=12324464&assignment_repo_type=AssignmentRepo)
 # Projet Web2 2023
 ## Introduction
-- Ce boilerplate vous offre l'architecture de base de votre frontend et de votre API pour développer un projet qui vous tient à coeur et qui répond aux exigences résumées ci-dessous (et détaillées dans le template du rapport de projet). 
+- Ce boilerplate vous offre l'architecture de base de votre frontend et de votre API pour développer un projet qui vous tient à coeur et qui   répond aux exigences résumées ci-dessous (et détaillées dans le template du rapport de projet). 
 - Vous pouvez mettre à jour le boilerplate autant que nécessaire, installer des packages...
 - Votre web repository sur GitHub doit être public.
 
