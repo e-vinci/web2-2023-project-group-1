@@ -36,3 +36,15 @@ Content-Type: application/json
     "username":"manager",
     "password":"manager"
 }
+
+###Test1
+POST {{baseUrl}}/users/addSite
+Content-Type: application/json
+
+{
+"userId":"1",
+"urlSite":"test01",
+"siteName":"testSite1",
+"usernameSite":"Useraname1",
+"passwordSite":"patate05"
+}

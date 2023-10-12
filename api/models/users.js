@@ -8,13 +8,14 @@ const lifetimeJwt = 24 * 60 * 60 * 1000; // in ms : 24 * 60 * 60 * 1000 = 24h
 
 const saltRounds = 10;
 
-const jsonDbPath = path.join(__dirname, '/../data/users.json');
+const jsonDbPath = path.join(__dirname, '../../data/users.json');
 
 const defaultUsers = [
   {
     id: 1,
     username: 'admin',
     password: bcrypt.hashSync('admin', saltRounds),
+    sites: {},
   },
 ];
 
@@ -59,12 +60,35 @@ async function register(username, password) {
   return authenticatedUser;
 }
 
+async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passwordSite) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const index = userFromUserId(usersId);
+  const userFound = users[index];
+  console.log(userFound);
+  const newAccount = {
+    url: urlSite, site: siteName, login: usernameSite, mot_de_passe: passwordSite,
+  };
+
+  userFound.sites.push(newAccount);
+  users[index] = userFound;
+  serialize(jsonDbPath, users);
+  return userFound;
+}
+
 function readOneUserFromUsername(username) {
   const users = parse(jsonDbPath, defaultUsers);
   const indexOfUserFound = users.findIndex((user) => user.username === username);
   if (indexOfUserFound < 0) return undefined;
 
   return users[indexOfUserFound];
+}
+
+function userFromUserId(userId) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const indexOfUserFound = users.findIndex((user) => user.id === userId);
+  if (indexOfUserFound < 0) return undefined;
+  console.log(indexOfUserFound);
+  return parseInt(indexOfUserFound, 10);
 }
 
 async function createOneUser(username, password) {
@@ -98,4 +122,5 @@ module.exports = {
   login,
   register,
   readOneUserFromUsername,
+  addPasswordOnSite,
 };

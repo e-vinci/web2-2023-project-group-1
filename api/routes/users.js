@@ -1,4 +1,5 @@
 const express = require('express');
+const { addPasswordOnSite } = require('../models/users');
 
 const router = express.Router();
 
@@ -7,4 +8,12 @@ router.get('/', (req, res) => {
   res.json({ users: [{ name: 'e-baron' }] });
 });
 
+router.post('/addSite', (req) => {
+  const usersId = parseInt(req.body.userId, 10);
+  const { urlSite } = req.body;
+  const { siteName } = req.body;
+  const { usernameSite } = req.body;
+  const { passwordSite } = req.body;
+  addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passwordSite);
+});
 module.exports = router;
