@@ -9,12 +9,14 @@ router.get('/', (req, res) => {
 });
 
 /* POST add 1 site to my db */
-router.post('/addSite', (req) => {
+router.post('/addSite', (req, res) => {
   const usersId = parseInt(req.body.userId, 10);
-  const { urlSite } = req.body;
-  const { siteName } = req.body;
-  const { usernameSite } = req.body;
-  const { passwordSite } = req.body;
-  addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passwordSite);
+  const {
+    urlSite, siteName, userNameSite, passwordSite,
+  } = req.body;
+  if (!urlSite || !siteName || !userNameSite || !passwordSite || usersId < 0) {
+    res.status(400);
+  }
+  addPasswordOnSite(usersId, urlSite, siteName, userNameSite, passwordSite);
 });
 module.exports = router;
