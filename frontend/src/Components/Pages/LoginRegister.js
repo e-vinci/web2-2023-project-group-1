@@ -1,9 +1,16 @@
-const form = `<h1>Login</h1>
-<h1>Register</h1>`;
+import {switchListener, formLogin, divEnveloppanteFormulaire} from '../Forms/Forms';
 
 const LoginRegister = () => {
     const main = document.querySelector('main');
-    main.innerHTML = form;
+    main.className = 'd-flex align-items-center justify-content-center';
+    main.innerHTML = divEnveloppanteFormulaire;
+    const divEnveloppante = document.querySelector('#Enveloppante');
+    divEnveloppante.innerHTML = formLogin;
+    switchListener();
 };
+
+
+
+
 
 export default LoginRegister;
