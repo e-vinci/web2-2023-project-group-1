@@ -19,8 +19,7 @@ const defaultUsers = [
 async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passwordSite) {
   const index = userFromUserId(usersId);
   const idSite = getNextIdSite(index);
-  console.log('id:');
-  console.log(idSite);
+
   const newAccount = {
     id: idSite,
     url: urlSite,
@@ -43,7 +42,6 @@ function toDatabaseSites(usersite, indexUser, indexSite, state) {
     users[indexUser] = userFound;
   }
   serialize(jsonDbPath, users);
-  console.log(userFound);
   return userFound;
 }
 
@@ -61,8 +59,7 @@ function getNextIdSite(indexUser) {
   const lastItemIndex = getLastIndexSite(indexUser);
   const id = users[indexUser].sites[lastItemIndex]?.id;
   if (!id) return 1;
-  console.log('last id');
-  console.log(id);
+
   const nextId = id + 1;
 
   return nextId;
@@ -71,10 +68,9 @@ function getNextIdSite(indexUser) {
 function getLastIndexSite(indexUser) {
   const users = parse(jsonDbPath, defaultUsers);
   if (users[indexUser].sites.length >= 1) {
-    console.log('in if');
     return users[indexUser].sites.length - 1;
   }
-  console.log('in else');
+
   return -1;
 }
 
