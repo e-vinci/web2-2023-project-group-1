@@ -6,7 +6,7 @@
     "debug": "npm run dev",
     "dev": "nodemon ./bin/www",
     "start": "nodemon ./bin/www",
-    "lint": "eslint **/*.js",
+    "lint": "eslint \"**/*.js\"",
     "lint:fix": "npm run lint -- --fix"
   },
   "nodemonConfig": {
