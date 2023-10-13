@@ -5,7 +5,7 @@
   "scripts": {
     "debug": "npm run dev",
     "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "lint": "eslint **/*.js",
     "lint:fix": "npm run lint -- --fix"
   },
@@ -28,7 +28,7 @@
   "devDependencies": {
     "eslint": "^8.19.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "nodemon": "^2.0.19",
+    "nodemon": "^2.0.22",
     "prettier-airbnb-config": "^1.0.0"
   },
   "author": "e-Baron"
