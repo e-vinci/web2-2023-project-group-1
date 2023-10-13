@@ -74,22 +74,31 @@ function getLastIndexSite(indexUser) {
   return -1;
 }
 
-// Method needed to remove a site on the data base
+/**
+ * Remove a site from a user
+ * @param {Number} userId the user id to delete a site
+ * @param {Number} siteId the site id to delete
+ * @returns deleted site
+ */
 async function removeSite(userId, siteId) {
   const users = parse(jsonDbPath, defaultUsers);
 
   const indexUser = userFromUserId(userId);
   const indexSite = siteFromSiteId(siteId);
 
-  const deletedSites = users[indexUser].sites[indexSite + 1].splice(indexSite, 1);
-
-  const deletedSite = deletedSites[0];
+  const deletedSite = users[indexUser].sites.splice(indexSite, 1);
 
   serialize(jsonDbPath, users);
 
   return deletedSite;
 }
 
+/**
+ * Find index of the site of a user
+ * @param {*} indexUser the index of the user who wants to delete a site
+ * @param {*} siteId the id of the site to delete
+ * @returns index of the site of a user if found, undefined otherwise
+ */
 // Function needed to find one index of a site
 function siteFromSiteId(indexUser, siteId) {
   const allUserSites = getAllUserSites(indexUser);
@@ -98,7 +107,11 @@ function siteFromSiteId(indexUser, siteId) {
   return parseInt(indexSite, 10);
 }
 
-// Method needed to get all sites of a user
+/**
+ * Get all sites of a user
+ * @param {*} indexUser the index of the user who wants to have all his sites
+ * @returns all sites of a user if found, undefined otherwise
+ */
 function getAllUserSites(indexUser) {
   const users = parse(jsonDbPath, defaultUsers);
   const user = users[indexUser];

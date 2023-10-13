@@ -17,11 +17,13 @@ router.post('/addSite', async (req, res) => {
 });
 
 /**
- * DELETE delete a site by id
+ * Delete a site from the database
+ * @param {Object} req object of the request.
+ * @param {Object} res object of the response.
  */
 router.delete('/deleteSite', async (req, res) => {
   const userId = parseInt(req.body.userId, 10);
-  const siteId = parseInt(req.body.siteId, 10);
+  const siteId = parseInt(req.body.id, 10);
 
   if (!userId || !siteId) {
     return res.sendStatus(400);
