@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const path = require('node:path');
+const jwt = require('jsonwebtoken');
 const { parse, serialize } = require('../utils/json');
 
 const saltRounds = 10;
@@ -74,4 +75,11 @@ function getLastIndexSite(indexUser) {
   return -1;
 }
 
-module.exports = { addPasswordOnSite };
+async function getAllSite(token) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const decodedUser = jwt.decode(token);
+  const { sites } = users[userFromUserId(decodedUser.id)];
+  return sites;
+}
+
+module.exports = { addPasswordOnSite, getAllSite };

@@ -1,13 +1,21 @@
 @baseUrl = http://localhost:3000
 
-###Ajout d'un site avec un mot de passe 
-POST {{baseUrl}}/users/addSite
+### Login the default admin
+##### Define a request variable nammed admin
+#@name admin
+POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
 {
-"userId":"1",
-"urlSite":"test01",
-"siteName":"testSite1",
-"usernameSite":"Useraname1",
-"passwordSite":"patate05"
+    "username":"admin",
+    "password":"admin"
 }
+
+
+
+
+###Get List sites by token
+GET {{baseUrl}}/users
+Content-Type: application/json
+Authorization: {{adminToken}}
+
