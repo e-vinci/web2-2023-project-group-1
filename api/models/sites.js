@@ -74,4 +74,36 @@ function getLastIndexSite(indexUser) {
   return -1;
 }
 
-module.exports = { addPasswordOnSite };
+// Method needed to remove a site on the data base
+async function removeSite(userId, siteId) {
+  const users = parse(jsonDbPath, defaultUsers);
+
+  const indexUser = userFromUserId(userId);
+  const indexSite = siteFromSiteId(siteId);
+
+  const deletedSites = users[indexUser].sites[indexSite + 1].splice(indexSite, 1);
+
+  const deletedSite = deletedSites[0];
+
+  serialize(jsonDbPath, users);
+
+  return deletedSite;
+}
+
+// Function needed to find one index of a site
+function siteFromSiteId(indexUser, siteId) {
+  const allUserSites = getAllUserSites(indexUser);
+  const indexSite = allUserSites.findIndex((site) => site.id === siteId);
+  if (indexSite < 0) return undefined;
+  return parseInt(indexSite, 10);
+}
+
+// Method needed to get all sites of a user
+function getAllUserSites(indexUser) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const user = users[indexUser];
+  const allUserSites = user.sites;
+  return allUserSites;
+}
+
+module.exports = { addPasswordOnSite, removeSite };

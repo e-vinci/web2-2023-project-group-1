@@ -1,5 +1,5 @@
 const express = require('express');
-const { addPasswordOnSite } = require('../models/sites');
+const { addPasswordOnSite, removeSite } = require('../models/sites');
 
 const router = express();
 
@@ -13,6 +13,21 @@ router.post('/addSite', async (req, res) => {
     return res.sendStatus(400);
   }
   const returned = await addPasswordOnSite(usersId, urlSite, siteName, userNameSite, passwordSite);
+  return res.json(returned);
+});
+
+/**
+ * DELETE delete a site by id
+ */
+router.delete('/deleteSite', async (req, res) => {
+  const userId = parseInt(req.body.userId, 10);
+  const siteId = parseInt(req.body.siteId, 10);
+
+  if (!userId || !siteId) {
+    return res.sendStatus(400);
+  }
+
+  const returned = await removeSite(userId, siteId);
   return res.json(returned);
 });
 
