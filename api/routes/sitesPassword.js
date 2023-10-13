@@ -1,5 +1,5 @@
 const express = require('express');
-const { addPasswordOnSite } = require('../models/users');
+const { addPasswordOnSite } = require('../models/sites');
 
 const router = express();
 

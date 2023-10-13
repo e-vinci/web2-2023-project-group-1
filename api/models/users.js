@@ -95,33 +95,8 @@ function getNextId() {
   return nextId;
 }
 
-// Method needed to add a password on the data base
-
-async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passwordSite) {
-  const users = parse(jsonDbPath, defaultUsers);
-  const index = userFromUserId(usersId);
-  const userFound = users[index];
-  const newAccount = {
-    url: urlSite, site: siteName, login: usernameSite, mot_de_passe: passwordSite,
-  };
-
-  userFound.sites.push(newAccount);
-  users[index] = userFound;
-  serialize(jsonDbPath, users);
-  return userFound;
-}
-
-// Function needed to find one index of a user
-function userFromUserId(userId) {
-  const users = parse(jsonDbPath, defaultUsers);
-  const indexOfUserFound = users.findIndex((user) => user.id === userId);
-  if (indexOfUserFound < 0) return undefined;
-  return parseInt(indexOfUserFound, 10);
-}
-
 module.exports = {
   login,
   register,
   readOneUserFromUsername,
-  addPasswordOnSite,
 };

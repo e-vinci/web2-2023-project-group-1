@@ -28,7 +28,7 @@ async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passw
     login: usernameSite,
     mot_de_passe: bcrypt.hashSync(passwordSite, saltRounds),
   };
-  return toDatabaseSites(newAccount, index, idSite, 'ADD');
+  return toDatabaseSites(newAccount, index, getLastIndexSite(index), 'ADD');
 }
 
 /* Add or modify site  */
@@ -38,7 +38,8 @@ function toDatabaseSites(usersite, indexUser, indexSite, state) {
   if (state === 'ADD') {
     if (indexUser > users.length) return undefined;
     userFound = users[indexUser];
-    userFound.sites[indexSite].push(usersite);
+    userFound.sites[indexSite + 1] = usersite;
+
     users[indexUser] = userFound;
   }
   serialize(jsonDbPath, users);
@@ -57,15 +58,24 @@ function userFromUserId(userId) {
 // Get the id after the last of the list
 function getNextIdSite(indexUser) {
   const users = parse(jsonDbPath, defaultUsers);
-  let lastItemIndex;
-  if (users[indexUser].site.length > 1) {
-    lastItemIndex = users[indexUser].sites.length - 1;
-  } else {
-    lastItemIndex = 1;
-  }
-  const lastId = users[indexUser].site[lastItemIndex]?.id;
-  const nextId = lastId + 1;
+  const lastItemIndex = getLastIndexSite(indexUser);
+  const id = users[indexUser].sites[lastItemIndex]?.id;
+  if (!id) return 1;
+  console.log('last id');
+  console.log(id);
+  const nextId = id + 1;
+
   return nextId;
+}
+
+function getLastIndexSite(indexUser) {
+  const users = parse(jsonDbPath, defaultUsers);
+  if (users[indexUser].sites.length >= 1) {
+    console.log('in if');
+    return users[indexUser].sites.length - 1;
+  }
+  console.log('in else');
+  return -1;
 }
 
 module.exports = { addPasswordOnSite };
