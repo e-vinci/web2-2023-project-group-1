@@ -21,7 +21,7 @@ router.post('/addSite', async (req, res) => {
  * @param {Object} req object of the request.
  * @param {Object} res object of the response.
  */
-router.delete('/deleteSite', async (req, res) => {
+router.delete('/deleteSite', (req, res) => {
   const userId = parseInt(req.body.userId, 10);
   const siteId = parseInt(req.body.id, 10);
 
@@ -29,7 +29,12 @@ router.delete('/deleteSite', async (req, res) => {
     return res.sendStatus(400);
   }
 
-  const returned = await removeSite(userId, siteId);
+  const returned = removeSite(userId, siteId);
+
+  if (!returned) {
+    return res.sendStatus(404);
+  }
+
   return res.json(returned);
 });
 

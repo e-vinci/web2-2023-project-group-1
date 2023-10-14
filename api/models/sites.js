@@ -80,11 +80,14 @@ function getLastIndexSite(indexUser) {
  * @param {Number} siteId the site id to delete
  * @returns deleted site
  */
-async function removeSite(userId, siteId) {
+function removeSite(userId, siteId) {
   const users = parse(jsonDbPath, defaultUsers);
 
   const indexUser = userFromUserId(userId);
-  const indexSite = siteFromSiteId(siteId);
+
+  const indexSite = siteFromSiteId(userId, siteId);
+
+  if (indexSite === undefined) return undefined;
 
   const deletedSite = users[indexUser].sites.splice(indexSite, 1);
 
@@ -114,7 +117,7 @@ function siteFromSiteId(indexUser, siteId) {
  */
 function getAllUserSites(indexUser) {
   const users = parse(jsonDbPath, defaultUsers);
-  const user = users[indexUser];
+  const user = users.find((usera) => usera.id === indexUser);
   const allUserSites = user.sites;
   return allUserSites;
 }
