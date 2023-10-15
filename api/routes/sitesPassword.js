@@ -1,5 +1,5 @@
 const express = require('express');
-const { addPasswordOnSite, removeSite } = require('../models/sites');
+const { addPasswordOnSite, removeSite, updatePassword } = require('../models/sites');
 
 const router = express();
 
@@ -38,4 +38,26 @@ router.delete('/deleteSite', (req, res) => {
   return res.json(returned);
 });
 
+/**
+ * Update a password
+ */
+router.patch('/updateSite', (req, res) => {
+  const userId = parseInt(req?.body?.userId, 10);
+  const siteId = parseInt(req?.body?.id, 10);
+  const siteName = req?.body?.site;
+  const url = req?.body?.url;
+  const password = req?.body?.password;
+  const userName = req?.body?.login;
+
+  if (!userId || !siteId) {
+    return res.sendStatus(400);
+  }
+  const updatedPassword = updatePassword(userId, siteId, password, url, siteName, userName);
+
+  if (!updatedPassword) {
+    return res.sendStatus(404);
+  }
+
+  return res.json(updatedPassword);
+});
 module.exports = router;
