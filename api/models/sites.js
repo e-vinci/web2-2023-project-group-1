@@ -112,14 +112,42 @@ function siteFromSiteId(indexUser, siteId) {
 
 /**
  * Get all sites of a user
- * @param {*} indexUser the index of the user who wants to have all his sites
+ * @param {*} userId the index of the user who wants to have all his sites
  * @returns all sites of a user if found, undefined otherwise
  */
-function getAllUserSites(indexUser) {
+function getAllUserSites(userId) {
   const users = parse(jsonDbPath, defaultUsers);
-  const user = users.find((usera) => usera.id === indexUser);
+  const user = users.find((usera) => usera.id === userId);
   const allUserSites = user.sites;
   return allUserSites;
 }
 
-module.exports = { addPasswordOnSite, removeSite };
+/**
+ * Update password
+ */
+function updatePassword(userId, siteId, password, url, siteName, userName) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const userIndex = users.findIndex((s) => s.id === userId);
+  const user = users.find((userUpdate) => userUpdate.id === userId);
+  const allSites = getAllUserSites(userId);
+  const siteIndex = allSites.findIndex((s) => s.id === siteId);
+  const copieSite = { ...allSites[siteIndex] };
+  if (userName !== undefined) {
+    copieSite.login = userName;
+  }
+  if (password !== undefined) {
+    copieSite.mot_de_passe = bcrypt.hashSync(password, saltRounds);
+  }
+  if (url !== undefined) {
+    copieSite.url = url;
+  }
+  if (siteName !== undefined) {
+    copieSite.site = siteName;
+  }
+  allSites[siteIndex] = copieSite;
+  user.sites = allSites;
+  users[userIndex] = user;
+  serialize(jsonDbPath, users);
+  return copieSite;
+}
+module.exports = { addPasswordOnSite, removeSite, updatePassword };
