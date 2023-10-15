@@ -40,11 +40,11 @@ async function login(username, password) {
   return authenticatedUser;
 }
 
-async function register(username, password) {
+async function register(username, email, password) {
   const userFound = readOneUserFromUsername(username);
   if (userFound) return undefined;
 
-  await createOneUser(username, password);
+  await createOneUser(username, email, password);
 
   const token = jwt.sign(
     { username }, // session data added to the payload (payload : part 2 of a JWT)
@@ -68,15 +68,17 @@ function readOneUserFromUsername(username) {
   return users[indexOfUserFound];
 }
 
-async function createOneUser(username, password) {
+async function createOneUser(username, email, password) {
   const users = parse(jsonDbPath, defaultUsers);
-
+  const sites = {};
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   const createdUser = {
     id: getNextId(),
     username,
+    email,
     password: hashedPassword,
+    sites,
   };
 
   users.push(createdUser);
