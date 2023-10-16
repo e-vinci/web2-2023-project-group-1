@@ -14,46 +14,66 @@ const defaultUsers = [
   },
 ];
 
-// Method needed to add a password on the data base
-
+/**
+ * Prepare the data to add a password on a site
+ * @param {Number} usersId the user id to add a password on a site
+ * @param {String} urlSite the url of the site
+ * @param {String} siteName the name of the site
+ * @param {String} usernameSite the username of user on the site
+ * @param {String} passwordSite the password of user on the site
+ * @returns method to add a password on a site
+ */
 async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passwordSite) {
-  const index = userFromUserId(usersId);
-  const idSite = getNextIdSite(index);
+  const indexIndex = indexUserFromUserId(usersId);
+  const idSite = getNextIdSite(indexIndex);
 
-  const newAccount = {
+  const newSite = {
     id: idSite,
     url: urlSite,
     site: siteName,
     login: usernameSite,
     mot_de_passe: bcrypt.hashSync(passwordSite, saltRounds),
   };
-  return toDatabaseSites(newAccount, index, getLastIndexSite(index), 'ADD');
+  return toDatabaseSites(newSite, indexIndex, getLastIndexSite(indexIndex));
 }
 
-/* Add or modify site  */
-function toDatabaseSites(usersite, indexUser, indexSite, state) {
+/**
+ * Add a site to a user
+ * @param {JSON} usersite the site to add
+ * @param {Number} indexUser the index of the user to add a site
+ * @param {Number} indexSite the index of the site to add
+ * @returns the site added or undefined if user not found
+ */
+function toDatabaseSites(usersite, indexUser, indexSite) {
   const users = parse(jsonDbPath, defaultUsers);
-  let userFound;
-  if (state === 'ADD') {
-    if (indexUser > users.length) return undefined;
-    userFound = users[indexUser];
-    userFound.sites[indexSite + 1] = usersite;
 
-    users[indexUser] = userFound;
-  }
+  if (indexUser > users.length) return undefined;
+  const userFound = users[indexUser];
+  userFound.sites[indexSite + 1] = usersite;
+
+  users[indexUser] = userFound;
+
   serialize(jsonDbPath, users);
   return userFound;
 }
 
-// Function needed to find one index of a user
-function userFromUserId(userId) {
+/**
+ * Find index of the user
+ * @param {Number} userId the user id to find the index
+ * @returns index of the user if found, undefined otherwise
+ */
+function indexUserFromUserId(userId) {
   const users = parse(jsonDbPath, defaultUsers);
   const indexOfUserFound = users.findIndex((user) => user.id === userId);
   if (indexOfUserFound < 0) return undefined;
   return parseInt(indexOfUserFound, 10);
 }
 
-// Get the id after the last of the list
+/**
+ * Get the next id of a site
+ * @param {Number} indexUser the index of the user who wants to have the next id of a site
+ * @returns the next id of a site
+ */
 function getNextIdSite(indexUser) {
   const users = parse(jsonDbPath, defaultUsers);
   const lastItemIndex = getLastIndexSite(indexUser);
@@ -65,6 +85,11 @@ function getNextIdSite(indexUser) {
   return nextId;
 }
 
+/**
+ * Get the last index of a site
+ * @param {Number} indexUser the index of the user who wants to have the last index of a site
+ * @returns the last index of a site or -1 if no site
+ */
 function getLastIndexSite(indexUser) {
   const users = parse(jsonDbPath, defaultUsers);
   if (users[indexUser].sites.length >= 1) {
@@ -83,7 +108,7 @@ function getLastIndexSite(indexUser) {
 function removeSite(userId, siteId) {
   const users = parse(jsonDbPath, defaultUsers);
 
-  const indexUser = userFromUserId(userId);
+  const indexUser = indexUserFromUserId(userId);
 
   const indexSite = siteFromSiteId(userId, siteId);
 
@@ -98,8 +123,8 @@ function removeSite(userId, siteId) {
 
 /**
  * Find index of the site of a user
- * @param {*} indexUser the index of the user who wants to delete a site
- * @param {*} siteId the id of the site to delete
+ * @param {Number} indexUser the index of the user who wants to delete a site
+ * @param {Number} siteId the id of the site to delete
  * @returns index of the site of a user if found, undefined otherwise
  */
 // Function needed to find one index of a site
@@ -112,7 +137,7 @@ function siteFromSiteId(indexUser, siteId) {
 
 /**
  * Get all sites of a user
- * @param {*} userId the index of the user who wants to have all his sites
+ * @param {Number} userId the index of the user who wants to have all his sites
  * @returns all sites of a user if found, undefined otherwise
  */
 function getAllUserSites(userId) {
@@ -123,7 +148,14 @@ function getAllUserSites(userId) {
 }
 
 /**
- * Update password
+ * Update a site from a user
+ * @param {Number} userId the user id to update a site
+ * @param {Number} siteId the site id to update
+ * @param {String} password potentially new password
+ * @param {String} url potentially new url
+ * @param {String} siteName potentially new site name
+ * @param {String} userName potentially new username
+ * @returns the updated site
  */
 function updatePassword(userId, siteId, password, url, siteName, userName) {
   const users = parse(jsonDbPath, defaultUsers);
@@ -150,4 +182,5 @@ function updatePassword(userId, siteId, password, url, siteName, userName) {
   serialize(jsonDbPath, users);
   return copieSite;
 }
+
 module.exports = { addPasswordOnSite, removeSite, updatePassword };
