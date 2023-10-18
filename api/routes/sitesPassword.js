@@ -1,5 +1,7 @@
 const express = require('express');
-const { addPasswordOnSite, removeSite, updatePassword } = require('../models/sites');
+const {
+  addPasswordOnSite, removeSite, updatePassword, filtreBySiteName,
+} = require('../models/sites');
 
 const router = express();
 
@@ -60,4 +62,16 @@ router.patch('/updateSite', (req, res) => {
 
   return res.json(updatedPassword);
 });
+
+router.get('/orderBySiteName', (req, res) => {
+  const userId = parseInt(req.body.userId, 10);
+
+  const orderBy = filtreBySiteName(userId);
+
+  if (!orderBy) {
+    return res.sendStatus(404);
+  }
+  return res.json(orderBy);
+});
+
 module.exports = router;
