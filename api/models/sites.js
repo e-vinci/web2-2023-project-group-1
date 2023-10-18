@@ -183,4 +183,25 @@ function updatePassword(userId, siteId, password, url, siteName, userName) {
   return copieSite;
 }
 
-module.exports = { addPasswordOnSite, removeSite, updatePassword };
+/**
+ * Filters and sorts a list of sites associated with a user based on site names.
+ *
+ * @param {number} id - The user ID for which to filter and sort sites.
+ * @returns {Array} - An array of sites associated with the user, sorted by site names.
+ *                   Returns 'undefined' if the user is not found.
+ */
+function filtreBySiteName(id) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const indexOfUserFound = users.findIndex((user) => user.id === id);
+  if (indexOfUserFound < 0) return undefined;
+
+  const userListFound = users[indexOfUserFound].sites;
+
+  userListFound.sort((a, b) => a.site.localeCompare(b.site));
+
+  return userListFound;
+}
+
+module.exports = {
+  addPasswordOnSite, removeSite, updatePassword, filtreBySiteName,
+};

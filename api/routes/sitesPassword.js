@@ -1,5 +1,7 @@
 const express = require('express');
-const { addPasswordOnSite, removeSite, updatePassword } = require('../models/sites');
+const {
+  addPasswordOnSite, removeSite, updatePassword, filtreBySiteName,
+} = require('../models/sites');
 
 const router = express();
 
@@ -60,4 +62,23 @@ router.patch('/updateSite', (req, res) => {
 
   return res.json(updatedPassword);
 });
+
+/**
+ * Handles an HTTP GET request to order and retrieve a
+ * list of sites associated with a user by site names.
+ *
+ * @param {object} req - The Express request object containing the user ID in the request body.
+ * @param {object} res - The Express response object to send a JSON response or an error status.
+ */
+router.get('/orderBySiteName', (req, res) => {
+  const userId = parseInt(req.body.userId, 10);
+
+  const orderBy = filtreBySiteName(userId);
+
+  if (!orderBy) {
+    return res.sendStatus(404);
+  }
+  return res.json(orderBy);
+});
+
 module.exports = router;
