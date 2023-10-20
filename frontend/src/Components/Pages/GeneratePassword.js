@@ -1,6 +1,4 @@
-/* eslint-disable*/
 const Password = require('password-npm');
-import clipboard from '../../img/clipboard.png';
 
 const GeneratePassword = () => {
   const main = document.querySelector('main');
@@ -30,9 +28,9 @@ const GeneratePassword = () => {
           </div>
           <div bis_skin_checked="1">
             <input type="submit" value="Générer">
-            <input type="submit" value="Copier" name="copy">
+            <input type="button" value="Copier" name="copy" id="copy-button">
           </div>
-          <div id="generate-password" bis_skin_checked="1"></div>
+          <div id="generate-password" bis_skin_checked="1" id="generate-button"></div>
         </div>
       </form>
     </section>
@@ -58,6 +56,23 @@ const GeneratePassword = () => {
     generatePassword.className = 'rounded border-1 border-secondary border p-3 m-3';
     generatePassword.innerHTML = `${password.random()}`;
   });
+
+  const copyButton = document.querySelector('#copy-button');
+
+  copyButton.addEventListener('click', () => {
+    const generatedPassword = generatePassword.textContent;
+    copyToClipboard(generatedPassword);
+  });
+  
+
+  function copyToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+  }
 };
 
 export default GeneratePassword;
