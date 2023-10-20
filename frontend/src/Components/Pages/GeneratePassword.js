@@ -3,7 +3,7 @@ const Password = require('password-npm');
 const GeneratePassword = () => {
   const main = document.querySelector('main');
   main.innerHTML = `
-  <h2 style="text-align: center;">Generate Password</h2>
+  <h2 style="text-align: center;">Génération de mot de passe</h2>
   <section class="generate d-flex align-items-center justify-content-center">
     <form id="generate-form" class="p-3 shadow p-3 m-5 mb-5 bg-body-tertiary rounded border-top border-primary border-3 col-md-4 pt-5 pb-5" style="text-align: left;">
       <div bis_skin_checked="1">
