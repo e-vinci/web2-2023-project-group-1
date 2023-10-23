@@ -3,7 +3,7 @@
 }
 
 body{
-    background-color: #F4F2EE;
+    background-color: rgb(244,242,238);
 }
 
 .navbar{
@@ -40,4 +40,10 @@ z-index: 1000;
     border-radius: 50%;
     cursor: pointer;
     margin-top: -4px;
+}
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color : #FFFFFF;
 }
