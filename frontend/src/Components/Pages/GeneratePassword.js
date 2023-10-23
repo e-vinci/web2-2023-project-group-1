@@ -1,4 +1,4 @@
-const Password = require('password-npm');
+const generator = require('generate-password-browser');
 
 const GeneratePassword = () => {
   const main = document.querySelector('main');
@@ -38,23 +38,23 @@ const GeneratePassword = () => {
 
   const generateForm = document.querySelector('#generate-form');
   const generatePassword = document.querySelector('#generate-password');
-  const charCount = document.querySelector('#char-count'); // Sélectionnez l'élément pour le nombre de caractères
+  const charCount = document.querySelector('#char-count'); 
 
-  // Écoutez le changement de valeur de la plage (range)
   generateForm.addEventListener('input', () => {
     const rangeValue = document.querySelector('#generate-length').value;
-    charCount.textContent = rangeValue; // Mettez à jour le texte avec la valeur de la plage
+    charCount.textContent = rangeValue;
   });
 
   generateForm.addEventListener('submit', event => {
     event.preventDefault();
-    const length = parseInt(event.target['generate-length'].value, 10);
-    const includeUppercase = event.target['generate-include-uppercase'].checked;
-    const includeNumbers = event.target['generate-include-numbers'].checked;
-    const includeSymbols = event.target['generate-include-symbols'].checked;
-    const password = new Password(length, true, includeUppercase, includeNumbers, includeSymbols);
+    const passwordToText = generator.generate({
+      length: parseInt(event.target['generate-length'].value, 10),
+      uppercase: event.target['generate-include-uppercase'].checked,
+      numbers: event.target['generate-include-numbers'].checked,
+      symbols: event.target['generate-include-symbols'].checked,
+    });
     generatePassword.className = 'rounded border-1 border-secondary border p-3 m-3';
-    generatePassword.innerHTML = `${password.random()}`;
+    generatePassword.innerHTML = `${passwordToText}`;
   });
 
   const copyButton = document.querySelector('#copy-button');
