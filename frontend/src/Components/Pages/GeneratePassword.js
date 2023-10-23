@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+// eslint-disable-next-line import/no-extraneous-dependencies
 const generator = require('generate-password-browser');
 
 const GeneratePassword = () => {
