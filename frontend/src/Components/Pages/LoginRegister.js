@@ -1,4 +1,4 @@
-import {switchListener, formLogin, divEnveloppanteFormulaire} from '../Forms/Forms';
+import {switchListener, formLogin, divEnveloppanteFormulaire, loginListener} from '../Forms/Forms';
 
 const LoginRegister = () => {
     const main = document.querySelector('main');
@@ -6,6 +6,7 @@ const LoginRegister = () => {
     main.innerHTML = divEnveloppanteFormulaire;
     const divEnveloppante = document.querySelector('#Enveloppante');
     divEnveloppante.innerHTML = formLogin;
+    loginListener();
     switchListener();
 };
 
