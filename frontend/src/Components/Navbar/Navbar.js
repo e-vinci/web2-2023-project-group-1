@@ -27,7 +27,7 @@ const Navbar = () => {
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form class="form-inline mx-auto d-flex">
-              <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
+              <input id="researchBar" class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
               <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Rechercher</button>
             </form>
             <ul class="navbar-nav ms-auto">
