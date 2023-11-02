@@ -97,7 +97,7 @@ const listenersGeneratorPassword = () => {
 
 const renderGeneratorPassword = () => {
     const modalGeneratorWrapper = document.querySelector('#modalWrapper');
-    modalGeneratorWrapper.innerHTML = modalGenerator;
+    modalGeneratorWrapper.innerHTML += modalGenerator;
     const innerModal = document.querySelector('#inner-modal');
     innerModal.innerHTML = generatorForm;
     listenersGeneratorPassword();
