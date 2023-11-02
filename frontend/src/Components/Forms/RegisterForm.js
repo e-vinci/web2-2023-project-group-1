@@ -1,4 +1,4 @@
-import setAuthenticatedUser from '../../utils/auths';
+import { setAuthenticatedUser } from '../../utils/auths';
 import Navbar from '../Navbar/Navbar';
 import Navigate from '../Router/Navigate';
 

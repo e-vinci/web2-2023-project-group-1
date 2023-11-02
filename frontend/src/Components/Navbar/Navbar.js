@@ -44,7 +44,7 @@ function renderNavbar(){
                 <a class="nav-link" href="#" data-uri="/">A propos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="modal" data-target="#modal">Générateur</a>
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalGenerator">Générer MDP</a>
               </li>
               <li class="nav-item">
                 <a class="btn btn-primary" href="#" data-uri="/login">Login/Register</a>
@@ -54,6 +54,7 @@ function renderNavbar(){
         </div>
       </nav>
   `;
+  
 
   const authenticatedUserNavbar = `
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 bg-body-tertiary rounded">
@@ -83,10 +84,10 @@ function renderNavbar(){
                 <a class="nav-link" href="#" data-uri="/">A propos</a>
               </li>
               <li class="nav-item">
-              <a class="nav-link" href="#" data-toggle="modal" data-target="#modal">Générateur</a>"&
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalGenerator">Générer MDP</a>
               </li >
               <li class="nav-item">
-                <a class="nav-link " href="#" data-uri="/">${authenticatedUser?.username}</a>
+                <a class="nav-link " data-uri="/">${authenticatedUser?.username}</a>
               </li>
               <li class="nav-item">
                 <a class="btn btn-primary" href="#" data-uri="/logout">Logout</a>

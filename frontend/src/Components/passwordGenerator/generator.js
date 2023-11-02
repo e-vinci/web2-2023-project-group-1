@@ -2,33 +2,30 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const generator = require('generate-password-browser');
 
-const modal = `
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body" id="inner-modal">
-            
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-        </div>
-    </div>
+const modalGenerator = `
+<div class="modal fade" id="modalGenerator" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalGeneratorLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Génération de mot de passe</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body w-100" id="inner-modal">
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
     </div>
 `;
 
 const generatorForm = `
-<h2 style="text-align: center;">Génération de mot de passe</h2>
 <section class="generate d-flex align-items-center justify-content-center">
-  <form id="generate-form" class="p-3 shadow p-3 m-5 mb-5 bg-body-tertiary rounded border-top border-primary border-3 col-md-4 pt-5 pb-5" style="text-align: left;">
-    <div bis_skin_checked="1">
+  <form id="generate-form"  style="text-align: left;">
+    <div bis_skin_checked="1" >
         <div class=" pt-1 pb-1" bis_skin_checked="1">
             <label for="generate-length">Nombre de caractères : </label>
             <span id="char-count">5</span>
@@ -99,8 +96,8 @@ const listenersGeneratorPassword = () => {
 }
 
 const renderGeneratorPassword = () => {
-    const header = document.querySelector('header');
-    header.innerHTML += modal;
+    const modalGeneratorWrapper = document.querySelector('#modalWrapper');
+    modalGeneratorWrapper.innerHTML = modalGenerator;
     const innerModal = document.querySelector('#inner-modal');
     innerModal.innerHTML = generatorForm;
     listenersGeneratorPassword();
