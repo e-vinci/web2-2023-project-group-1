@@ -1,16 +1,29 @@
+const STORE_NAME = 'user';
 let currentUser;
 
-const getAuhtenticatedUser = () => currentUser;
+const getAuthenticatedUser = () => {
+  if (currentUser !== undefined) return currentUser;
 
-const setAuthenticatedUser = (user) => {
-  currentUser = user;
+  const serializedUser = localStorage.getItem(STORE_NAME);
+  if (!serializedUser) return undefined;
+
+  currentUser = JSON.parse(serializedUser);
+  return currentUser;
 };
 
-const isAuhtenticated = () => currentUser !== undefined;
+const setAuthenticatedUser = (authenticatedUser) => {
+  const serializedUser = JSON.stringify(authenticatedUser);
+  localStorage.setItem(STORE_NAME, serializedUser);
 
-const clearAuhtenticatedUser = () => {
+  currentUser = authenticatedUser;
+};
+
+const isAuthenticated = () => currentUser !== undefined;
+
+const clearAuthenticatedUser = () => {
+  localStorage.removeItem(STORE_NAME);
   currentUser = undefined;
 };
 
 
-module.exports = {  getAuhtenticatedUser,setAuthenticatedUser, isAuhtenticated, clearAuhtenticatedUser, };
+module.exports = {  getAuthenticatedUser,setAuthenticatedUser, isAuthenticated, clearAuthenticatedUser, };
