@@ -44,7 +44,7 @@ function renderNavbar(){
                 <a class="nav-link" href="#" data-uri="/">A propos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" data-uri="/generate">Générateur</a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#modal">Générateur</a>
               </li>
               <li class="nav-item">
                 <a class="btn btn-primary" href="#" data-uri="/login">Login/Register</a>
@@ -83,7 +83,7 @@ function renderNavbar(){
                 <a class="nav-link" href="#" data-uri="/">A propos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" data-uri="/generate">Générateur</a>
+              <a class="nav-link" href="#" data-toggle="modal" data-target="#modal">Générateur</a>"&
               </li >
               <li class="nav-item">
                 <a class="nav-link " href="#" data-uri="/">${authenticatedUser?.username}</a>

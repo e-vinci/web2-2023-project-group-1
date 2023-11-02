@@ -2,6 +2,28 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const generator = require('generate-password-browser');
 
+const modal = `
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" id="inner-modal">
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+    </div>
+    </div>
+`;
+
 const generatorForm = `
 <h2 style="text-align: center;">Génération de mot de passe</h2>
 <section class="generate d-flex align-items-center justify-content-center">
@@ -77,8 +99,10 @@ const listenersGeneratorPassword = () => {
 }
 
 const renderGeneratorPassword = () => {
-    const main = document.querySelector('main');
-    main.innerHTML = generatorForm;
+    const header = document.querySelector('header');
+    header.innerHTML += modal;
+    const innerModal = document.querySelector('#inner-modal');
+    innerModal.innerHTML = generatorForm;
     listenersGeneratorPassword();
 }
 
