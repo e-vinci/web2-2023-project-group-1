@@ -38,6 +38,9 @@ const Navbar = () => {
                 <a class="nav-link" href="#" data-uri="/">A propos</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="#" data-uri="/generate">Générateur</a>
+              </li>
+              <li class="nav-item">
                 <a class="btn btn-primary" href="#" data-uri="/login">Login/Register</a>
               </li>                        
             </ul>
