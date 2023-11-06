@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 // eslint-disable-next-line no-unused-vars
 import { Navbar as BootstrapNavbar } from 'bootstrap';
 import { getAuthenticatedUser, isAuthenticated } from '../../utils/auths';
