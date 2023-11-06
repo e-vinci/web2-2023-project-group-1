@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 // eslint-disable-next-line no-unused-vars
 import { Navbar as BootstrapNavbar } from 'bootstrap';
 import { getAuthenticatedUser, isAuthenticated } from '../../utils/auths';
@@ -41,7 +42,7 @@ function renderNavbar(){
                 <a class="nav-link" aria-current="page" href="#" data-uri="/">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" data-uri="/">A propos</a>
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalAbout">A propos</a>
               </li>
               <li class="nav-item">
               <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalGenerator">Générer MDP</a>
@@ -81,7 +82,7 @@ function renderNavbar(){
                 <a class="nav-link" aria-current="page" href="#" data-uri="/">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" data-uri="/">A propos</a>
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalAbout">A propos</a>
               </li>
               <li class="nav-item">
               <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalGenerator">Générer MDP</a>
