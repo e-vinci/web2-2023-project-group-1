@@ -1,12 +1,12 @@
 import HomePage from '../Pages/HomePage';
 import LoginRegister from '../Pages/LoginRegister';
-import GeneratePassword from '../Pages/GeneratePassword';
 import Logout from '../Logout/Logout';
+import CheckerLeaderboard from '../Pages/CheckerLeaderboard';
 
 const routes = {
   '/': HomePage,
+  '/password-strength-checker': CheckerLeaderboard,
   '/login': LoginRegister,
-  '/generate': GeneratePassword,
   '/logout': Logout,
 };
 

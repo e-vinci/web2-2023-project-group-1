@@ -12,6 +12,16 @@ top: 0;
 z-index: 1000;
 }
 
+.custom-input {
+    height: 60px;
+    font-size: 24px; 
+    color: blue;
+
+    &:focus {
+        color: blue;
+    }
+}
+
 .range-container {
     display: flex;
     flex-direction: column;
