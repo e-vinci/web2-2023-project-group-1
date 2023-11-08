@@ -1,3 +1,4 @@
+/* eslint-disable import/no-import-module-exports */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
@@ -25,6 +26,9 @@ const checkerForm = `
 </section>
 `;
 
+/**
+ * add listeners to the password strength checker
+ */
 const listenersPasswordStrengthChecker = () => {
     const checker = document.querySelector('#checker-form');
     const checkerResult = document.querySelector('#checker-result');
@@ -42,24 +46,15 @@ const listenersPasswordStrengthChecker = () => {
         const passwordStrengthResult = passwordStrength(passwordToCheck);
 
         const val = passwordStrengthResult.value;
-        let resultHTML;
-        if (val === 'Too weak') {
-            resultHTML = `<p style="color: red;">Trop faible</p>`;
-        } else if (val === 'Weak') {
-            resultHTML = `<p style="color: orange;">Faible</p>`;
-        } else if (val === 'Medium') {
-            resultHTML = `<p style="color: yellow;">Moyen</p>`;
-        } else if (val === 'Strong') {
-            resultHTML = `<p style="color: green;">Fort</p>`;
-        }      
+        const resultHTML = toFrench(val);
         checkerResult.innerHTML = 'La puissance de votre mot de passe : ';
         checkerResult.innerHTML += resultHTML;
 
         checkerAdvice.innerHTML = 'Nos conseil pour améliorer votre mot de passe : ';
         const advices = passwordStrengthResult.contains;
-        const advicesList = advicesToArray(advices, passwordToCheck);
+        const advicesList = advicesToArray(advices, passwordToCheck, val);
         
-        if (advicesList.length === 0) {
+        if (advicesList.length === 0 && val === 'Strong') {
           checkerAdvice.innerHTML = 'Votre mot de passe est sécurisé';
         } else {
           const advicesHTML = `
@@ -81,10 +76,28 @@ const listenersPasswordStrengthChecker = () => {
         }
         const response = fetch('/api/leaderboard/addLeaderboard', option);
         if (!response.ok) {
-            console.log('Une erreur est survenue');
+            console.log('Error can\'t add to leaderboard because response is not ok');
         }
     });
     
+}
+
+/**
+ * convert the password strength in english to french
+ * @param {String} string the password strength in english
+ * @returns {String} the password strength in french
+ */
+function toFrench(string) {
+  if (string === 'Too weak') {
+    return `<p style="color: red;">Trop faible</p>`;
+  }
+  if (string === 'Weak') {
+    return `<p style="color: orange;">Faible</p>`;
+  } 
+  if (string === 'Medium') {
+    return `<p style="color: yellow;">Moyen</p>`;
+  } 
+  return `<p style="color: green;">Fort</p>`;   
 }
 
 /**
@@ -93,7 +106,7 @@ const listenersPasswordStrengthChecker = () => {
  * @param {*} password the password to check
  * @returns {Array} list of advice to improve the password
  */
-function advicesToArray(array, password) {
+function advicesToArray(array, password, val) {
   const advicesList = [];
   if (!array.includes('uppercase')) {
     advicesList.push('Ajouter des majuscules');
@@ -107,12 +120,15 @@ function advicesToArray(array, password) {
   if (!array.includes('symbol')) {
     advicesList.push('Ajouter des caractères spéciaux');
   }
-  if (password.length < 8) {
+  if (password.length < 8 || val !== 'Strong') {
     advicesList.push('Ajouter des caractères');
   }
   return advicesList;
 }
 
+/**
+ * render the password strength checker
+ */
 const renderPasswordStrengthChecker = () => {
   const checker = document.querySelector('.checker');
   checker.innerHTML = checkerForm;

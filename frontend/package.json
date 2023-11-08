@@ -36,6 +36,7 @@
     "crypto": "^1.0.1",
     "generate-password-browser": "^1.1.0",
     "gh-pages": "^4.0.0",
+    "js-confetti": "^0.11.0",
     "phaser": "^3.55.2",
     "terser-webpack-plugin": "^5.3.6",
     "webpack-merge": "^5.8.0"
