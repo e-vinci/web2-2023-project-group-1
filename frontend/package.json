@@ -32,6 +32,7 @@
     "bootstrap": "^5.0.1",
     "check-password-strength": "^2.0.7",
     "clean-webpack-plugin": "^4.0.0",
+    "confetti-js": "^0.0.18",
     "crypto": "^1.0.1",
     "generate-password-browser": "^1.1.0",
     "gh-pages": "^4.0.0",
