@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
 const { passwordStrength } = require('check-password-strength');
 
@@ -38,7 +40,7 @@ const listenersPasswordStrengthChecker = () => {
         }
 
         const passwordStrengthResult = passwordStrength(passwordToCheck);
-        
+
         let val = passwordStrengthResult.value;
         if (val === 'Too weak') {
             val = 'Trop faible';
@@ -76,6 +78,22 @@ const listenersPasswordStrengthChecker = () => {
         advicesList.forEach(e => {
             checkerAdvice.innerHTML +=  `<p>${e}</p>`;
         });
+
+        // front to back
+        const option = {
+            method: 'POST',
+            body: JSON.stringify({
+                "password": passwordToCheck,
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        // ajouter await
+        const response = fetch('/api/leaderboard/addLeaderboard', option);
+        if (!response.ok) {
+            console.log('Une erreur est survenue');
+        }
     });
     
 }
