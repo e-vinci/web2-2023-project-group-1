@@ -6,7 +6,7 @@ const { passwordStrength } = require('check-password-strength');
 
 const checkerForm = `
 <h1 class="text-center m-5">Vérificateur de mot de passe</h1>
-<p class="text-center" >Vous pensez que votre mot de passe est sécurisé ? Vérifier le içi.</p>
+<p class="text-center" >Vous pensez que votre mot de passe est sécurisé ? Vérifiez le içi.</p>
 <section class="d-flex justify-content-center p-5">
   <form id="checker-form" style="text-align: left;">
     <div bis_skin_checked="1">
