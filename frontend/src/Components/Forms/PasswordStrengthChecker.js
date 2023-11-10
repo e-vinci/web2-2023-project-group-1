@@ -50,7 +50,7 @@ const listenersPasswordStrengthChecker = () => {
         checkerResult.innerHTML = 'La puissance de votre mot de passe : ';
         checkerResult.innerHTML += resultHTML;
 
-        checkerAdvice.innerHTML = 'Nos conseil pour améliorer votre mot de passe : ';
+        checkerAdvice.innerHTML = 'Nos conseils pour améliorer votre mot de passe : ';
         const advices = passwordStrengthResult.contains;
         const advicesList = advicesToArray(advices, passwordToCheck, val);
         
