@@ -1,9 +1,11 @@
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-import-module-exports
 import crypto from 'crypto-js/sha512';
 
 const encrypt = async (text, password) => {
     const option = {
         method: 'POST',
         body: JSON.stringify({
+            // eslint-disable-next-line no-undef
             "id": id,
             "password": password
         }),
@@ -16,7 +18,7 @@ const encrypt = async (text, password) => {
     const data = await response.json();
     if(data.value===1){
     const cipher = crypto.createCipher('aes-512-cbc', password);
-    const iv = cipher.iv;
+    const {iv} = cipher;
     let encrypted = cipher.update(text, 'utf8', 'hex');
     encrypted += cipher.final('hex');
 
@@ -31,6 +33,7 @@ const decrypt = async (encryptedText, password, iv) => {
     const option = {
         method: 'POST',
         body: JSON.stringify({
+            // eslint-disable-next-line no-undef
             "id": id,
             "password": password
         }),
