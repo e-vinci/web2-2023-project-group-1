@@ -45,6 +45,9 @@ function renderNavbar(){
                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalAbout">A propos</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#" data-uri="/password-strength-checker">Checker</a>
+              </li>
+              <li class="nav-item">
               <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalGenerator">Générer MDP</a>
               </li>
               <li class="nav-item">
@@ -83,6 +86,9 @@ function renderNavbar(){
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalAbout">A propos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#" data-uri="/password-strength-checker">Checker</a>
               </li>
               <li class="nav-item">
               <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalGenerator">Générer MDP</a>

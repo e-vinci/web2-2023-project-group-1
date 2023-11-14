@@ -1,4 +1,4 @@
-import { renderGeneratorPassword} from '../passwordGenerator/generator'
+import { renderGeneratorPassword } from '../passwordGenerator/generator';
 
 const GeneratePassword = () => {
     renderGeneratorPassword();
