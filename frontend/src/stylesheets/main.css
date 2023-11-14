@@ -10,6 +10,7 @@ body{
 position : sticky;
 top: 0;
 z-index: 1000;
+width: fix;
 }
 
 .range-container {
@@ -46,4 +47,19 @@ z-index: 1000;
     bottom: 0;
     width: 100%;
     color : #FFFFFF;
+}
+
+
+.my-path {
+    fill:none;
+    stroke:#464dc9;
+    stroke-width:1;
+  }
+
+#animation {
+    position: absolute;
+    margin-top: 13%;
+    margin-left: 3%;
+    width: 25%;
+
 }
