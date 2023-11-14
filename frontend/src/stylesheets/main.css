@@ -52,7 +52,7 @@ z-index: 1000;
     margin-top: -4px;
 }
 #footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     color : #FFFFFF;
