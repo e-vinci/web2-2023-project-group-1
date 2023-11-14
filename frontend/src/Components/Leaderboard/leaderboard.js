@@ -2,10 +2,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
+import anime from 'animejs';
+
 const checkleaderboard = `
-<h3 class="text-center m-5">Les pires mots de passe</h3>
+<h3 class="ml12">Les pires mots de passe</h3>
+<div src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></div>
 <section class="w-75 p-3 mx-auto">
   <table id="leaderboard" class="table table-striped table-hover">
+  
     <thead>
         <tr class="border border-dark">
             <th id="classement">Classement</th>
@@ -36,6 +40,31 @@ async function afficherMdp() {
         `;
         tableau.innerHTML += infoMdp;
     });
+    
+}
+
+async function animationTitre() {
+
+    const textWrapper = document.querySelector('.ml12');
+    textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+anime.timeline({loop: true})
+  .add({
+    targets: '.ml12 .letter',
+    translateX: [40,0],
+    translateZ: 0,
+    opacity: [0,1],
+    easing: "easeOutExpo",
+    duration: 1200,
+    delay: (el, i) => 500 + 30 * i
+  }).add({
+    targets: '.ml12 .letter',
+    translateX: [0,-30],
+    opacity: [1,0],
+    easing: "easeInExpo",
+    duration: 1100,
+    delay: (el, i) => 100 + 30 * i
+  });
 }
 
 const leaderboardListener = () => {
@@ -44,6 +73,8 @@ const leaderboardListener = () => {
     afficherMdp();
 }
 
-module.exports = {
-    leaderboardListener
+export {
+    leaderboardListener,
+    animationTitre,
+
 };

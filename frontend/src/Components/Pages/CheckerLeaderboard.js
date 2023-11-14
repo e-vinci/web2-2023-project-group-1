@@ -1,11 +1,6 @@
-/* eslint-disable import/no-unresolved */
-import {
-  renderPasswordStrengthChecker
-} from '../Forms/PasswordStrengthChecker';
+const {renderPasswordStrengthChecker} =require('../Forms/PasswordStrengthChecker');
+const {leaderboardListener,animationTitre} = require('../Leaderboard/leaderboard');
 
-import {
-  leaderboardListener
-} from '../Leaderboard/leaderboard';
 
 const CheckerLeaderboard = () => {
   const main = document.querySelector('main');
@@ -15,8 +10,8 @@ const CheckerLeaderboard = () => {
   `;
   renderPasswordStrengthChecker();
   leaderboardListener();
+  animationTitre();
 
 };
-  
+
 export default CheckerLeaderboard;
-  
