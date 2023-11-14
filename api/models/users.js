@@ -97,8 +97,24 @@ function getNextId() {
   return nextId;
 }
 
+function passwordCheck(id, password) {
+  const user = readOneUserFromId(id);
+  const passwordMatch = bcrypt.compare(password, user.password);
+  if (!passwordMatch) return 0;
+  return 1;
+}
+
+function readOneUserFromId(id) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const indexOfUserFound = users.findIndex((user) => user.id === id);
+  if (indexOfUserFound < 0) return undefined;
+
+  return users[indexOfUserFound];
+}
+
 module.exports = {
   login,
   register,
   readOneUserFromUsername,
+  passwordCheck,
 };
