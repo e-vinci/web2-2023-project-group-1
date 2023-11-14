@@ -71,3 +71,17 @@ body {
     width: 100%;
     color: #FFFFFF;
 }
+
+.ml12 {
+    margin-top:5%;
+    margin-bottom: 3%;
+    font-weight: 500;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+}
+
+.ml12 .letter {
+    display: inline-block;
+    line-height: 1em;
+}
