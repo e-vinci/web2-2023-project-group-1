@@ -213,7 +213,7 @@ function renderNavbar() {
   const authenticatedUserNavbar = `
   <nav class="navbar navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 bg-body-tertiary rounded">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Add your brand here</a>
+          <a class="navbar-brand"  id="animation" href="#">Add your brand here</a>
           <button
             class="navbar-toggler"
             type="button"
