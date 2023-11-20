@@ -2,7 +2,6 @@ import HomePage from '../Pages/HomePage';
 import LoginRegister from '../Pages/LoginRegister';
 import Logout from '../Logout/Logout';
 import UserPage from '../Pages/UserPage';
-import CheckerLeaderboard from '../Pages/CheckerLeaderboard';
 import GeneratePassword from '../Pages/GeneratePassword';
 
 const routes = {

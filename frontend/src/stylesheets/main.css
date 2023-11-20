@@ -108,16 +108,16 @@ width: fix;
 
 
 .my-path {
-    fill:none;
-    stroke:#464dc9;
-    stroke-width:1;
+    fill:aqua;
+    stroke:#060615;
+    stroke: width 2px;;
   }
 
 #animation {
     position: absolute;
-    margin-top: 13%;
+    margin-top: 15%;
     margin-left: 3%;
-    width: 25%;
+    width: 30%;
 }
 
 .ml12 {
