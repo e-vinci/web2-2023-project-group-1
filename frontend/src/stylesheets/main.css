@@ -18,11 +18,44 @@ position: absolute;
 body {
     background-color: rgb(244, 242, 238);
 }
+.listSite {
+position: absolute;
+  top: 58px; ;
+  bottom: 0;
+  left: 0;
+  padding: 58px 0 0; 
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+  width: 240px;
+  z-index: 600;
+
+
+}
+
+body {
+    background-color: rgb(244, 242, 238);
+}
+
+.navbar{
+position : sticky;
+top: 0;
+z-index: 1000;
+width: fix;
+}
 
 .navbar {
     position: sticky;
     top: 0;
     z-index: 1000;
+}
+
+.custom-input {
+    height: 60px;
+    font-size: 24px; 
+    color: blue;
+
+    &:focus {
+        color: blue;
+    }
 }
 
 .custom-input {
@@ -67,9 +100,24 @@ body {
 
 #footer {
     position: fixed;
+    position: fixed;
     bottom: 0;
     width: 100%;
     color: #FFFFFF;
+}
+
+
+.my-path {
+    fill:none;
+    stroke:#464dc9;
+    stroke-width:1;
+  }
+
+#animation {
+    position: absolute;
+    margin-top: 13%;
+    margin-left: 3%;
+    width: 25%;
 }
 
 .ml12 {
