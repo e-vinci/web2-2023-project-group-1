@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login } = require('../models/users');
+const { register, login, passwordCheck } = require('../models/users');
 
 const router = express.Router();
 
@@ -30,6 +30,20 @@ router.post('/login', async (req, res) => {
   if (!authenticatedUser) return res.sendStatus(401); // 401 Unauthorized
 
   return res.json(authenticatedUser);
+});
+
+router.post('/passwordCheck', async (req, res) => {
+  const id = req?.body?.id?.length !== 0 ? req.body.id : undefined;
+  const password = req?.body?.password?.length !== 0 ? req.body.password : undefined;
+
+  if (!id || !password) return res.sendStatus(400); // 400 Bad Reques
+
+  const boolean = await passwordCheck(id, password);
+  const result = { value: boolean };
+
+  if (!boolean) return res.sendStatus(401); // 401 Unauthorized
+
+  return res.json(result);
 });
 
 module.exports = router;
