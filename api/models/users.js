@@ -111,7 +111,6 @@ function readOneUserFromId(id) {
 
   return users[indexOfUserFound];
 }
-
 module.exports = {
   login,
   register,
