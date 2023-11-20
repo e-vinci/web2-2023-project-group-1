@@ -3,6 +3,7 @@ import LoginRegister from '../Pages/LoginRegister';
 import Logout from '../Logout/Logout';
 import UserPage from '../Pages/UserPage';
 import CheckerLeaderboard from '../Pages/CheckerLeaderboard';
+import GeneratePassword from '../Pages/GeneratePassword';
 
 const routes = {
   '/': HomePage,
@@ -11,7 +12,6 @@ const routes = {
   '/generate': GeneratePassword,
   '/user':UserPage,
   '/logout': Logout,
-  '/user':UserPage,
 };
 
 export default routes;
