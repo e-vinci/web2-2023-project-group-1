@@ -7,7 +7,6 @@ import GeneratePassword from '../Pages/GeneratePassword';
 
 const routes = {
   '/': HomePage,
-  '/password-strength-checker': CheckerLeaderboard,
   '/login': LoginRegister,
   '/generate': GeneratePassword,
   '/user':UserPage,
