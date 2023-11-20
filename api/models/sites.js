@@ -26,11 +26,13 @@ const defaultUsers = [
 async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passwordSite) {
   const indexIndex = indexUserFromUserId(usersId);
   const idSite = getNextIdSite(indexIndex);
+  const dateAdded = Date.now().toLocaleString();
 
   const newSite = {
     id: idSite,
     url: urlSite,
     site: siteName,
+    dateSite: dateAdded,
     login: usernameSite,
     mot_de_passe: bcrypt.hashSync(passwordSite, saltRounds),
   };
