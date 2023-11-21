@@ -204,6 +204,18 @@ function filtreBySiteName(id) {
   return userListFound;
 }
 
+function sortByDate(id) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const indexOfUserFound = users.findIndex((user) => user.id === id);
+  if (indexOfUserFound < 0) return undefined;
+
+  const userListFound = users[indexOfUserFound].sites;
+
+  userListFound.sort((a, b) => a.dateSite.localeCompare(b.dateSite));
+
+  return userListFound;
+}
+
 module.exports = {
-  addPasswordOnSite, removeSite, updatePassword, filtreBySiteName,
+  addPasswordOnSite, removeSite, updatePassword, filtreBySiteName, sortByDate,
 };
