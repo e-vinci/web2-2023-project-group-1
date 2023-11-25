@@ -1,6 +1,11 @@
 const express = require('express');
 const {
-  addPasswordOnSite, removeSite, updatePassword, filtreBySiteName, sortByDate,
+  addPasswordOnSite,
+  removeSite,
+  updatePassword,
+  filtreBySiteName,
+  sortByDate,
+  filterByPasswordPower,
 } = require('../models/sites');
 
 const router = express();
@@ -97,6 +102,23 @@ router.get('/orderByDate', (req, res) => {
     return res.sendStatus(404);
   }
   return res.json(orderBy);
+});
+
+router.get('/filterByPower', (req, res) => {
+  const userId = parseInt(req.body?.userId, 10);
+  const power = req.body?.power;
+
+  if (!userId || !power) {
+    return res.sendStatus(400);
+  }
+
+  const filterByPower = filterByPasswordPower(userId, power);
+
+  if (!filterByPower) {
+    return res.sendStatus(404);
+  }
+
+  return res.json(filterByPower);
 });
 
 module.exports = router;

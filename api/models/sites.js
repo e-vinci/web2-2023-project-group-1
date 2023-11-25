@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const path = require('node:path');
+const { passwordStrength } = require('check-password-strength');
+
 const { parse, serialize } = require('../utils/json');
 
 const saltRounds = 10;
@@ -216,6 +218,28 @@ function sortByDate(id) {
   return userListFound;
 }
 
+function filterByPasswordPower(id, power) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const indexOfUserFound = users.findIndex((user) => user.id === id);
+  if (indexOfUserFound < 0) return undefined;
+
+  const userListFound = users[indexOfUserFound].sites;
+  const sites = [];
+
+  userListFound.forEach((site) => {
+    const pswValue = passwordStrength(site.mot_de_passe).value;
+    if (pswValue === power) {
+      console.log(sites.push(site));
+    }
+  });
+  return sites;
+}
+
 module.exports = {
-  addPasswordOnSite, removeSite, updatePassword, filtreBySiteName, sortByDate,
+  addPasswordOnSite,
+  removeSite,
+  updatePassword,
+  filtreBySiteName,
+  sortByDate,
+  filterByPasswordPower,
 };
