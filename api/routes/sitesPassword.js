@@ -1,6 +1,11 @@
 const express = require('express');
 const {
-  addPasswordOnSite, removeSite, updatePassword, filtreBySiteName,
+  addPasswordOnSite,
+  removeSite,
+  updatePassword,
+  filtreBySiteName,
+  sortByDate,
+  filterByPasswordPower,
 } = require('../models/sites');
 
 const router = express();
@@ -79,6 +84,41 @@ router.get('/orderBySiteName', (req, res) => {
     return res.sendStatus(404);
   }
   return res.json(orderBy);
+});
+
+/**
+ * Handles an HTTP GET request to order and retrieve a
+ * list of sites associated with a user by date.
+ *
+ * @param {object} req - The Express request object containing the user ID in the request body.
+ * @param {object} res - The Express response object to send a JSON response or an error status.
+ */
+router.get('/orderByDate', (req, res) => {
+  const userId = parseInt(req.body.userId, 10);
+
+  const orderBy = sortByDate(userId);
+
+  if (!orderBy) {
+    return res.sendStatus(404);
+  }
+  return res.json(orderBy);
+});
+
+router.get('/filterByPower', (req, res) => {
+  const userId = parseInt(req.body?.userId, 10);
+  const power = req.body?.power;
+
+  if (!userId || !power) {
+    return res.sendStatus(400);
+  }
+
+  const filterByPower = filterByPasswordPower(userId, power);
+
+  if (!filterByPower) {
+    return res.sendStatus(404);
+  }
+
+  return res.json(filterByPower);
 });
 
 module.exports = router;
