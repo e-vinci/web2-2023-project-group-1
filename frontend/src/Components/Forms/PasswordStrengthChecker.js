@@ -5,9 +5,14 @@
 const { passwordStrength } = require('check-password-strength');
 
 const checkerForm = `
-<h1 class="text-center m-5">Vérificateur de mot de passe</h1>
-<p class="text-center" >Vous pensez que votre mot de passe est sécurisé ? Vérifiez le içi.</p>
-<section class="d-flex justify-content-center p-5">
+<div class="p-3 mb-2" style="background-color: #7F5056; color: white; margin: 10px 200px 20px 200px;" src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js">
+<h1 id="backround" class="text-center m-5 ">Vérification de mot de passe</h1>
+</div>
+<div class="text-center m-4" style="font-size: 30px;">
+<p>Vous pensez que votre mot de passe est sécurisé ? </p>
+<p>Vérifiez le <span>\u{1F447}</span></p>
+</div>
+<section class="d-flex justify-content-center p-5 "  style="margin-top: -40px;">
   <form id="checker-form" style="text-align: left;">
     <div bis_skin_checked="1">
       <div class=" pt-1 pb-1" bis_skin_checked="1">
@@ -18,7 +23,7 @@ const checkerForm = `
         <input type="submit" value="Vérifier" >
       </div>
       <div class="d-flex justify-content-center">
-        <div id="checker-result" class="px-5 p-3" bis_skin_checked="1">La puissance de votre mot de passe : </div>
+        <div id="checker-result" class="5px p-3" bis_skin_checked="1">La puissance de votre mot de passe : </div>
         <div id="checker-advice" class="px-5 p-3" bis_skin_checked="1">Nos conseil pour améliorer votre mot de passe : </div>
       </div>
     </div>
