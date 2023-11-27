@@ -46,15 +46,21 @@ const UserPage = () => {
   main.className = 'd-flex align-items-center justify-content-center';
   main.innerHTML = sidebarToFill;
   const sideBar=document.querySelector('.listSite');
+  const buttonaddSit=document.createElement('button');
+ buttonaddSit.innerHTML='<button type="button" class="btn btn-primary btn-lg btn-block">Ajouter un site</button>';
+  sideBar.appendChild(buttonaddSit);
+
   defaultList.forEach((element)=>{
-    const listelem=document.createElement('li');
+    const listelem=document.createElement('th');
     const elem=document.createElement('button');
     elem.id = element.id;
-    elem.innerHTML=element.site;
+    elem.innerHTML='type="button" class="btn btn-primary btn-lg btn-block"';
     listelem.appendChild(elem);
     sideBar.appendChild(listelem);
   }
+  
    );
+ 
   
 
 
