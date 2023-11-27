@@ -20,7 +20,7 @@ const checkerForm = `
       </div>
       </div>
       <div bis_skin_checked="1">
-        <input type="submit" value="Vérifier">
+        <input type="submit" value="Vérifier" >
       </div>
       <div class="d-flex justify-content-center">
         <div id="checker-result" class="5px p-3" bis_skin_checked="1">La puissance de votre mot de passe : </div>

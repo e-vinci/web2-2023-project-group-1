@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const path = require('node:path');
+const { passwordStrength } = require('check-password-strength');
+
 const { parse, serialize } = require('../utils/json');
 
 const saltRounds = 10;
@@ -26,11 +28,13 @@ const defaultUsers = [
 async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passwordSite) {
   const indexIndex = indexUserFromUserId(usersId);
   const idSite = getNextIdSite(indexIndex);
+  const dateAdded = Date.now().toLocaleString();
 
   const newSite = {
     id: idSite,
     url: urlSite,
     site: siteName,
+    dateSite: dateAdded,
     login: usernameSite,
     mot_de_passe: bcrypt.hashSync(passwordSite, saltRounds),
   };
@@ -202,6 +206,40 @@ function filtreBySiteName(id) {
   return userListFound;
 }
 
+function sortByDate(id) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const indexOfUserFound = users.findIndex((user) => user.id === id);
+  if (indexOfUserFound < 0) return undefined;
+
+  const userListFound = users[indexOfUserFound].sites;
+
+  userListFound.sort((a, b) => a.dateSite.localeCompare(b.dateSite));
+
+  return userListFound;
+}
+
+function filterByPasswordPower(id, power) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const indexOfUserFound = users.findIndex((user) => user.id === id);
+  if (indexOfUserFound < 0) return undefined;
+
+  const userListFound = users[indexOfUserFound].sites;
+  const sites = [];
+
+  userListFound.forEach((site) => {
+    const pswValue = passwordStrength(site.mot_de_passe).value;
+    if (pswValue === power) {
+      console.log(sites.push(site));
+    }
+  });
+  return sites;
+}
+
 module.exports = {
-  addPasswordOnSite, removeSite, updatePassword, filtreBySiteName,
+  addPasswordOnSite,
+  removeSite,
+  updatePassword,
+  filtreBySiteName,
+  sortByDate,
+  filterByPasswordPower,
 };
