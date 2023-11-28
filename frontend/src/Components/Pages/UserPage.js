@@ -1,3 +1,10 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-console */
+
+import { getAuthenticatedUser } from "../../utils/auths";
+import Navigate from '../Router/Navigate';
+// import { encrypt, decrypt } from "../../utils/cryptPassword";
+
 const defaultList= [
   {
       "id": 1,
@@ -35,35 +42,139 @@ const sidebarToFill=`<!--Main Navigation-->
   <div class="row">
     <div class="listSite">
     </div>
-    <div class="col-sm">
+    <div id="right" class="col-sm">
       The other box
     </div>
     </div>
 </div>`;
 
+const addPasswordForm = `
+  <form id="registrationForm" class="mt-3">
+    <div class="mb-3">
+      <label for="url" class="form-label">URL</label>
+      <input type="url" class="form-control" id="url" required>
+      <div id="messageErreurURL" class="form-text"></div>
+    </div>
+    <div class="mb-3">
+      <label for="site" class="form-label">Site</label>
+      <input type="text" class="form-control" id="site" required>
+      <div id="messageErreurSite" class="form-text"></div>
+    </div>
+    <div class="mb-3">
+      <label for="login" class="form-label">Login</label>
+      <input type="text" class="form-control" id="login" required>
+      <div id="messageErreurLogin" class="form-text"></div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Mot de passe</label>
+      <input type="password" class="form-control" id="password" required>
+      <div id="messageErreurPassword" class="form-text"></div>
+    </div>
+    <button type="submit" id="submitPassword" class="btn btn-primary">Enregistrer</button>
+    <p id="resultat" class="text-success"></p>
+  </form>
+`;
+
 const UserPage = () => {
+  const user = getAuthenticatedUser();
+  const username = user.username;
+  console.log(username);
+
   const main = document.querySelector('main');
   main.className = 'd-flex align-items-center justify-content-center';
   main.innerHTML = sidebarToFill;
   const sideBar=document.querySelector('.listSite');
   const buttonaddSit=document.createElement('button');
- buttonaddSit.innerHTML='<button type="button" class="btn btn-primary btn-lg btn-block">Ajouter un site</button>';
+  buttonaddSit.innerHTML='<button id="addButton" type="button" class="btn btn-primary btn-lg btn-block">Ajouter un site</button>';
   sideBar.appendChild(buttonaddSit);
 
   defaultList.forEach((element)=>{
-    const listelem=document.createElement('th');
+    const listelem=document.createElement('tr');
     const elem=document.createElement('button');
     elem.id = element.id;
     elem.innerHTML='type="button" class="btn btn-primary btn-lg btn-block"';
     listelem.appendChild(elem);
     sideBar.appendChild(listelem);
-  }
-  
-   );
- 
-  
+  });
+
+  const addButton = document.querySelector('#addButton');
+  const rightDiv = document.querySelector('#right');
+  let submitPasswordButton;
+  addButton.addEventListener('click', () => {
+    rightDiv.innerHTML = "";
+    rightDiv.innerHTML = addPasswordForm;
+    submitPasswordButton = document.querySelector('#submitPassword');
+
+    submitPasswordButton.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const url = document.querySelector('#url').value;
+      const site = document.querySelector('#site').value;
+      const login = document.querySelector('#login').value;
+      const passwordNeedToEcnrypt = document.querySelector('#password').value;
+
+      if (url === '') {
+        const messageErreurURL = document.querySelector('#messageErreurURL');
+        messageErreurURL.innerHTML = `Veuillez renseigner une URL`;
+        messageErreurURL.display = 'block';
+        return;
+      }
+      if (site === '') {
+        const messageErreurSite = document.querySelector('#messageErreurSite');
+        messageErreurSite.innerHTML = `Veuillez renseigner un nom de site`;
+        messageErreurSite.display = 'block';
+        return;
+      }
+      if (login === '') {
+        const messageErreurLogin = document.querySelector('#messageErreurLogin');
+        messageErreurLogin.innerHTML = `Veuillez renseigner un login`;
+        messageErreurLogin.display = 'block';
+        return;
+      }
+      if (passwordNeedToEcnrypt === '') {
+        const messageErreurPassword = document.querySelector('#messageErreurPassword');
+        messageErreurPassword.innerHTML = `Veuillez renseigner un mot de passe`;
+        messageErreurPassword.display = 'block';
+        return;
+      } 
+
+      const option1 = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'username': username,
+        }
+      };
+
+      const response1 = await fetch('/api/auths/readUserFromUsername', option1)
+      console.log(await response1.json());
 
 
+
+
+      /*const option2 = {
+        method: 'POST',
+        body: JSON.stringify({
+          "url": url,
+          "site": site,
+          "login": login,
+          "password": passwordNeedToEcnrypt
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+
+      const response2 = await fetch('/api/sitePassword/addSite', option);
+      const resultat = document.querySelector('#resultat');
+        if (!response2.ok) {
+            resultat.className = 'text-danger';
+            resultat.innerHTML = `Une erreur est survenue`;
+        } else {
+            resultat.innerHTML = `Enregistrement réussi`;
+            Navigate('/user');
+        }*/
+    });
+  });
 };
 
 

@@ -111,9 +111,19 @@ function readOneUserFromId(id) {
 
   return users[indexOfUserFound];
 }
+
+function readIdFromUsername(username) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const indexOfUserFound = users.findIndex((user) => user.username === username);
+  if (indexOfUserFound < 0) return undefined;
+
+  return users[indexOfUserFound].id;
+}
+
 module.exports = {
   login,
   register,
   readOneUserFromUsername,
   passwordCheck,
+  readIdFromUsername,
 };

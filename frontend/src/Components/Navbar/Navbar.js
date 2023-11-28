@@ -237,7 +237,7 @@ function renderNavbar() {
               <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalGenerator">Générer MDP</a>
               </li >
               <li class="nav-item">
-                <a class="nav-link " data-uri="/">${authenticatedUser?.username}</a>
+                <a class="nav-link " href="#" data-uri="/user">${authenticatedUser?.username}</a>
               </li>
               <li class="nav-item">
                 <a class="btn btn-primary" href="#" data-uri="/logout">Logout</a>

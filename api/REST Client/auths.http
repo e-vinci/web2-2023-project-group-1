@@ -47,3 +47,12 @@ Content-Type: application/json
     "password":"manager"
 }
 
+
+### Get id from username
+GET {{baseUrl}}/auths/readUserFromUsername
+Content-Type: application/json
+
+{
+    "username": "admin"
+}
+

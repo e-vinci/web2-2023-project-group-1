@@ -1,6 +1,12 @@
 // eslint-disable-next-line import/no-extraneous-dependencies, import/no-import-module-exports
 import crypto from 'crypto-js/sha512';
 
+/**
+ * Encrypt a password with crypto-js
+ * @param {String} text password of a site to encrypt
+ * @param {String} password password's user
+ * @returns password encrypted
+ */
 const encrypt = async (text, password) => {
     const option = {
         method: 'POST',
