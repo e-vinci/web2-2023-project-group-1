@@ -58,6 +58,7 @@ const addPasswordForm = `
 const UserPage = () => {
   const user = getAuthenticatedUser();
   const username = user.username;
+  console.log(username);
 
   const main = document.querySelector('main');
   main.className = 'd-flex align-items-center justify-content-center';
@@ -158,7 +159,6 @@ const UserPage = () => {
       const response1 = await fetch('/api/auths/readUserFromUsername', option1)
       const userId = await response1.json();
 
-
       const option2 = {
         method: 'POST',
         body: JSON.stringify({
@@ -166,7 +166,7 @@ const UserPage = () => {
           "urlSite": url,
           "siteName": site,
           "userNameSite": login,
-          "passwordSite": encryption(passwordNeedToEcnrypt, masterPassword)
+          "passwordSite": passwordNeedToEcnrypt
         }),
         headers: {
           'Content-Type': 'application/json'
