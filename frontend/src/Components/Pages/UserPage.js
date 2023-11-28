@@ -78,7 +78,6 @@ const addPasswordForm = `
 const UserPage = () => {
   const user = getAuthenticatedUser();
   const username = user.username;
-  console.log(username);
 
   const main = document.querySelector('main');
   main.className = 'd-flex align-items-center justify-content-center';
@@ -138,33 +137,33 @@ const UserPage = () => {
       } 
 
       const option1 = {
-        method: 'GET',
+        method: 'POST', 
+        body: JSON.stringify({
+          'username': username,
+        }),
         headers: {
           'Content-Type': 'application/json',
-          'username': username,
         }
       };
 
       const response1 = await fetch('/api/auths/readUserFromUsername', option1)
-      console.log(await response1.json());
+      const userId = await response1.json();
 
-
-
-
-      /*const option2 = {
+      const option2 = {
         method: 'POST',
         body: JSON.stringify({
-          "url": url,
-          "site": site,
-          "login": login,
-          "password": passwordNeedToEcnrypt
+          "userId": userId,
+          "urlSite": url,
+          "siteName": site,
+          "userNameSite": login,
+          "passwordSite": passwordNeedToEcnrypt
         }),
         headers: {
           'Content-Type': 'application/json'
         }
       };
 
-      const response2 = await fetch('/api/sitePassword/addSite', option);
+      const response2 = await fetch('/api/sites/addSite', option2);
       const resultat = document.querySelector('#resultat');
         if (!response2.ok) {
             resultat.className = 'text-danger';
@@ -172,7 +171,7 @@ const UserPage = () => {
         } else {
             resultat.innerHTML = `Enregistrement réussi`;
             Navigate('/user');
-        }*/
+        }
     });
   });
 };

@@ -70,7 +70,7 @@ function readOneUserFromUsername(username) {
 
 async function createOneUser(username, email, password) {
   const users = parse(jsonDbPath, defaultUsers);
-  const sites = {};
+  const sites = [];
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   const createdUser = {
