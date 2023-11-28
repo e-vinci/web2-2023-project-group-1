@@ -53,9 +53,11 @@ function toDatabaseSites(usersite, indexUser, indexSite) {
 
   if (indexUser > users.length) return undefined;
   const userFound = users[indexUser];
+  console.log(userFound);
   userFound.sites[indexSite + 1] = usersite;
 
   users[indexUser] = userFound;
+  console.log(users[indexUser]);
 
   serialize(jsonDbPath, users);
   return userFound;
