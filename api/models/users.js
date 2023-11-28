@@ -116,26 +116,8 @@ function readIdFromUsername(username) {
   const users = parse(jsonDbPath, defaultUsers);
   const indexOfUserFound = users.findIndex((user) => user.username === username);
   if (indexOfUserFound < 0) return undefined;
-  return parseInt(users[indexOfUserFound].id, 10);
-}
 
-async function comparePassword(username, password) {
-  const users = parse(jsonDbPath, defaultUsers);
-  const userFound = users.find((user) => user.username === username);
-  if (!userFound) return undefined;
-  const passwordMatch = await bcrypt.compare(password, userFound.password);
-  return passwordMatch === true ? 1 : 0;
   return users[indexOfUserFound].id;
-}
-
-
-
-async function comparePassword(username, password) {
-  const users = parse(jsonDbPath, defaultUsers);
-  const userFound = users.find((user) => user.username === username);
-  if (!userFound) return undefined;
-  const passwordMatch = await bcrypt.compare(password, userFound.password);
-  return passwordMatch === true ? 1 : 0;
 }
 
 module.exports = {
