@@ -1,5 +1,6 @@
+/* eslint-disable object-curly-newline */
 const express = require('express');
-const { register, login, passwordCheck } = require('../models/users');
+const { register, login, passwordCheck, readIdFromUsername } = require('../models/users');
 
 const router = express.Router();
 
@@ -44,6 +45,18 @@ router.post('/passwordCheck', async (req, res) => {
   if (!boolean) return res.sendStatus(401); // 401 Unauthorized
 
   return res.json(result);
+});
+
+router.get('/readUserFromUsername', async (req, res) => {
+  const username = req?.body?.id?.length !== 0 ? req.body.username : undefined;
+
+  if (!username) return res.sendStatus(400);
+
+  const returned = await readIdFromUsername(username);
+
+  if (!returned) return res.sendStatus(404);
+
+  return res.json(returned);
 });
 
 module.exports = router;
