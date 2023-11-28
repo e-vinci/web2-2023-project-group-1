@@ -48,8 +48,8 @@ Content-Type: application/json
 }
 
 
-### Get id from username
-GET {{baseUrl}}/auths/readUserFromUsername
+### Get id from username (5)
+POST {{baseUrl}}/auths/readUserFromUsername
 Content-Type: application/json
 
 {

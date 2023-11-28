@@ -63,7 +63,6 @@ const addPasswordForm = `
 const UserPage = () => {
   const user = getAuthenticatedUser();
   const username = user.username;
-  console.log(username);
 
   const main = document.querySelector('main');
   main.className = 'd-flex align-items-center justify-content-center';
@@ -181,6 +180,10 @@ const UserPage = () => {
 
 
       const option1 = {
+        method: 'POST', 
+        body: JSON.stringify({
+          'username': username,
+        }),
         method: 'POST', 
         body: JSON.stringify({
           'username': username,
