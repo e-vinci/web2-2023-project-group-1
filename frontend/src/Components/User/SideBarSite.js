@@ -1,33 +1,4 @@
-const defaultList= [
-    {
-        "id": 1,
-        "url": "test01",
-        "site": "testSite1",
-        "login": "Useraname1",
-        "mot_de_passe": "$2b$10$fe2S0.EVIParWe1jAoagE.oxCfWS95JUX0YtG.mOnHdEB5zfi4TUW"
-    },
-    {
-        "id": 2,
-        "url": "test01",
-        "site": "testSite1",
-        "login": "Useraname1",
-        "mot_de_passe": "$2b$10$0rQmPNWcskf5Ce2/hKYRFu0mDELZpc4VSN406e3rogrIo6/165362"
-    },
-    {
-        "id": 3,
-        "url": "test01",
-        "site": "testSite1",
-        "login": "Useraname1",
-        "mot_de_passe": "$2b$10$cWHPZkMaeGY2PSCXPHk6NOGDdsHipiSKCj0kYe9lC5Z/roMYDea6K"
-    },
-    {
-        "id": 4,
-        "url": "test01",
-        "site": "testSite1",
-        "login": "Useraname1",
-        "mot_de_passe": "$2b$10$BrUjYe2DNaRXF3oRj0oZxu/MkfoBmBphPaEMTZ9HPYFsjXLkdmMbC"
-    }
-  ];
+const {getAuthenticatedUser} =require('../../utils/auths')
 
   const sidebarToFill=`<!--Main Navigation-->
   <header>
@@ -41,17 +12,45 @@ const defaultList= [
 </div>`;
 
   async function  showSideBar(){
+    console.log(getAuthenticatedUser());
     const main = document.querySelector('main');
     main.className = 'd-flex align-items-center justify-content-center';
     main.innerHTML = sidebarToFill;
     const sideBar=document.querySelector('.listSite');
-    defaultList.forEach((element)=>{
-      const listelem=document.createElement('li');
+    const buttonaddSit=document.createElement('tr');
+    const elemAdd=document.createElement('button');
+    elemAdd.innerHTML='Ajouter un site';
+    elemAdd.setAttribute('type', 'button');
+    elemAdd.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
+    buttonaddSit.appendChild(elemAdd)
+    sideBar.appendChild(buttonaddSit);
+      const option = {
+          method: 'GET',
+          body: JSON.stringify({
+              "userName": getAuthenticatedUser().username,
+          }),
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      }
+      const response = fetch('/api/sites/orderBySiteName', option);
+      if (!response.ok) {
+          console.log('Error can\'t add to leaderboard because response is not ok');
+      }
+      const list=response.JSON();
+  
+    list.forEach((element)=>{
+      const listelem=document.createElement('tr');
       const elem=document.createElement('button');
       elem.id = element.id;
       elem.innerHTML=element.site;
+      elem.setAttribute('type', 'button');
+      elem.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
       elem.addEventListener('click', async (event) => {
-        // Perform actions when the button is clicked
+        const tab = document.querySelector('.leftSide');
+        tab.innerHTML='';
+
+        
         console.log('Button clicked:', event.site);
       } );
       listelem.appendChild(elem);

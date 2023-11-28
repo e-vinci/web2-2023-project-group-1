@@ -1,6 +1,3 @@
-
-
-
 const checkDuplicatePassword = `
 <section class="w-75 p-3 mx-auto">
   <table id="duplicatePassword" class="table table-striped table-hover">
@@ -20,9 +17,9 @@ const checkDuplicatePassword = `
 `;
 
 
-async function afficherDupliatePassword() {
+function afficherDuplicatePassword() {
     const tab = document.querySelector('.leftSide');
-    const checker = document.querySelector('#duplicatePassword');
+    const checker = document.createElement('div');
     checker.innerHTML = checkDuplicatePassword;
     tab.appendChild(checker);
 }
@@ -30,5 +27,5 @@ async function afficherDupliatePassword() {
 
 
 module.exports = {
-    afficherDupliatePassword
+    afficherDuplicatePassword
 };

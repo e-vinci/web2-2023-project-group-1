@@ -229,7 +229,7 @@ function filterByPasswordPower(id, power) {
   userListFound.forEach((site) => {
     const pswValue = passwordStrength(site.mot_de_passe).value;
     if (pswValue === power) {
-      console.log(sites.push(site));
+      sites.push(site);
     }
   });
   return sites;
