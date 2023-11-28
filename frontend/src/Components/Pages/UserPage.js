@@ -15,6 +15,7 @@ const sidebarToFill=`<!--Main Navigation-->
   <div class="row">
     <div class="listSite">
     </div>
+    <div id="right" class="col-sm">
     <div id="right" class="leftSide">
       The other box
     </div>

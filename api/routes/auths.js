@@ -1,6 +1,7 @@
 /* eslint-disable object-curly-newline */
+/* eslint-disable object-curly-newline */
 const express = require('express');
-const { register, login, passwordCheck, readIdFromUsername, comparePassword } = require('../models/users');
+const { register, login, passwordCheck, readIdFromUsername, comparePassword, readIdFromUsername } = require('../models/users');
 
 const router = express.Router();
 
@@ -47,9 +48,9 @@ router.post('/passwordCheck', async (req, res) => {
   return res.json(result);
 });
 
+
 router.post('/readUserFromUsername', async (req, res) => {
   const username = req?.body?.id?.length !== 0 ? req.body.username : undefined;
-
   if (!username) return res.sendStatus(400);
 
   const returned = await readIdFromUsername(username);
@@ -58,6 +59,7 @@ router.post('/readUserFromUsername', async (req, res) => {
 
   return res.json(returned);
 });
+
 
 router.post('/comparePassword', async (req, res) => {
   const username = req?.body?.id?.length !== 0 ? req.body.username : undefined;
@@ -69,5 +71,7 @@ router.post('/comparePassword', async (req, res) => {
 
   return res.json(returned);
 });
+
+
 
 module.exports = router;
