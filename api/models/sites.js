@@ -36,7 +36,7 @@ async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passw
     site: siteName,
     dateSite: dateAdded,
     login: usernameSite,
-    mot_de_passe: bcrypt.hashSync(passwordSite, saltRounds),
+    mot_de_passe: passwordSite,
   };
   return toDatabaseSites(newSite, indexIndex, getLastIndexSite(indexIndex));
 }

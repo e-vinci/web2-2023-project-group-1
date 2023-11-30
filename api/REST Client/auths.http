@@ -56,3 +56,20 @@ Content-Type: application/json
     "username": "admin"
 }
 
+### Compare a password
+POST {{baseUrl}}/auths/comparePassword
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+### Compare a password
+POST {{baseUrl}}/auths/comparePassword
+Content-Type: application/json
+
+{
+    "username": "admin2",
+    "password": "admin"
+}

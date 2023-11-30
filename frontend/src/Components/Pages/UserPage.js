@@ -2,8 +2,8 @@
 /* eslint-disable no-console */
 
 import { getAuthenticatedUser } from "../../utils/auths";
+import { encrypt } from "../../utils/cryptPassword"
 import Navigate from '../Router/Navigate';
-// import { encrypt, decrypt } from "../../utils/cryptPassword";
 
 import  {showSideBar} from '../User/SideBarSite';
 import { afficherDuplicatePassword } from '../User/AfficherDuplicatePassword'; 
@@ -42,6 +42,11 @@ const addPasswordForm = `
       <label for="password" class="form-label">Mot de passe</label>
       <input type="password" class="form-control" id="password" required>
       <div id="messageErreurPassword" class="form-text"></div>
+    </div>
+    <div class="mb-3">
+      <label for="masterPassword" class="form-label">Mot de passe maitre</label>
+      <input type="password" class="form-control" id="masterPassword" required>
+      <div id="messageErreurMasterPassword" class="form-text"></div>
     </div>
     <button type="submit" id="submitPassword" class="btn btn-primary">Enregistrer</button>
     <p id="resultat" class="text-success"></p>
@@ -84,6 +89,7 @@ const UserPage = () => {
       const site = document.querySelector('#site').value;
       const login = document.querySelector('#login').value;
       const passwordNeedToEcnrypt = document.querySelector('#password').value;
+      const masterPassword = document.querySelector('#masterPassword').value;
 
       if (url === '') {
         const messageErreurURL = document.querySelector('#messageErreurURL');
@@ -109,6 +115,34 @@ const UserPage = () => {
         messageErreurPassword.display = 'block';
         return;
       } 
+      if (masterPassword === '') {
+        const messageErreurMasterPassword = document.querySelector('#messageErreurMasterPassword');
+        messageErreurMasterPassword.innerHTML = `Veuillez renseigner votre mot de pass maitre`;
+        messageErreurMasterPassword.display = 'block';
+        return;
+      } 
+
+
+      const optionCompare = {
+        method: 'POST',
+        body: JSON.stringify({
+          "username": username,
+          "password": masterPassword
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      
+      const responseCompare = await fetch('/api/auths/comparePassword', optionCompare);
+      const compareData = await responseCompare.json();
+      if (compareData !== 1) {
+        const messageErreurMasterPassword = document.querySelector('#messageErreurMasterPassword');
+        messageErreurMasterPassword.innerHTML = `Mot de passe maitre incorrect`;
+        messageErreurMasterPassword.display = 'block';
+        return;
+      }
+
 
       const option1 = {
         method: 'POST', 
@@ -123,6 +157,7 @@ const UserPage = () => {
       const response1 = await fetch('/api/auths/readUserFromUsername', option1)
       const userId = await response1.json();
 
+
       const option2 = {
         method: 'POST',
         body: JSON.stringify({
@@ -130,7 +165,7 @@ const UserPage = () => {
           "urlSite": url,
           "siteName": site,
           "userNameSite": login,
-          "passwordSite": passwordNeedToEcnrypt
+          "passwordSite": encrypt(passwordNeedToEcnrypt, masterPassword)
         }),
         headers: {
           'Content-Type': 'application/json'

@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 const express = require('express');
-const { register, login, passwordCheck, readIdFromUsername } = require('../models/users');
+const { register, login, passwordCheck, readIdFromUsername, comparePassword } = require('../models/users');
 
 const router = express.Router();
 
@@ -49,13 +49,23 @@ router.post('/passwordCheck', async (req, res) => {
 
 router.post('/readUserFromUsername', async (req, res) => {
   const username = req?.body?.id?.length !== 0 ? req.body.username : undefined;
-  console.log(username);
 
   if (!username) return res.sendStatus(400);
 
   const returned = await readIdFromUsername(username);
 
   if (!returned) return res.sendStatus(404);
+
+  return res.json(returned);
+});
+
+router.post('/comparePassword', async (req, res) => {
+  const username = req?.body?.id?.length !== 0 ? req.body.username : undefined;
+  const password = req?.body?.password;
+
+  if (!username || !password) return res.sendStatus(400);
+
+  const returned = await comparePassword(username, password);
 
   return res.json(returned);
 });

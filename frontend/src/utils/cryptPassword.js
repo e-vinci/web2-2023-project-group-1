@@ -72,4 +72,4 @@ const decryptedText = decrypt(encrypted, password, iv);
 
 console.log(decryptedText); // This is a secret text.
 
-module.exports(encrypt,decrypt);
+module.exports = { encrypt, decrypt};
