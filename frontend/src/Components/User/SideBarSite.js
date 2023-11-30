@@ -12,7 +12,6 @@ const {getAuthenticatedUser} =require('../../utils/auths')
 </div>`;
 
   async function  showSideBar(){
-    console.log(getAuthenticatedUser());
     const main = document.querySelector('main');
     main.className = 'd-flex align-items-center justify-content-center';
     main.innerHTML = sidebarToFill;
@@ -22,23 +21,9 @@ const {getAuthenticatedUser} =require('../../utils/auths')
     elemAdd.innerHTML='Ajouter un site';
     elemAdd.setAttribute('type', 'button');
     elemAdd.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
-    buttonaddSit.appendChild(elemAdd)
+    buttonaddSit.appendChild(elemAdd);
     sideBar.appendChild(buttonaddSit);
-      const option = {
-          method: 'GET',
-          body: JSON.stringify({
-              "userName": getAuthenticatedUser().username,
-          }),
-          headers: {
-              'Content-Type': 'application/json'
-          }
-      }
-      const response = fetch('/api/sites/orderBySiteName', option);
-      if (!response.ok) {
-          console.log('Error can\'t add to leaderboard because response is not ok');
-      }
-      const list=response.JSON();
-  
+    const list=await getlist();
     list.forEach((element)=>{
       const listelem=document.createElement('tr');
       const elem=document.createElement('button');
@@ -57,8 +42,25 @@ const {getAuthenticatedUser} =require('../../utils/auths')
       sideBar.appendChild(listelem);
     }
      );
- 
      }
+
+     async function  getlist(){
+const option = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ username: getAuthenticatedUser().username }),
+};
+
+const response = await fetch('/api/sites/orderBySiteName', option);
+  if (!response.ok) {
+      console.log('Error can\'t access the list because response is not ok');
+  }
+  const list =await response.json();
+  return list;
+}
+     
     
    module.exports = {
     showSideBar

@@ -79,8 +79,8 @@ router.patch('/updateSite', (req, res) => {
  * @param {object} req - The Express request object containing the user ID in the request body.
  * @param {object} res - The Express response object to send a JSON response or an error status.
  */
-router.get('/orderBySiteName', (req, res) => {
-  const userId = readIdUserFromUsername(req.body.userName);
+router.post('/orderBySiteName', (req, res) => {
+  const userId = readIdUserFromUsername(req.body.username);
   const orderBy = filtreBySiteName(userId);
   if (!orderBy) {
     return res.sendStatus(404);

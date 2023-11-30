@@ -19,9 +19,21 @@ const checkDuplicatePassword = `
 
 function afficherDuplicatePassword() {
     const tab = document.querySelector('.leftSide');
+    const block=document.createElement('div')
+    const duplicata=document.createElement('button');
+    duplicata.innerHTML='Afficher les mot de passe dupliquer';
+    duplicata.setAttribute('type', 'button');
+    duplicata.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
+    block.appendChild(duplicata);
+    tab.appendChild(block);
     const checker = document.createElement('div');
-    checker.innerHTML = checkDuplicatePassword;
-    tab.appendChild(checker);
+       duplicata.addEventListener('click', async (event) => {
+        block.innerHTML='';
+         checker.innerHTML = checkDuplicatePassword;
+        tab.appendChild(checker);
+        console.log('Button clicked:', event.site);
+      } );
+   
 }
 
 

@@ -200,7 +200,6 @@ function filtreBySiteName(id) {
   if (indexOfUserFound < 0) return undefined;
 
   const userListFound = users[indexOfUserFound].sites;
-
   userListFound.sort((a, b) => a.site.localeCompare(b.site));
 
   return userListFound;
