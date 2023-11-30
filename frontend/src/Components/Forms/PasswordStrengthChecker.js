@@ -19,11 +19,11 @@ const checkerForm = `
     <p>Vérifiez le <span>\u{1F447}</span></p>
   </div>
   
-  <div class="image-container" style="margin-right: 20px;">
-    <img id="tresfaible" src="${tente}" style="display: none; width: 20%;" >
-    <img id="faible" src="${Faible}" style="display: none;" >
-    <img id="moyen" src="${Moyen}" style="display: none;" >
-    <img id="fort" src="${Fort}" style="display: none;" >
+  <div class="image-container" style="margin-left: 15%; position: absolute;">
+    <img id="tresfaible" src="${tente}" style="display: none;width: 20%; " >
+    <img id="faible" src="${Faible}" style="display: none; width: 20%;" >
+    <img id="moyen" src="${Moyen}" style="display: none; width: 20%;" >
+    <img id="fort" src="${Fort}" style="display: none; width: 20%;" >
   </div>
 
   <section class="d-flex justify-content-center p-5 "  style="margin-top: -40px;">
@@ -129,15 +129,15 @@ const listenersPasswordStrengthChecker = () => {
  */
 function toFrench(string) {
   if (string === 'Too weak') {
-    return `<p style="color: red;">Trop faible</p>`;
+    return `<p style="color: red; font-weight: bold;">Trop faible</p>`;
   }
   if (string === 'Weak') {
-    return `<p style="color: orange;">Faible</p>`;
+    return `<p style="color: orange; font-weight: bold;">Faible</p>`;
   }
   if (string === 'Medium') {
-    return `<p style="color: yellow;">Moyen</p>`;
+    return `<p style="color: yellow; font-weight: bold;">Moyen</p>`;
   }
-  return `<p style="color: green;">Fort</p>`;
+  return `<p style="color: green; font-weight: bold;">Fort</p>`;
 }
 
 /**
