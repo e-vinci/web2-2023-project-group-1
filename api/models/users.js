@@ -129,6 +129,14 @@ async function comparePassword(username, password) {
   return users[indexOfUserFound].id;
 }
 
+async function comparePassword(username, password) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const userFound = users.find((user) => user.username === username);
+  if (!userFound) return undefined;
+  const passwordMatch = await bcrypt.compare(password, userFound.password);
+  return passwordMatch === true ? 1 : 0;
+}
+
 module.exports = {
   login,
   register,

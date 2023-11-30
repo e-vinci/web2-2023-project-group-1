@@ -62,7 +62,6 @@ router.post('/readUserFromUsername', async (req, res) => {
   return res.json(returned);
 });
 
-
 router.post('/comparePassword', async (req, res) => {
   const username = req?.body?.id?.length !== 0 ? req.body.username : undefined;
   const password = req?.body?.password;
