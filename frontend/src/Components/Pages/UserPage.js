@@ -8,6 +8,36 @@ import Navigate from '../Router/Navigate';
 import  {showSideBar} from '../User/SideBarSite';
 import { afficherDuplicatePassword } from '../User/AfficherDuplicatePassword'; 
 
+const defaultList= [
+  {
+      "id": 1,
+      "url": "test01",
+      "site": "testSite1",
+      "login": "Useraname1",
+      "mot_de_passe": "$2b$10$fe2S0.EVIParWe1jAoagE.oxCfWS95JUX0YtG.mOnHdEB5zfi4TUW"
+  },
+  {
+      "id": 2,
+      "url": "test01",
+      "site": "testSite1",
+      "login": "Useraname1",
+      "mot_de_passe": "$2b$10$0rQmPNWcskf5Ce2/hKYRFu0mDELZpc4VSN406e3rogrIo6/165362"
+  },
+  {
+      "id": 3,
+      "url": "test01",
+      "site": "testSite1",
+      "login": "Useraname1",
+      "mot_de_passe": "$2b$10$cWHPZkMaeGY2PSCXPHk6NOGDdsHipiSKCj0kYe9lC5Z/roMYDea6K"
+  },
+  {
+      "id": 4,
+      "url": "test01",
+      "site": "testSite1",
+      "login": "Useraname1",
+      "mot_de_passe": "$2b$10$BrUjYe2DNaRXF3oRj0oZxu/MkfoBmBphPaEMTZ9HPYFsjXLkdmMbC"
+  }
+];
 
 const sidebarToFill=`<!--Main Navigation-->
   <header>
@@ -53,7 +83,6 @@ const addPasswordForm = `
   </form>
 `;
 
-
 const UserPage = () => {
   const user = getAuthenticatedUser();
   const username = user.username;
@@ -73,6 +102,116 @@ const UserPage = () => {
     elem.innerHTML='type="button" class="btn btn-primary btn-lg btn-block"';
     listelem.appendChild(elem);
     sideBar.appendChild(listelem);
+  });
+
+  const addButton = document.querySelector('#addButton');
+  const rightDiv = document.querySelector('#right');
+  let submitPasswordButton;
+  addButton.addEventListener('click', () => {
+    rightDiv.innerHTML = "";
+    rightDiv.innerHTML = addPasswordForm;
+    submitPasswordButton = document.querySelector('#submitPassword');
+
+    submitPasswordButton.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const url = document.querySelector('#url').value;
+      const site = document.querySelector('#site').value;
+      const login = document.querySelector('#login').value;
+      const passwordNeedToEcnrypt = document.querySelector('#password').value;
+      const masterPassword = document.querySelector('#masterPassword').value;
+
+      if (url === '') {
+        const messageErreurURL = document.querySelector('#messageErreurURL');
+        messageErreurURL.innerHTML = `Veuillez renseigner une URL`;
+        messageErreurURL.display = 'block';
+        return;
+      }
+      if (site === '') {
+        const messageErreurSite = document.querySelector('#messageErreurSite');
+        messageErreurSite.innerHTML = `Veuillez renseigner un nom de site`;
+        messageErreurSite.display = 'block';
+        return;
+      }
+      if (login === '') {
+        const messageErreurLogin = document.querySelector('#messageErreurLogin');
+        messageErreurLogin.innerHTML = `Veuillez renseigner un login`;
+        messageErreurLogin.display = 'block';
+        return;
+      }
+      if (passwordNeedToEcnrypt === '') {
+        const messageErreurPassword = document.querySelector('#messageErreurPassword');
+        messageErreurPassword.innerHTML = `Veuillez renseigner un mot de passe`;
+        messageErreurPassword.display = 'block';
+        return;
+      } 
+      if (masterPassword === '') {
+        const messageErreurMasterPassword = document.querySelector('#messageErreurMasterPassword');
+        messageErreurMasterPassword.innerHTML = `Veuillez renseigner votre mot de pass maitre`;
+        messageErreurMasterPassword.display = 'block';
+        return;
+      } 
+
+
+      const optionCompare = {
+        method: 'POST',
+        body: JSON.stringify({
+          "username": username,
+          "password": masterPassword
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      
+      const responseCompare = await fetch('/api/auths/comparePassword', optionCompare);
+      const compareData = await responseCompare.json();
+      if (compareData !== 1) {
+        const messageErreurMasterPassword = document.querySelector('#messageErreurMasterPassword');
+        messageErreurMasterPassword.innerHTML = `Mot de passe maitre incorrect`;
+        messageErreurMasterPassword.display = 'block';
+        return;
+      }
+
+
+      const option1 = {
+        method: 'POST', 
+        body: JSON.stringify({
+          'username': username,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      };
+
+      const response1 = await fetch('/api/auths/readUserFromUsername', option1)
+      const userId = await response1.json();
+
+
+      const option2 = {
+        method: 'POST',
+        body: JSON.stringify({
+          "userId": userId,
+          "urlSite": url,
+          "siteName": site,
+          "userNameSite": login,
+          "passwordSite": encryption(passwordNeedToEcnrypt, masterPassword)
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+
+      const response2 = await fetch('/api/sites/addSite', option2);
+      const resultat = document.querySelector('#resultat');
+        if (!response2.ok) {
+            resultat.className = 'text-danger';
+            resultat.innerHTML = `Une erreur est survenue`;
+        } else {
+            resultat.innerHTML = `Enregistrement réussi`;
+            Navigate('/user');
+        }
+    });
+  });
   });
 
   const addButton = document.querySelector('#addButton');

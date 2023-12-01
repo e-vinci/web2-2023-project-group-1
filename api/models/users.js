@@ -117,7 +117,7 @@ function readIdFromUsername(username) {
   const indexOfUserFound = users.findIndex((user) => user.username === username);
   if (indexOfUserFound < 0) return undefined;
 
-  return parseInt(users[indexOfUserFound].id, 10);
+  return parseInt(users[indexOfUserFound].id,10);
 }
 
 async function comparePassword(username, password) {
@@ -134,5 +134,5 @@ module.exports = {
   readOneUserFromUsername,
   passwordCheck,
   readIdFromUsername,
-  comparePassword,
+  comparePassword
 };
