@@ -7,7 +7,7 @@ import crypto from 'crypto-js/sha512';
  * @param {String} password password's user
  * @returns password encrypted
  */
-const encrypt = async (text, password) => {
+ const   encryption =async (text, password)=>{
     const option = {
         method: 'POST',
         body: JSON.stringify({
@@ -35,7 +35,7 @@ const encrypt = async (text, password) => {
     return undefined
 };
 
-const decrypt = async (encryptedText, password, iv) => {
+ const decryption =async (encryptedText, password, iv) => {
     const option = {
         method: 'POST',
         body: JSON.stringify({
@@ -59,17 +59,4 @@ const decrypt = async (encryptedText, password, iv) => {
     return decrypted;}
     return undefined
 };
-
-const text = "This is a secret text.";
-const password = "my_secret_password";
-
-const { encrypted, iv } = encrypt(text, password);
-
-console.log(encrypted); // f6c98f8970d0001424f025d32097816a65d612d1a321452b894272a9
-console.log(iv); // 81c578a7ce824970b83b208a79780805
-
-const decryptedText = decrypt(encrypted, password, iv);
-
-console.log(decryptedText); // This is a secret text.
-
-module.exports = { encrypt, decrypt};
+export { encryption , decryption};
