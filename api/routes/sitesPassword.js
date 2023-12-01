@@ -8,6 +8,10 @@ const {
   filterByPasswordPower,
 } = require('../models/sites');
 
+const {
+  readIdUserFromUsername,
+} = require('../models/users');
+
 const router = express();
 
 /* POST add 1 site to my db */
@@ -75,11 +79,9 @@ router.patch('/updateSite', (req, res) => {
  * @param {object} req - The Express request object containing the user ID in the request body.
  * @param {object} res - The Express response object to send a JSON response or an error status.
  */
-router.get('/orderBySiteName', (req, res) => {
-  const userId = parseInt(req.body.userId, 10);
-
+router.post('/orderBySiteName', (req, res) => {
+  const userId = readIdUserFromUsername(req.body.username);
   const orderBy = filtreBySiteName(userId);
-
   if (!orderBy) {
     return res.sendStatus(404);
   }

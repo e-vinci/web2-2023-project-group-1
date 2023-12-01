@@ -200,7 +200,6 @@ function filtreBySiteName(id) {
   if (indexOfUserFound < 0) return undefined;
 
   const userListFound = users[indexOfUserFound].sites;
-
   userListFound.sort((a, b) => a.site.localeCompare(b.site));
 
   return userListFound;
@@ -229,7 +228,7 @@ function filterByPasswordPower(id, power) {
   userListFound.forEach((site) => {
     const pswValue = passwordStrength(site.mot_de_passe).value;
     if (pswValue === power) {
-      console.log(sites.push(site));
+      sites.push(site);
     }
   });
   return sites;
