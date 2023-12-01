@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 
 import { getAuthenticatedUser } from "../../utils/auths";
-import { encrypt } from "../../utils/cryptPassword"
+import { encryption } from "../../utils/cryptPassword";
 import Navigate from '../Router/Navigate';
 
 const defaultList= [
@@ -191,7 +191,7 @@ const UserPage = () => {
           "urlSite": url,
           "siteName": site,
           "userNameSite": login,
-          "passwordSite": encrypt(passwordNeedToEcnrypt, masterPassword)
+          "passwordSite": encryption(passwordNeedToEcnrypt, masterPassword)
         }),
         headers: {
           'Content-Type': 'application/json'
