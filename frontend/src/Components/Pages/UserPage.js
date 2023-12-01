@@ -207,7 +207,7 @@ const UserPage = () => {
           "urlSite": url,
           "siteName": site,
           "userNameSite": login,
-          "passwordSite": await encryption(passwordNeedToEcnrypt, masterPassword,userId)
+          "passwordSite": encrypt(passwordNeedToEcnrypt, masterPassword)
         }),
         headers: {
           'Content-Type': 'application/json'
