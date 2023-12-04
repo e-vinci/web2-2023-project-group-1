@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 
 import { getAuthenticatedUser } from "../../utils/auths";
-import { encryption } from "../../utils/cryptPassword";
+import { decryption, encryption } from "../../utils/cryptPassword";
 import Navigate from '../Router/Navigate';
 
 // import  {showS eBar} from '../User/SideBarSite';
@@ -185,8 +185,10 @@ const UserPage = () => {
 
       const response1 = await fetch('/api/auths/readUserFromUsername', option1)
       const userId = await response1.json();
-      
-      console.log(userId);
+      const pass=await encryption(passwordNeedToEcnrypt, masterPassword,userId);
+      console.log(await encryption(passwordNeedToEcnrypt, masterPassword,userId));
+      const res=await decryption(pass,masterPassword,userId)
+      console.log(res);
 
       const option2 = {
         method: 'POST',
@@ -195,7 +197,7 @@ const UserPage = () => {
           "urlSite": url,
           "siteName": site,
           "userNameSite": login,
-          "passwordSite": encryption(passwordNeedToEcnrypt, masterPassword)
+          "passwordSite": await encryption(passwordNeedToEcnrypt, masterPassword,userId)
         }),
         headers: {
           'Content-Type': 'application/json'
