@@ -3,6 +3,7 @@
 
 import { getAuthenticatedUser } from "../../utils/auths";
 import { decryption, encryption } from "../../utils/cryptPassword";
+import { decryption, encryption } from "../../utils/cryptPassword";
 import Navigate from '../Router/Navigate';
 
 // import  {showS eBar} from '../User/SideBarSite';
@@ -197,6 +198,10 @@ const UserPage = () => {
 
       const response1 = await fetch('/api/auths/readUserFromUsername', option1)
       const userId = await response1.json();
+      const pass=await encryption(passwordNeedToEcnrypt, masterPassword,userId);
+      console.log(await encryption(passwordNeedToEcnrypt, masterPassword,userId));
+      const res=await decryption(pass,masterPassword,userId)
+      console.log(res);
       const pass=await encryption(passwordNeedToEcnrypt, masterPassword,userId);
       console.log(await encryption(passwordNeedToEcnrypt, masterPassword,userId));
       const res=await decryption(pass,masterPassword,userId)
