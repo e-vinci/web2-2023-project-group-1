@@ -5,8 +5,8 @@ import { getAuthenticatedUser } from "../../utils/auths";
 import { encryption } from "../../utils/cryptPassword";
 import Navigate from '../Router/Navigate';
 
-import  {showSideBar} from '../User/SideBarSite';
-import { afficherDuplicatePassword } from '../User/AfficherDuplicatePassword'; 
+// import  {showS eBar} from '../User/SideBarSite';
+// import { afficherDuplicatePassword } from '../User/AfficherDuplicatePassword'; 
 
 
 const sidebarToFill=`<!--Main Navigation-->

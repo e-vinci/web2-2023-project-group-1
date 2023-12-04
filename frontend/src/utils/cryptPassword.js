@@ -7,7 +7,7 @@ import crypto from 'crypto-js/sha512';
  * @param {String} password password's user
  * @returns password encrypted
  */
- const   encryption =async (text, password)=>{
+ const   encryption = async (text, password)=>{
     const option = {
         method: 'POST',
         body: JSON.stringify({
