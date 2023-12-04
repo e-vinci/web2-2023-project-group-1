@@ -36,7 +36,7 @@ async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passw
     site: siteName,
     dateSite: dateAdded,
     login: usernameSite,
-    mot_de_passe: bcrypt.hashSync(passwordSite, saltRounds),
+    mot_de_passe: passwordSite,
   };
   return toDatabaseSites(newSite, indexIndex, getLastIndexSite(indexIndex));
 }
@@ -53,9 +53,11 @@ function toDatabaseSites(usersite, indexUser, indexSite) {
 
   if (indexUser > users.length) return undefined;
   const userFound = users[indexUser];
+  console.log(userFound);
   userFound.sites[indexSite + 1] = usersite;
 
   users[indexUser] = userFound;
+  console.log(users[indexUser]);
 
   serialize(jsonDbPath, users);
   return userFound;
