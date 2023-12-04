@@ -19,11 +19,11 @@ const checkerForm = `
     <p>Vérifiez le <span>\u{1F447}</span></p>
   </div>
   
-  <div class="image-container" style="margin-left: 15%; position: absolute;">
-    <img id="tresfaible" src="${tente}" style="display: none;width: 20%; " >
-    <img id="faible" src="${Faible}" style="display: none; width: 20%;" >
-    <img id="moyen" src="${Moyen}" style="display: none; width: 20%;" >
-    <img id="fort" src="${Fort}" style="display: none; width: 20%;" >
+  <div class="image-container" style=" margin-left: 15%; position: absolute; width: 10%;">
+    <img id="tresfaible" src="${tente}" style="display: none;width: 100%; " >
+    <img id="faible" src="${Faible}" style="display: none; width: 100%;" >
+    <img id="moyen" src="${Moyen}" style="display: none; width: 100%;" >
+    <img id="fort" src="${Fort}" style="display: none; width: 100%;" >
   </div>
 
   <section class="d-flex justify-content-center p-5 "  style="margin-top: -40px;">
