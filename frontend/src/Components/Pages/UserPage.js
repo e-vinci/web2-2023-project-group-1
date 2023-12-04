@@ -99,7 +99,7 @@ const UserPage = () => {
       const login = document.querySelector('#login').value;
       const passwordNeedToEcnrypt = document.querySelector('#password').value;
       const masterPassword = document.querySelector('#masterPassword').value;
-      const masterPassword = document.querySelector('#masterPassword').value;
+  
 
       if (url === '') {
         const messageErreurURL = document.querySelector('#messageErreurURL');
@@ -161,26 +161,7 @@ const UserPage = () => {
       } 
 
 
-      const optionCompare = {
-        method: 'POST',
-        body: JSON.stringify({
-          "username": username,
-          "password": masterPassword
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      
-      const responseCompare = await fetch('/api/auths/comparePassword', optionCompare);
-      const compareData = await responseCompare.json();
-      if (compareData !== 1) {
-        const messageErreurMasterPassword = document.querySelector('#messageErreurMasterPassword');
-        messageErreurMasterPassword.innerHTML = `Mot de passe maitre incorrect`;
-        messageErreurMasterPassword.display = 'block';
-        return;
-      }
-
+    
 
       const option1 = {
         method: 'POST', 
