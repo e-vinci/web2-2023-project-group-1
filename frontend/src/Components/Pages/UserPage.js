@@ -7,6 +7,8 @@ import Navigate from '../Router/Navigate';
 
 // import  {showS eBar} from '../User/SideBarSite';
 // import { afficherDuplicatePassword } from '../User/AfficherDuplicatePassword'; 
+// import  {showS eBar} from '../User/SideBarSite';
+// import { afficherDuplicatePassword } from '../User/AfficherDuplicatePassword'; 
 
 
 const sidebarToFill=`<!--Main Navigation-->

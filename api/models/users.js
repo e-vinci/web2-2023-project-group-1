@@ -127,4 +127,5 @@ module.exports = {
   passwordCheck,
   readIdFromUsername,
   comparePassword,
+  comparePassword,
 };
