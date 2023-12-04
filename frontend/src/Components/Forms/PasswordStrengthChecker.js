@@ -3,7 +3,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
-import tente from '../../img/Tres_faible.gif';
+import TresFaible from '../../img/Tres_faible.gif';
 import Faible from '../../img/Faible.gif';
 import Moyen from '../../img/Moyen.gif';
 import Fort from '../../img/Fort.gif';
@@ -21,7 +21,7 @@ const checkerForm = `
   </div>
   
   <div class="image-container" style=" margin-left: 15%; position: absolute; width: 10%;">
-    <img id="tresfaible" src="${tente}" style="display: none;width: 100%; " >
+    <img id="tresfaible" src="${TresFaible}" style="display: none;width: 100%; " >
     <img id="faible" src="${Faible}" style="display: none; width: 100%;" >
     <img id="moyen" src="${Moyen}" style="display: none; width: 100%;" >
     <img id="fort" src="${Fort}" style="display: none; width: 100%;" >
