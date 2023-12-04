@@ -8,6 +8,36 @@ import Navigate from '../Router/Navigate';
 // import  {showS eBar} from '../User/SideBarSite';
 // import { afficherDuplicatePassword } from '../User/AfficherDuplicatePassword'; 
 
+const defaultList= [
+  {
+      "id": 1,
+      "url": "test01",
+      "site": "testSite1",
+      "login": "Useraname1",
+      "mot_de_passe": "$2b$10$fe2S0.EVIParWe1jAoagE.oxCfWS95JUX0YtG.mOnHdEB5zfi4TUW"
+  },
+  {
+      "id": 2,
+      "url": "test01",
+      "site": "testSite1",
+      "login": "Useraname1",
+      "mot_de_passe": "$2b$10$0rQmPNWcskf5Ce2/hKYRFu0mDELZpc4VSN406e3rogrIo6/165362"
+  },
+  {
+      "id": 3,
+      "url": "test01",
+      "site": "testSite1",
+      "login": "Useraname1",
+      "mot_de_passe": "$2b$10$cWHPZkMaeGY2PSCXPHk6NOGDdsHipiSKCj0kYe9lC5Z/roMYDea6K"
+  },
+  {
+      "id": 4,
+      "url": "test01",
+      "site": "testSite1",
+      "login": "Useraname1",
+      "mot_de_passe": "$2b$10$BrUjYe2DNaRXF3oRj0oZxu/MkfoBmBphPaEMTZ9HPYFsjXLkdmMbC"
+  }
+];
 
 const sidebarToFill=`<!--Main Navigation-->
   <header>
@@ -58,7 +88,6 @@ const addPasswordForm = `
     <p id="resultat" class="text-success"></p>
   </form>
 `;
-
 
 const UserPage = () => {
   const user = getAuthenticatedUser();
