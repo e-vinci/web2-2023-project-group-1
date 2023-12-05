@@ -11,7 +11,7 @@ const {afficherSite} =require("./AfficherSite");
   <div class="row">
     <div class="listSite">
     </div>
-    <div class="leftSide">
+    <div class="right">
     </div>
     </div>
 </div>`;
@@ -45,11 +45,6 @@ const addPasswordForm = `
       <input type="password" class="form-control" id="masterPassword" required>
       <div id="messageErreurMasterPassword" class="form-text"></div>
     </div>
-    <div class="mb-3">
-      <label for="masterPassword" class="form-label">Mot de passe maitre</label>
-      <input type="password" class="form-control" id="masterPassword" required>
-      <div id="messageErreurMasterPassword" class="form-text"></div>
-    </div>
     <button type="submit" id="submitPassword" class="btn btn-primary">Enregistrer</button>
     <p id="resultat" class="text-success"></p>
   </form>
@@ -67,9 +62,12 @@ const addPasswordForm = `
     elemAdd.innerHTML='Ajouter un site';
     elemAdd.setAttribute('type', 'button');
     elemAdd.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
+    elemAdd.setAttribute('id','addButton');
+    sideBar.appendChild(elemAdd);
     
   const addButton = document.querySelector('#addButton');
-  const rightDiv = document.querySelector('#right');
+  console.log(addButton);
+  const rightDiv = document.querySelector('.right');
   let submitPasswordButton;
   addButton.addEventListener('click', () => {
     rightDiv.innerHTML = "";
