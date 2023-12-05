@@ -20,30 +20,46 @@ const checkerForm = `
     <p>Vérifiez le <span>\u{1F447}</span></p>
   </div>
   
-  <div class="image-container" style=" margin-left: 15%; position: absolute; width: 10%;">
-    <img id="tresfaible" src="${TresFaible}" style="display: none;width: 100%; " >
-    <img id="faible" src="${Faible}" style="display: none; width: 100%;" >
-    <img id="moyen" src="${Moyen}" style="display: none; width: 100%;" >
-    <img id="fort" src="${Fort}" style="display: none; width: 100%;" >
+<div class="container">
+  <div class="row align-items-start" style="width:500px">
+    <div class="col-md-2">
+      <section id="image-container" style="width: 50%;">
+        <img id="tresfaible" src="${TresFaible}" style="display: none;width: 100%;" >
+        <img id="faible" src="${Faible}" style="display: none; width: 100%;" >
+        <img id="moyen" src="${Moyen}" style="display: none; width: 100%;" >
+        <img id="fort" src="${Fort}" style="display: none; width: 100%;" >
+      </section>
+    </div>
   </div>
 
-  <section class="d-flex justify-content-center p-5 "  style="margin-top: -40px;">
-    <form id="checker-form" style="text-align: left;">
-      <div bis_skin_checked="1">
-        <div class="pt-1 pb-1" bis_skin_checked="1">
-          <input type="text" class="form-control custom-input" id="checker-password" name="checker-password">
-        </div>
+    <div class="row align-items-center">
+      <div class="col-md-12">
+        <section class="d-flex justify-content-center p-5" style="margin-top: -40px;">
+          <form id="checker-form" style="text-align: left;">
+            <div bis_skin_checked="1">
+              <div class="pt-1 pb-1" bis_skin_checked="1">
+                <input type="text" class="form-control custom-input" id="checker-password" name="checker-password">
+              </div>
+            </div>
+            <div bis_skin_checked="1">
+              <input type="submit" value="Vérifier" >
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <div id="checker-result" class="5px p-3" bis_skin_checked="1">La puissance de votre mot de passe : </div>
+              <div id="checker-advice" class="px-5 p-3" bis_skin_checked="1">Nos conseils pour améliorer votre mot de passe : </div>
+            </div>
+          </form>
+        </section>
       </div>
-      <div bis_skin_checked="1">
-        <input type="submit" value="Vérifier" >
+    </div>  
+
+    <div class="row align-items-end">
+      <div class="col-md-1">
       </div>
-  
-      <div class="d-flex justify-content-center">
-        <div id="checker-result" class="5px p-3" bis_skin_checked="1">La puissance de votre mot de passe : </div>
-        <div id="checker-advice" class="px-5 p-3" bis_skin_checked="1">Nos conseil pour améliorer votre mot de passe : </div>
-      </div>
-  </form>
-</section>
+    </div>
+</div>
+
 `;
 
 const displayImage = (passwordStrengthValue) => {
@@ -72,7 +88,6 @@ const displayImage = (passwordStrengthValue) => {
       fort.style.display = 'block';
       break;
     default:
-      // Aucune correspondance, ne rien faire
       break;
   }
 };
