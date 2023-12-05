@@ -3,10 +3,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
-import TresFaible from '../../img/Tres_faible.gif';
-import Faible from '../../img/Faible.gif';
-import Moyen from '../../img/Moyen.gif';
-import Fort from '../../img/Fort.gif';
+import TresFaible from '../../img/Angry.gif';
+import Faible from '../../img/NotHappy.gif';
+import Moyen from '../../img/Middle_happy.gif';
+import Fort from '../../img/Happyyy.gif';
 
 const { passwordStrength } = require('check-password-strength');
 
@@ -42,8 +42,6 @@ const checkerForm = `
         <div id="checker-result" class="5px p-3" bis_skin_checked="1">La puissance de votre mot de passe : </div>
         <div id="checker-advice" class="px-5 p-3" bis_skin_checked="1">Nos conseil pour améliorer votre mot de passe : </div>
       </div>
-      
-    </div>
   </form>
 </section>
 `;
@@ -162,7 +160,7 @@ function advicesToArray(array, password, val) {
     advicesList.push('Ajouter des caractères spéciaux');
   }
   if (password.length < 8 || val !== 'Strong') {
-    advicesList.push('Ajouter des caractères');
+    advicesList.push('Ajouter plus de caractères');
   }
   return advicesList;
 }
