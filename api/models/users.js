@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const path = require('node:path');
+const escape = require('escape-html');
 const { parse, serialize } = require('../utils/json');
 
 const jwtSecret = 'ilovemypizza!';
@@ -75,8 +76,8 @@ async function createOneUser(username, email, password) {
 
   const createdUser = {
     id: getNextId(),
-    username,
-    email,
+    login: escape(username),
+    email: escape(email),
     password: hashedPassword,
     sites,
   };
@@ -119,6 +120,7 @@ function readIdFromUsername(username) {
 
   return users[indexOfUserFound].id;
 }
+
 async function comparePassword(username, password) {
   const users = parse(jsonDbPath, defaultUsers);
   const userFound = users.find((user) => user.username === username);

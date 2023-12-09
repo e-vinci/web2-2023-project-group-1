@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const path = require('node:path');
+const escape = require('escape-html');
 const { passwordStrength } = require('check-password-strength');
 
 const { parse, serialize } = require('../utils/json');
@@ -31,12 +32,12 @@ async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passw
   const dateAdded = Date.now().toLocaleString();
 
   const newSite = {
-    id: idSite,
-    url: urlSite,
-    site: siteName,
-    dateSite: dateAdded,
-    login: usernameSite,
-    mot_de_passe: passwordSite,
+    id: escape(idSite),
+    url: escape(urlSite),
+    site: escape(siteName),
+    dateSite: escape(dateAdded),
+    login: escape(usernameSite),
+    mot_de_passe: bcrypt.hashSync(passwordSite, saltRounds),
   };
   return toDatabaseSites(newSite, indexIndex, getLastIndexSite(indexIndex));
 }

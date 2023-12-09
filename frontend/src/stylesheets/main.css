@@ -82,15 +82,12 @@ width: fix;
 
 .my-path {
     fill:none;
-    stroke:#464dc9;
-    stroke-width:1;
+    stroke:#242984;
+    stroke: width 1;
   }
 
 #animation {
-    position: absolute;
-    margin-top: 13%;
-    margin-left: 3%;
-    width: 25%;
+    position: static;
 }
 
 .ml12 {
