@@ -38,10 +38,11 @@ function afficherDuplicatePassword() {
         const password='patate';
         for (const elem of list){
           for(const elem1 of list){
-if(elem.id != elem1.id ){
+if(elem.id < elem1.id ){
   if(decryption(elem.mot_de_passe)=== decryption(elem.mot_de_passe)){
 
-    block.innerHTML=''
+  ligneDoublon=document.createElement('div');
+  ligneDoublon.innerHTML='Site doublé:'+ elem1.site +' = '+elem.site
   }
 }
           }
