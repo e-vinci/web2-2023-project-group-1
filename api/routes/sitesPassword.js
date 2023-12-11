@@ -9,7 +9,7 @@ const {
 } = require('../models/sites');
 
 const {
-  readIdUserFromUsername,
+  readIdFromUsername,
 } = require('../models/users');
 
 const router = express();
@@ -80,7 +80,7 @@ router.patch('/updateSite', (req, res) => {
  * @param {object} res - The Express response object to send a JSON response or an error status.
  */
 router.post('/orderBySiteName', (req, res) => {
-  const userId = readIdUserFromUsername(req.body.username);
+  const userId = readIdFromUsername(req.body.username);
   const orderBy = filtreBySiteName(userId);
   if (!orderBy) {
     return res.sendStatus(404);
