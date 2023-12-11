@@ -44,10 +44,8 @@ import CryptoJS from 'crypto-js';
     const data = await response.json();
     if(parseInt(data.value,10)===1){
    const decrypted = CryptoJS.Rabbit.decrypt(encrypted, password).toString(CryptoJS.enc.Utf8);
-   console.log("ijblsdqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqccccc")
-   console.log(decrypted);
     return decrypted;}
     return undefined
 };
 
-export { encryption , decryption};
+export { encryption , decryption };

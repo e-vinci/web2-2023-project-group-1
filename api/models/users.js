@@ -126,7 +126,7 @@ async function comparePassword(username, password) {
   const userFound = users.find((user) => user.username === username);
   if (!userFound) return undefined;
   const passwordMatch = await bcrypt.compare(password, userFound.password);
-  return passwordMatch === true ? 1 : 0;
+  return passwordMatch;
 }
 
 module.exports = {

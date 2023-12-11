@@ -2,7 +2,7 @@
 async function afficherSite(idSite){
 
     const option = {
-        method: 'GET',
+        method: 'POST',
         body: JSON.stringify({
             "userId": idSite,
         }),
@@ -14,8 +14,6 @@ async function afficherSite(idSite){
     if (!response.ok) {
         console.log('Error can\'t add to leaderboard because response is not ok');
     }
-
-    const site=await response.json();
 
 
     const rightSide = document.querySelector('.right');
