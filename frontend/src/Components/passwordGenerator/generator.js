@@ -1,9 +1,9 @@
 /* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import tente from '../../img/tente.png';
-import maisonBois from '../../img/maisonBois.png';
-import maison from '../../img/home.png';
-import chateau from '../../img/Chateau.png';
+import Tent from '../../img/tente.png';
+import WoodenHouse from '../../img/maisonBois.png';
+import Home from '../../img/home.png';
+import Castle from '../../img/Chateau.png';
 
 const generator = require('generate-password-browser');
 
@@ -29,10 +29,10 @@ const modalGenerator = `
 
 const generatorForm = `
 <div class="image-container" style=" margin-top: 30px; position: absolute; width: 20%;">
-            <img id="tresFaible" src="${tente}" style="width: 100%; " >
-            <img id="faible" src="${maisonBois}" style="display: none; width: 100%;" >
-            <img id="moyen" src="${maison}" style="display: none; width: 100%;" >
-            <img id="fort" src="${chateau}" style="display: none; width: 100%;" >
+            <img id="tent_id" src="${Tent}" style="width: 100%; " >
+            <img id="woodenHouse_id" src="${WoodenHouse}" style="display: none; width: 100%;" >
+            <img id="home_id" src="${Home}" style="display: none; width: 100%;" >
+            <img id="castle_id" src="${Castle}" style="display: none; width: 100%;" >
 </div>
 
 <section class="generate d-flex align-items-center justify-content-center">
@@ -70,31 +70,31 @@ const generatorForm = `
 `;
 
 const displayImage = (rangeValue) => {
-    const tresFaible = document.getElementById("tresFaible");
-    const faible = document.getElementById("faible");
-    const moyen = document.getElementById("moyen");
-    const fort = document.getElementById("fort");
+    const tent = document.getElementById("tent_id");
+    const woodenHouse = document.getElementById("woodenHouse_id");
+    const home = document.getElementById("home_id");
+    const castle = document.getElementById("castle_id");
 
-    if (rangeValue >=0 && rangeValue <= 10) {
-        tresFaible.style.display = 'block';
-        faible.style.display = 'none';
-        moyen.style.display = 'none';
-        fort.style.display = 'none';
+    if (rangeValue >= 0 && rangeValue <= 10) {
+        tent.style.display = 'block';
+        woodenHouse.style.display = 'none';
+        home.style.display = 'none';
+        castle.style.display = 'none';
     } else if (rangeValue <= 15) {
-        tresFaible.style.display = 'none';
-        faible.style.display = 'block';
-        moyen.style.display = 'none';
-        fort.style.display = 'none';
+        tent.style.display = 'none';
+        woodenHouse.style.display = 'block';
+        home.style.display = 'none';
+        castle.style.display = 'none';
     } else if (rangeValue <= 22) {
-        tresFaible.style.display = 'none';
-        faible.style.display = 'none';
-        moyen.style.display = 'block';
-        fort.style.display = 'none';
+        tent.style.display = 'none';
+        woodenHouse.style.display = 'none';
+        home.style.display = 'block';
+        castle.style.display = 'none';
     } else {
-        tresFaible.style.display = 'none';
-        faible.style.display = 'none';
-        moyen.style.display = 'none';
-        fort.style.display = 'block';
+        tent.style.display = 'none';
+        woodenHouse.style.display = 'none';
+        home.style.display = 'none';
+        castle.style.display = 'block';
     }
 };
 
@@ -109,7 +109,7 @@ const listenersGeneratorPassword = () => {
 
         displayImage(parseInt(rangeValue, 10));
     });
-    
+
 
     generateForm.addEventListener('submit', event => {
         event.preventDefault();
