@@ -3,10 +3,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
-import TresFaible from '../../img/Angry.gif';
-import Faible from '../../img/NotHappy.gif';
-import Moyen from '../../img/Middle_happy.gif';
-import Fort from '../../img/Happyyy.gif';
+import TresFaible from '../../img/Angry.gif'
+import Faible from '../../img/NotHappy.gif'
+import Moyen from '../../img/Middle_happy.gif'
+import Fort from '../../img/Happyyy.gif'
 
 const { passwordStrength } = require('check-password-strength');
 
@@ -20,33 +20,42 @@ const checkerForm = `
     <p>Vérifiez le <span>\u{1F447}</span></p>
   </div>
   
-  <div class="image-container" style=" margin-left: 15%; position: absolute; width: 10%;">
-    <img id="tresfaible" src="${TresFaible}" style="display: none;width: 100%; " >
-    <img id="faible" src="${Faible}" style="display: none; width: 100%;" >
-    <img id="moyen" src="${Moyen}" style="display: none; width: 100%;" >
-    <img id="fort" src="${Fort}" style="display: none; width: 100%;" >
-  </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2" >
+      <section id="image-container" style="width: 7%; position: absolute;">
+        <img id="tresfaible" src="${TresFaible}" style="display: none;width: 100%;" >
+        <img id="faible" src="${Faible}" style="display: none; width: 100%;" >
+        <img id="moyen" src="${Moyen}" style="display: none; width: 100%;" >
+        <img id="fort" src="${Fort}" style="display: none; width: 100%;" >
+      </section>
+    </div>
+ 
+    <div class=col-md-12 ms-auto">
+      <section class="d-flex justify-content-center p-5">
+          <form id="checker-form" style="text-align: left; margin-top:-40px">
+            <div bis_skin_checked="1">
+              <div class="pt-1 pb-1" bis_skin_checked="1">
+                <input type="text" class="form-control custom-input" id="checker-password" name="checker-password">
+              </div>
+            </div>
+            <div bis_skin_checked="1">
+              <input type="submit" value="Vérifier" >
+            </div>
 
-  <section class="d-flex justify-content-center p-5 "  style="margin-top: -40px;">
-    <form id="checker-form" style="text-align: left;">
-      <div bis_skin_checked="1">
-        <div class="pt-1 pb-1" bis_skin_checked="1">
-          <input type="text" class="form-control custom-input" id="checker-password" name="checker-password">
-        </div>
-      </div>
-      <div bis_skin_checked="1">
-        <input type="submit" value="Vérifier" >
-      </div>
+            <div class="d-flex justify-content-center">
+              <div id="checker-result" class="5px p-3" bis_skin_checked="1">La puissance de votre mot de passe : </div>
+              <div id="checker-advice" class="px-5 p-3" bis_skin_checked="1">Nos conseils pour améliorer votre mot de passe : </div>
+            </div>
+          </form>
+        </section>
+    </div>
   
-      <div class="d-flex justify-content-center">
-        <div id="checker-result" class="5px p-3" bis_skin_checked="1">La puissance de votre mot de passe : </div>
-        <div id="checker-advice" class="px-5 p-3" bis_skin_checked="1">Nos conseil pour améliorer votre mot de passe : </div>
-      </div>
-  </form>
-</section>
+  </div>
+</div>
 `;
 
-const displayImage = (passwordStrengthValue) => {
+const displayGif = (passwordStrengthValue) => {
   const tresFaible = document.getElementById("tresfaible");
   const faible = document.getElementById("faible");
   const moyen = document.getElementById("moyen");
@@ -72,7 +81,6 @@ const displayImage = (passwordStrengthValue) => {
       fort.style.display = 'block';
       break;
     default:
-      // Aucune correspondance, ne rien faire
       break;
   }
 };
@@ -117,7 +125,7 @@ const listenersPasswordStrengthChecker = () => {
     }
 
     // Appelez la fonction displayImage pour gérer le changement d'image
-    displayImage(passwordStrengthResult.value);
+    displayGif(passwordStrengthResult.value);
   });
 };
 
@@ -134,7 +142,7 @@ function toFrench(string) {
     return `<p style="color: orange; font-weight: bold;">Faible</p>`;
   }
   if (string === 'Medium') {
-    return `<p style="color: yellow; font-weight: bold;">Moyen</p>`;
+    return `<p style="color: #FFD700;  font-weight: bold;">Moyen</p>`;
   }
   return `<p style="color: green; font-weight: bold;">Fort</p>`;
 }
@@ -175,5 +183,5 @@ const renderPasswordStrengthChecker = () => {
 };
 
 export {
-  renderPasswordStrengthChecker, displayImage
+  renderPasswordStrengthChecker, displayGif
 }

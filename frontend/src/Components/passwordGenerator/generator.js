@@ -1,9 +1,9 @@
 /* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import tente from '../../img/tente.png';
-import maisonBois from '../../img/maisonBois.png';
-import maison from '../../img/home.png';
-import chateau from '../../img/Chateau.png';
+import Tente from '../../img/tente.png';
+import MaisonBois from '../../img/maisonBois.png';
+import Maison from '../../img/home.png';
+import Chateau from '../../img/Chateau.png';
 
 const generator = require('generate-password-browser');
 
@@ -29,10 +29,10 @@ const modalGenerator = `
 
 const generatorForm = `
 <div class="image-container" style=" margin-top: 30px; position: absolute; width: 20%;">
-            <img id="tresFaible" src="${tente}" style="width: 100%; " >
-            <img id="faible" src="${maisonBois}" style="display: none; width: 100%;" >
-            <img id="moyen" src="${maison}" style="display: none; width: 100%;" >
-            <img id="fort" src="${chateau}" style="display: none; width: 100%;" >
+            <img id="tente" src="${Tente}" style="width: 100%; " >
+            <img id="maisonBois" src="${MaisonBois}" style="display: none; width: 100%;" >
+            <img id="Maison" src="${Maison}" style="display: none; width: 100%;" >
+            <img id="Chateau" src="${Chateau}" style="display: none; width: 100%;" >
 </div>
 
 <section class="generate d-flex align-items-center justify-content-center">
@@ -70,31 +70,31 @@ const generatorForm = `
 `;
 
 const displayImage = (rangeValue) => {
-    const tresFaible = document.getElementById("tresFaible");
-    const faible = document.getElementById("faible");
-    const moyen = document.getElementById("moyen");
-    const fort = document.getElementById("fort");
+    const tente = document.getElementById("tente");
+    const maisonBois = document.getElementById("MaisonBois");
+    const maison = document.getElementById("Maison");
+    const chateau = document.getElementById("Chateau");
 
     if (rangeValue >=0 && rangeValue <= 10) {
-        tresFaible.style.display = 'block';
-        faible.style.display = 'none';
-        moyen.style.display = 'none';
-        fort.style.display = 'none';
+        tente.style.display = 'block';
+        maisonBois.style.display = 'none';
+        maison.style.display = 'none';
+        chateau.style.display = 'none';
     } else if (rangeValue <= 15) {
-        tresFaible.style.display = 'none';
-        faible.style.display = 'block';
-        moyen.style.display = 'none';
-        fort.style.display = 'none';
+        tente.style.display = 'none';
+        maisonBois.style.display = 'block';
+        maison.style.display = 'none';
+        chateau.style.display = 'none';
     } else if (rangeValue <= 22) {
-        tresFaible.style.display = 'none';
-        faible.style.display = 'none';
-        moyen.style.display = 'block';
-        fort.style.display = 'none';
+        tente.style.display = 'none';
+        maisonBois.style.display = 'none';
+        maison.style.display = 'block';
+        chateau.style.display = 'none';
     } else {
-        tresFaible.style.display = 'none';
-        faible.style.display = 'none';
-        moyen.style.display = 'none';
-        fort.style.display = 'block';
+        tente.style.display = 'none';
+        maisonBois.style.display = 'none';
+        maison.style.display = 'none';
+        chateau.style.display = 'block';
     }
 };
 
