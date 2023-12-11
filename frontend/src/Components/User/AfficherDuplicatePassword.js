@@ -1,3 +1,6 @@
+const { decryption } = require("../../utils/cryptPassword");
+
+
 const checkDuplicatePassword = `
 <section class="w-75 p-3 mx-auto">
   <table id="duplicatePassword" class="table table-striped table-hover">
@@ -31,11 +34,45 @@ function afficherDuplicatePassword() {
         block.innerHTML='';
          checker.innerHTML = checkDuplicatePassword;
         tab.appendChild(checker);
+        const list=getlist();
+        const password='patate';
+        for (const elem of list){
+          for(const elem1 of list){
+if(elem.id != elem1.id ){
+  if(decryption(elem.mot_de_passe)=== decryption(elem.mot_de_passe)){
+
+    block.innerHTML=''
+  }
+}
+          }
+
+        }
+
+
+
         console.log('Button clicked:', event.site);
       } );
    
 }
 
+
+
+     async function  getlist(){
+const option = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ username: getAuthenticatedUser().username }),
+};
+
+const response = await fetch('/api/sites/orderBySiteName', option);
+  if (!response.ok) {
+      console.log('Error can\'t access the list because response is not ok');
+  }
+  const list =await response.json();
+  return list;
+}
 
 
 module.exports = {

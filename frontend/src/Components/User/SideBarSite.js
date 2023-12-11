@@ -169,7 +169,7 @@ const addPasswordForm = `
           "urlSite": url,
           "siteName": site,
           "userNameSite": login,
-          "passwordSite": await encryption(passwordNeedToEcnrypt, masterPassword,userId)
+          "passwordSite": pass
         }),
         headers: {
           'Content-Type': 'application/json'

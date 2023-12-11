@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const path = require('node:path');
 const escape = require('escape-html');
-const { passwordStrength } = require('check-password-strength');
 
 const { parse, serialize } = require('../utils/json');
 
@@ -37,7 +36,7 @@ async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passw
     site: escape(siteName),
     dateSite: escape(dateAdded),
     login: escape(usernameSite),
-    mot_de_passe: bcrypt.hashSync(passwordSite, saltRounds),
+    mot_de_passe: escape(passwordSite),
   };
   return toDatabaseSites(newSite, indexIndex, getLastIndexSite(indexIndex));
 }
@@ -220,28 +219,11 @@ function sortByDate(id) {
   return userListFound;
 }
 
-function filterByPasswordPower(id, power) {
-  const users = parse(jsonDbPath, defaultUsers);
-  const indexOfUserFound = users.findIndex((user) => user.id === id);
-  if (indexOfUserFound < 0) return undefined;
-
-  const userListFound = users[indexOfUserFound].sites;
-  const sites = [];
-
-  userListFound.forEach((site) => {
-    const pswValue = passwordStrength(site.mot_de_passe).value;
-    if (pswValue === power) {
-      sites.push(site);
-    }
-  });
-  return sites;
-}
-
 module.exports = {
   addPasswordOnSite,
   removeSite,
   updatePassword,
   filtreBySiteName,
   sortByDate,
-  filterByPasswordPower,
+
 };
