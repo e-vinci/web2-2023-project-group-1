@@ -15,6 +15,13 @@ async function afficherSite(idSite){
         console.log('Error can\'t add to leaderboard because response is not ok');
     }
 
+    const site=await response.json();
+
+
+    const rightSide = document.querySelector('.right');
+    rightSide.innerHTML= ' ' ;
+    
+
 }
 
 module.exports = {

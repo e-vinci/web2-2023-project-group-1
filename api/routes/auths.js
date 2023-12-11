@@ -50,6 +50,7 @@ router.post('/passwordCheck', async (req, res) => {
 
 router.post('/readUserFromUsername', async (req, res) => {
   const username = req?.body?.id?.length !== 0 ? req.body.username : undefined;
+  console.log(username);
 
   if (!username) return res.sendStatus(400);
 
