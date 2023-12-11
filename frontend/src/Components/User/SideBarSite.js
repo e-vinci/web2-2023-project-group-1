@@ -1,6 +1,7 @@
 /* eslint-disable import/no-import-module-exports */
 /* eslint-disable import/no-unresolved */
 import Navigate from '../Router/Navigate';
+import checkPassword from './CheckPassword';
 
 import { encryption } from '../../utils/cryptPassword';
 import { getAuthenticatedUser } from '../../utils/auths';
@@ -51,6 +52,19 @@ const addPasswordForm = `
 
 async function showSideBar() {
   const user = getAuthenticatedUser();
+
+  const option1 = {
+    method: 'POST',
+    body: JSON.stringify({
+      username: user.username,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const response1 = await fetch('/api/auths/readUserFromUsername', option1);
+  const userId = await response1.json();
 
   const main = document.querySelector('main');
   main.className = 'd-flex align-items-center justify-content-center';
@@ -138,18 +152,6 @@ async function showSideBar() {
         return;
       }
 
-      const option1 = {
-        method: 'POST',
-        body: JSON.stringify({
-          username: user.username,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
-      const response1 = await fetch('/api/auths/readUserFromUsername', option1);
-      const userId = await response1.json();
       const pass = await encryption(passwordNeedToEcnrypt, masterPassword, userId);
 
       const option2 = {
@@ -177,6 +179,7 @@ async function showSideBar() {
       }
     });
   });
+
   buttonaddSit.appendChild(elemAdd);
   sideBar.appendChild(buttonaddSit);
   const list = await getlist();
@@ -189,7 +192,16 @@ async function showSideBar() {
     elem.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
     elem.addEventListener('click', async (e) => {
       e.preventDefault();
-      const tab = document.querySelector('.leftSide');
+
+      const masterPassowrd = await checkPassword(userId, elem.id);
+
+      if (masterPassowrd !== null) {
+        // afficher mdp
+      } else {
+        // si le mot de passe est pas le bon
+      }
+
+      const tab = document.querySelector('.right');
       tab.innerHTML = '';
       afficherSite(elem.id);
     });

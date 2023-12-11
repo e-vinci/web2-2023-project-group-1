@@ -2,7 +2,7 @@
 async function afficherSite(idSite){
 
     const option = {
-        method: 'GET',
+        method: 'POST',
         body: JSON.stringify({
             "userId": idSite,
         }),
