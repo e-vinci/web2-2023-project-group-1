@@ -53,12 +53,9 @@ function toDatabaseSites(usersite, indexUser, indexSite) {
 
   if (indexUser > users.length) return undefined;
   const userFound = users[indexUser];
-  console.log(userFound);
   userFound.sites[indexSite + 1] = usersite;
 
   users[indexUser] = userFound;
-  console.log(users[indexUser]);
-
   serialize(jsonDbPath, users);
   return userFound;
 }
@@ -219,11 +216,20 @@ function sortByDate(id) {
   return userListFound;
 }
 
+function getSiteById(userid, siteId) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const indexOfUserFound = users.findIndex((user) => user.id === userid);
+  if (indexOfUserFound < 0) return undefined;
+  const listeSite = users[indexOfUserFound].sites;
+  const indexOfSiteFound = listeSite.findIndex((site) => site.id === siteId);
+  return listeSite[indexOfSiteFound];
+}
+
 module.exports = {
   addPasswordOnSite,
   removeSite,
   updatePassword,
   filtreBySiteName,
   sortByDate,
-
+  getSiteById,
 };

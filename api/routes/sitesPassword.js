@@ -5,6 +5,7 @@ const {
   updatePassword,
   filtreBySiteName,
   sortByDate,
+  getSiteById,
 } = require('../models/sites');
 
 const {
@@ -103,6 +104,25 @@ router.get('/orderByDate', (req, res) => {
     return res.sendStatus(404);
   }
   return res.json(orderBy);
+});
+
+router.post('/getSiteById', (req, res) => {
+  console.log(req.body);
+  const userId = parseInt(req?.body?.userId, 10);
+  const siteId = parseInt(req?.body?.siteId, 10);
+  console.log(userId);
+  console.log(siteId);
+
+  if (!userId || !siteId) {
+    return res.sendStatus(400);
+  }
+
+  const site = getSiteById(userId, siteId);
+
+  if (!site) {
+    return res.sendStatus(404);
+  }
+  return res.json(site);
 });
 
 module.exports = router;
