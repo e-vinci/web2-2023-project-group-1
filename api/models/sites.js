@@ -31,7 +31,7 @@ async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passw
   const dateAdded = Date.now().toLocaleString();
 
   const newSite = {
-    id: escape(idSite),
+    id: parseInt(escape(idSite), 10),
     url: escape(urlSite),
     site: escape(siteName),
     dateSite: escape(dateAdded),
@@ -86,9 +86,9 @@ function getNextIdSite(indexUser) {
   const id = users[indexUser].sites[lastItemIndex]?.id;
   if (!id) return 1;
 
-  const nextId = id + 1;
+  const nextId = parseInt(id, 10) + 1;
 
-  return nextId;
+  return parseInt(nextId, 10);
 }
 
 /**

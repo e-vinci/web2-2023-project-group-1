@@ -1,6 +1,6 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-console */
-import { showSideBar } from "../User/SideBarSite";
+import showSideBar from "../User/SideBarSite";
 
 
 

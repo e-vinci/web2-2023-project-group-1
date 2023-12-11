@@ -48,4 +48,4 @@ import CryptoJS from 'crypto-js';
     return undefined
 };
 
-export { encryption , decryption};
+export { encryption , decryption };
