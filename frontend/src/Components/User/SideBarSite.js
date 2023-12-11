@@ -1,11 +1,12 @@
-const { decryption, encryption } = require('../../utils/cryptPassword');
-const  { Navigate } = require('../Router/Navigate');
-const {getAuthenticatedUser} =require('../../utils/auths');
-const {afficherSite} =require("./AfficherSite");
+/* eslint-disable import/no-import-module-exports */
+/* eslint-disable import/no-unresolved */
+import Navigate from '../Router/Navigate';
 
+import { encryption } from '../../utils/cryptPassword';
+import { getAuthenticatedUser } from '../../utils/auths';
+import { afficherSite } from './AfficherSite';
 
-
-  const sidebarToFill=`<!--Main Navigation-->
+const sidebarToFill = `<!--Main Navigation-->
   <header>
   <div class="container">
   <div class="row">
@@ -15,8 +16,6 @@ const {afficherSite} =require("./AfficherSite");
     </div>
     </div>
 </div>`;
-
-
 
 const addPasswordForm = `
   <form id="registrationForm" class="mt-3">
@@ -50,27 +49,26 @@ const addPasswordForm = `
   </form>
 `;
 
-  async function  showSideBar(){
-    const user = getAuthenticatedUser();
+async function showSideBar() {
+  const user = getAuthenticatedUser();
 
-    const main = document.querySelector('main');
-    main.className = 'd-flex align-items-center justify-content-center';
-    main.innerHTML = sidebarToFill;
-    const sideBar=document.querySelector('.listSite');
-    const buttonaddSit=document.createElement('tr');
-    const elemAdd=document.createElement('button');
-    elemAdd.innerHTML='Ajouter un site';
-    elemAdd.setAttribute('type', 'button');
-    elemAdd.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
-    elemAdd.setAttribute('id','addButton');
-    sideBar.appendChild(elemAdd);
-    
+  const main = document.querySelector('main');
+  main.className = 'd-flex align-items-center justify-content-center';
+  main.innerHTML = sidebarToFill;
+  const sideBar = document.querySelector('.listSite');
+  const buttonaddSit = document.createElement('tr');
+  const elemAdd = document.createElement('button');
+  elemAdd.innerHTML = 'Ajouter un site';
+  elemAdd.setAttribute('type', 'button');
+  elemAdd.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
+  elemAdd.setAttribute('id', 'addButton');
+  sideBar.appendChild(elemAdd);
+
   const addButton = document.querySelector('#addButton');
-  console.log(addButton);
   const rightDiv = document.querySelector('.right');
   let submitPasswordButton;
   addButton.addEventListener('click', () => {
-    rightDiv.innerHTML = "";
+    rightDiv.innerHTML = '';
     rightDiv.innerHTML = addPasswordForm;
     submitPasswordButton = document.querySelector('#submitPassword');
 
@@ -81,7 +79,6 @@ const addPasswordForm = `
       const login = document.querySelector('#login').value;
       const passwordNeedToEcnrypt = document.querySelector('#password').value;
       const masterPassword = document.querySelector('#masterPassword').value;
-  
 
       if (url === '') {
         const messageErreurURL = document.querySelector('#messageErreurURL');
@@ -106,26 +103,25 @@ const addPasswordForm = `
         messageErreurPassword.innerHTML = `Veuillez renseigner un mot de passe`;
         messageErreurPassword.display = 'block';
         return;
-      } 
+      }
       if (masterPassword === '') {
         const messageErreurMasterPassword = document.querySelector('#messageErreurMasterPassword');
         messageErreurMasterPassword.innerHTML = `Veuillez renseigner votre mot de pass maitre`;
         messageErreurMasterPassword.display = 'block';
         return;
-      } 
-
+      }
 
       const optionCompare = {
         method: 'POST',
         body: JSON.stringify({
-          "username": user.username,
-          "password": masterPassword
+          username: user.username,
+          password: masterPassword,
         }),
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       };
-      
+
       const responseCompare = await fetch('/api/auths/comparePassword', optionCompare);
       const compareData = await responseCompare.json();
       if (compareData !== 1) {
@@ -140,93 +136,83 @@ const addPasswordForm = `
         messageErreurMasterPassword.innerHTML = `Veuillez renseigner votre mot de pass maitre`;
         messageErreurMasterPassword.display = 'block';
         return;
-      } 
-
-
-    
+      }
 
       const option1 = {
-        method: 'POST', 
+        method: 'POST',
         body: JSON.stringify({
-          'username': user.username,
+          username: user.username,
         }),
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
       };
 
-      const response1 = await fetch('/api/auths/readUserFromUsername', option1)
+      const response1 = await fetch('/api/auths/readUserFromUsername', option1);
       const userId = await response1.json();
-      const pass=await encryption(passwordNeedToEcnrypt, masterPassword,userId);
-      console.log(await encryption(passwordNeedToEcnrypt, masterPassword,userId));
-      const res=await decryption(pass,masterPassword,userId)
-      console.log(res);
+      const pass = await encryption(passwordNeedToEcnrypt, masterPassword, userId);
 
       const option2 = {
         method: 'POST',
         body: JSON.stringify({
-          "userId": userId,
-          "urlSite": url,
-          "siteName": site,
-          "userNameSite": login,
-          "passwordSite": pass
+          userId,
+          urlSite: url,
+          siteName: site,
+          userNameSite: login,
+          passwordSite: pass,
         }),
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       };
 
       const response2 = await fetch('/api/sites/addSite', option2);
       const resultat = document.querySelector('#resultat');
-        if (!response2.ok) {
-            resultat.className = 'text-danger';
-            resultat.innerHTML = `Une erreur est survenue`;
-        } else {
-            resultat.innerHTML = `Enregistrement réussi`;
-            Navigate('/user');
-        }
+      if (!response2.ok) {
+        resultat.className = 'text-danger';
+        resultat.innerHTML = `Une erreur est survenue`;
+      } else {
+        resultat.innerHTML = `Enregistrement réussi`;
+        Navigate('/user');
+      }
     });
   });
-    buttonaddSit.appendChild(elemAdd);
-    sideBar.appendChild(buttonaddSit);
-    const list=await getlist();
-    list.forEach((element)=>{
-      const listelem=document.createElement('tr');
-      const elem=document.createElement('button');
-      elem.id = element.id;
-      elem.innerHTML=element.site;
-      elem.setAttribute('type', 'button');
-      elem.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
-      elem.addEventListener('click', async (event) => {
-        const tab = document.querySelector('.leftSide');
-        tab.innerHTML='';
-        afficherSite(elem.id);
-        console.log('Button clicked:', event.site);
-      } );
-      listelem.appendChild(elem);
-      sideBar.appendChild(listelem);
-    }
-     );
-     }
+  buttonaddSit.appendChild(elemAdd);
+  sideBar.appendChild(buttonaddSit);
+  const list = await getlist();
+  list.forEach((element) => {
+    const listelem = document.createElement('tr');
+    const elem = document.createElement('button');
+    elem.id = element.id;
+    elem.innerHTML = element.site;
+    elem.setAttribute('type', 'button');
+    elem.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
+    elem.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const tab = document.querySelector('.leftSide');
+      tab.innerHTML = '';
+      afficherSite(elem.id);
+    });
+    listelem.appendChild(elem);
+    sideBar.appendChild(listelem);
+  });
+}
 
-     async function  getlist(){
-const option = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({ username: getAuthenticatedUser().username }),
-};
+async function getlist() {
+  const option = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username: getAuthenticatedUser().username }),
+  };
 
-const response = await fetch('/api/sites/orderBySiteName', option);
+  const response = await fetch('/api/sites/orderBySiteName', option);
   if (!response.ok) {
-      console.log('Error can\'t access the list because response is not ok');
+    console.log("Error can't access the list because response is not ok");
   }
-  const list =await response.json();
+  const list = await response.json();
   return list;
 }
-     
-    
-   module.exports = {
-    showSideBar
-};
+
+export default showSideBar;
