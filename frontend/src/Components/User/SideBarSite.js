@@ -193,7 +193,7 @@ async function showSideBar() {
     elem.addEventListener('click', async (e) => {
       e.preventDefault();
 
-      const masterPassowrd = await checkPassword(userId, elem.id);
+      const masterPassowrd = await checkPassword(userId);
 
       if (masterPassowrd !== null) {
         // afficher mdp
