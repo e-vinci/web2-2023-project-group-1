@@ -3,7 +3,7 @@
 
 import { getAuthenticatedUser } from '../../utils/auths';
 
-const checkPassword = async (userId, elemId) => {
+const checkPassword = async (userId) => {
     const user = getAuthenticatedUser();
 
     const masterPassword = prompt('Entrez votre mot de passe maitre', '');
