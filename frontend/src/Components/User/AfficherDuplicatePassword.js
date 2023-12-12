@@ -1,4 +1,5 @@
-const { decryption } = require('../../utils/cryptPassword');
+import { decryption } from '../../utils/cryptPassword';
+import { getAuthenticatedUser } from '../../utils/auths';
 
 const checkDuplicatePassword = `
 <section class="w-75 p-3 mx-auto">
@@ -37,9 +38,11 @@ function afficherDuplicatePassword() {
     for (const elem of list) {
       for (const elem1 of list) {
         if (elem.id < elem1.id) {
-          if (decryption(elem.mot_de_passe) === decryption(elem.mot_de_passe)) {
-            ligneDoublon = document.createElement('div');
-            ligneDoublon.innerHTML = 'Site doublé:' + elem1.site + ' = ' + elem.site;
+          if (decryption(elem.mot_de_passe,password) === decryption(elem.mot_de_passe,password)) {
+            const ligneDoublon = document.createElement('div');
+            ligneDoublon.innerHTML = `Site doublé ${elem1.site}  =  ${elem.site}`;
+            tab.appendChild(ligneDoublon);
+
           }
         }
       }
@@ -66,6 +69,4 @@ async function getlist() {
   return list;
 }
 
-module.exports = {
-  afficherDuplicatePassword,
-};
+export default afficherDuplicatePassword ;
