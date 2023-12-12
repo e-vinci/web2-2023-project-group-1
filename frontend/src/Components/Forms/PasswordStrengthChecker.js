@@ -11,11 +11,10 @@ import Fort from '../../img/Happyyy.gif'
 const { passwordStrength } = require('check-password-strength');
 
 const checkerForm = `
-  <div class="p-3 mb-2" style="background-color: #7F5056; color: white; margin: 10px 200px 20px 200px;" src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js">
-    <h1 id="backround" class="text-center m-5 ">Vérification de mot de passe</h1>
-  </div>
+<section class="checker" style="background-color: white; width: 70%; margin: auto; padding: 1%; border-radius: 5px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);">
+  <h1 class="text-center m-5">Vérificateur de mot de passe</h1>
 
-  <div class="text-center m-4" style="font-size: 30px;">
+  <div class="text-center">
     <p>Vous pensez que votre mot de passe est sécurisé ? </p>
     <p>Vérifiez le <span>\u{1F447}</span></p>
   </div>
@@ -23,7 +22,7 @@ const checkerForm = `
 <div class="container">
   <div class="row">
     <div class="col-md-2" >
-      <section id="image-container" style="width: 7%; position: absolute;">
+      <section id="image-container" style=" margin-left:0.5% ;width: 7%; position: absolute;">
         <img id="tresfaible" src="${TresFaible}" style="display: none;width: 100%;" >
         <img id="faible" src="${Faible}" style="display: none; width: 100%;" >
         <img id="moyen" src="${Moyen}" style="display: none; width: 100%;" >
@@ -49,10 +48,10 @@ const checkerForm = `
             </div>
           </form>
         </section>
-    </div>
   
   </div>
 </div>
+</section>
 `;
 
 const displayGif = (passwordStrengthValue) => {
