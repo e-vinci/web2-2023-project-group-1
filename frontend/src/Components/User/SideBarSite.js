@@ -5,7 +5,7 @@ import checkPassword from './CheckPassword';
 
 import { encryption } from '../../utils/cryptPassword';
 import { getAuthenticatedUser } from '../../utils/auths';
-import  afficherSite  from './AfficherSite';
+import afficherSite from './AfficherSite';
 
 import afficherDuplicatePassword from './AfficherDuplicatePassword';
 
@@ -80,26 +80,21 @@ async function showSideBar() {
   elemAdd.setAttribute('id', 'addButton');
   sideBar.appendChild(elemAdd);
 
-
   const rightDiv = document.querySelector('.right');
   const duplicata = document.createElement('button');
   duplicata.innerHTML = 'Afficher les mot de passe dupliquer';
   duplicata.setAttribute('type', 'button');
   duplicata.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
-  duplicata.setAttribute('id','afficherDuplicata');
+  duplicata.setAttribute('id', 'afficherDuplicata');
   rightDiv.appendChild(duplicata);
 
-  const afficherDuplicata=document.querySelector('#afficherDuplicata');
+  const afficherDuplicata = document.querySelector('#afficherDuplicata');
 
   afficherDuplicata.addEventListener('click', async (e) => {
     e.preventDefault();
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!');
     const masterPassword = await checkPassword(userId);
     afficherDuplicatePassword(masterPassword);
-  }
-  );
-
-
+  });
 
   const addButton = document.querySelector('#addButton');
 
@@ -220,13 +215,11 @@ async function showSideBar() {
 
       if (masterPassword !== null) {
         // afficher mdp
-      rightDiv.innerHTML = '';
-      afficherSite(userId,elem.id,masterPassword);
+        rightDiv.innerHTML = '';
+        afficherSite(userId, elem.id, masterPassword);
       } else {
         // si le mot de passe est pas le bon
       }
-
-      
     });
     listelem.appendChild(elem);
     sideBar.appendChild(listelem);

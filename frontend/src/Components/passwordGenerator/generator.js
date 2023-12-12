@@ -8,7 +8,7 @@ import Castle from '../../img/Chateau.png';
 const generator = require('generate-password-browser');
 
 const modalGenerator = `
-<div class="modal fade" id="modalGenerator" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalGeneratorLabel" aria-hidden="true">
+<div class="modal fade modal-lg" id="modalGenerator" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalGeneratorLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
