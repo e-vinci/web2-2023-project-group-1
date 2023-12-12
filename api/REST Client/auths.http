@@ -47,3 +47,80 @@ Content-Type: application/json
     "password":"manager"
 }
 
+
+### Get id from username (5)
+POST {{baseUrl}}/auths/readUserFromUsername
+Content-Type: application/json
+
+{
+    "username": "admin"
+}
+
+
+<<<<<<< HEAD
+### Get id from username (5)
+POST {{baseUrl}}/auths/readUserFromUsername
+Content-Type: application/json
+
+{
+    "username": "admin"
+}
+
+### Compare a password
+POST {{baseUrl}}/auths/comparePassword
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+### Compare a password
+POST {{baseUrl}}/auths/comparePassword
+Content-Type: application/json
+
+{
+    "username": "admin2",
+    "password": "admin"
+}
+
+
+=======
+>>>>>>> 674c4db (add: start add new password)
+### Get id from username
+GET {{baseUrl}}/auths/readUserFromUsername
+Content-Type: application/json
+
+{
+    "username": "admin"
+}
+
+<<<<<<< HEAD
+
+### Get id from username (5)
+POST {{baseUrl}}/auths/readUserFromUsername
+Content-Type: application/json
+
+{
+    "username": "admin"
+}
+
+### Compare a password
+POST {{baseUrl}}/auths/comparePassword
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+### Compare a password
+POST {{baseUrl}}/auths/comparePassword
+Content-Type: application/json
+
+{
+    "username": "admin2",
+    "password": "admin"
+}
+=======
+>>>>>>> 674c4db (add: start add new password)

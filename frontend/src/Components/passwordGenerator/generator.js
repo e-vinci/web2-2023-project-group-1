@@ -1,5 +1,10 @@
 /* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/no-extraneous-dependencies
+import Tente from '../../img/tente.png';
+import MaisonBois from '../../img/maisonBois.png';
+import Maison from '../../img/home.png';
+import Chateau from '../../img/Chateau.png';
+
 const generator = require('generate-password-browser');
 
 const modalGenerator = `
@@ -23,9 +28,18 @@ const modalGenerator = `
 `;
 
 const generatorForm = `
+<div class="image-container" style=" margin-top: 30px; position: absolute; width: 20%;">
+            <img id="tente" src="${Tente}" style="width: 100%; " >
+            <img id="maisonBois" src="${MaisonBois}" style="display: none; width: 100%;" >
+            <img id="Maison" src="${Maison}" style="display: none; width: 100%;" >
+            <img id="Chateau" src="${Chateau}" style="display: none; width: 100%;" >
+</div>
+
 <section class="generate d-flex align-items-center justify-content-center">
   <form id="generate-form"  style="text-align: left;">
     <div bis_skin_checked="1" >
+    
+
         <div class=" pt-1 pb-1" bis_skin_checked="1">
             <label for="generate-length">Nombre de caractères : </label>
             <span id="char-count">5</span>
@@ -55,23 +69,55 @@ const generatorForm = `
   </section>
 `;
 
+const displayImage = (rangeValue) => {
+    const tente = document.getElementById("tente");
+    const maisonBois = document.getElementById("MaisonBois");
+    const maison = document.getElementById("Maison");
+    const chateau = document.getElementById("Chateau");
+
+    if (rangeValue >=0 && rangeValue <= 10) {
+        tente.style.display = 'block';
+        maisonBois.style.display = 'none';
+        maison.style.display = 'none';
+        chateau.style.display = 'none';
+    } else if (rangeValue <= 15) {
+        tente.style.display = 'none';
+        maisonBois.style.display = 'block';
+        maison.style.display = 'none';
+        chateau.style.display = 'none';
+    } else if (rangeValue <= 22) {
+        tente.style.display = 'none';
+        maisonBois.style.display = 'none';
+        maison.style.display = 'block';
+        chateau.style.display = 'none';
+    } else {
+        tente.style.display = 'none';
+        maisonBois.style.display = 'none';
+        maison.style.display = 'none';
+        chateau.style.display = 'block';
+    }
+};
+
 const listenersGeneratorPassword = () => {
     const generateForm = document.querySelector('#generate-form');
     const generatePassword = document.querySelector('#generate-password');
-    const charCount = document.querySelector('#char-count'); 
+    const charCount = document.querySelector('#char-count');
 
     generateForm.addEventListener('input', () => {
         const rangeValue = document.querySelector('#generate-length').value;
         charCount.textContent = rangeValue;
+
+        displayImage(parseInt(rangeValue, 10));
     });
+    
 
     generateForm.addEventListener('submit', event => {
         event.preventDefault();
         const passwordToText = generator.generate({
-        length: parseInt(event.target['generate-length'].value, 10),
-        uppercase: event.target['generate-include-uppercase'].checked,
-        numbers: event.target['generate-include-numbers'].checked,
-        symbols: event.target['generate-include-symbols'].checked,
+            length: parseInt(event.target['generate-length'].value, 10),
+            uppercase: event.target['generate-include-uppercase'].checked,
+            numbers: event.target['generate-include-numbers'].checked,
+            symbols: event.target['generate-include-symbols'].checked,
         });
         generatePassword.className = 'rounded border-1 border-secondary border p-3 m-3';
         generatePassword.innerHTML = `${passwordToText}`;
@@ -83,7 +129,7 @@ const listenersGeneratorPassword = () => {
         const generatedPassword = generatePassword.textContent;
         copyToClipboard(generatedPassword);
     });
-    
+
 
     async function copyToClipboard(text) {
         const textarea = document.createElement('textarea');
@@ -92,6 +138,7 @@ const listenersGeneratorPassword = () => {
         await navigator.clipboard.writeText(text);
         document.body.removeChild(textarea);
     }
+
 }
 
 const renderGeneratorPassword = () => {
@@ -102,7 +149,7 @@ const renderGeneratorPassword = () => {
     listenersGeneratorPassword();
 }
 
-module.exports = {
+export {
     listenersGeneratorPassword,
     renderGeneratorPassword,
-};
+}

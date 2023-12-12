@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const path = require('node:path');
+const escape = require('escape-html');
 const { parse, serialize } = require('../utils/json');
 
 const jwtSecret = 'ilovemypizza!';
@@ -62,7 +63,7 @@ async function register(username, email, password) {
 
 function readOneUserFromUsername(username) {
   const users = parse(jsonDbPath, defaultUsers);
-  const indexOfUserFound = users.findIndex((user) => user.username === username);
+  const indexOfUserFound = users.findIndex((user) => user.login === username);
   if (indexOfUserFound < 0) return undefined;
 
   return users[indexOfUserFound];
@@ -70,13 +71,13 @@ function readOneUserFromUsername(username) {
 
 async function createOneUser(username, email, password) {
   const users = parse(jsonDbPath, defaultUsers);
-  const sites = {};
+  const sites = [];
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   const createdUser = {
     id: getNextId(),
-    username,
-    email,
+    login: escape(username),
+    email: escape(email),
     password: hashedPassword,
     sites,
   };
@@ -112,12 +113,19 @@ function readOneUserFromId(id) {
   return users[indexOfUserFound];
 }
 
-function readIdUserFromUsername(username) {
+function readIdFromUsername(username) {
   const users = parse(jsonDbPath, defaultUsers);
-  const indexOfUserFound = users.findIndex((user) => user.username === username);
+  const indexOfUserFound = users.findIndex((user) => user.login === username);
   if (indexOfUserFound < 0) return undefined;
+  return users[indexOfUserFound].id;
+}
 
-  return parseInt(users[indexOfUserFound].id, 10);
+async function comparePassword(username, password) {
+  const users = parse(jsonDbPath, defaultUsers);
+  const userFound = users.find((user) => user.login === username);
+  if (!userFound) return undefined;
+  const passwordMatch = await bcrypt.compare(password, userFound.password);
+  return passwordMatch === true ? 1 : 0;
 }
 
 module.exports = {
@@ -125,5 +133,6 @@ module.exports = {
   register,
   readOneUserFromUsername,
   passwordCheck,
-  readIdUserFromUsername,
+  readIdFromUsername,
+  comparePassword,
 };

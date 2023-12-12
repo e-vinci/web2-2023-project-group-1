@@ -26,4 +26,4 @@ const clearAuthenticatedUser = () => {
 };
 
 
-module.exports = {  getAuthenticatedUser,setAuthenticatedUser, isAuthenticated, clearAuthenticatedUser, };
+export {  getAuthenticatedUser,setAuthenticatedUser, isAuthenticated, clearAuthenticatedUser };

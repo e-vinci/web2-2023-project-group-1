@@ -1,20 +1,61 @@
+/* eslint-disable no-alert */
 /* eslint-disable import/no-import-module-exports */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
-import tente from '../../img/Tres_faible.gif';
-import Faible from '../../img/Faible.gif';
-import Moyen from '../../img/Moyen.gif';
-import Fort from '../../img/Fort.gif';
+import TresFaible from '../../img/Angry.gif'
+import Faible from '../../img/NotHappy.gif'
+import Moyen from '../../img/Middle_happy.gif'
+import Fort from '../../img/Happyyy.gif'
 
 const { passwordStrength } = require('check-password-strength');
 
 const checkerForm = `
+<section class="checker" style="background-color: white; width: 70%; margin: auto; padding: 1%; border-radius: 5px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);">
+  <h1 class="text-center m-5">Vérificateur de mot de passe</h1>
   <div id = "checkPassword" class = "pt-2 pb-2 shadow p-1 mb-5 bg-body-tertiary rounded border-top border-primary border-3">
       <div class="pt-3 mb-2" src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js">
         <h1  class="text-center pt-2 ">Vérification de mot de passe</h1>
       </div>
 
+  <div class="text-center">
+    <p>Vous pensez que votre mot de passe est sécurisé ? </p>
+    <p>Vérifiez le <span>\u{1F447}</span></p>
+  </div>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-md-2" >
+      <section id="image-container" style=" margin-left:0.5% ;width: 7%; position: absolute;">
+        <img id="tresfaible" src="${TresFaible}" style="display: none;width: 100%;" >
+        <img id="faible" src="${Faible}" style="display: none; width: 100%;" >
+        <img id="moyen" src="${Moyen}" style="display: none; width: 100%;" >
+        <img id="fort" src="${Fort}" style="display: none; width: 100%;" >
+      </section>
+    </div>
+ 
+    <div class=col-md-12 ms-auto">
+      <section class="d-flex justify-content-center p-5">
+          <form id="checker-form" style="text-align: left; margin-top:-40px">
+            <div bis_skin_checked="1">
+              <div class="pt-1 pb-1" bis_skin_checked="1">
+                <input type="text" class="form-control custom-input" id="checker-password" name="checker-password">
+              </div>
+            </div>
+            <div bis_skin_checked="1">
+              <input type="submit" value="Vérifier" >
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <div id="checker-result" class="5px p-3" bis_skin_checked="1">La puissance de votre mot de passe : </div>
+              <div id="checker-advice" class="px-5 p-3" bis_skin_checked="1">Nos conseils pour améliorer votre mot de passe : </div>
+            </div>
+          </form>
+        </section>
+  
+  </div>
+</div>
+</section>
       <div class="text-center pt-3 m-4" style="font-size: 25px;">
         <p>Vous pensez que votre mot de passe est sécurisé ? </p>
         <p>Vérifiez le <span>\u{1F447}</span></p>
@@ -48,7 +89,7 @@ const checkerForm = `
   
 `;
 
-const displayImage = (passwordStrengthValue) => {
+const displayGif = (passwordStrengthValue) => {
   const tresFaible = document.getElementById("tresfaible");
   const faible = document.getElementById("faible");
   const moyen = document.getElementById("moyen");
@@ -74,7 +115,6 @@ const displayImage = (passwordStrengthValue) => {
       fort.style.display = 'block';
       break;
     default:
-      // Aucune correspondance, ne rien faire
       break;
   }
 };
@@ -85,7 +125,7 @@ const listenersPasswordStrengthChecker = () => {
   const checker = document.querySelector('#checker-form');
   const checkerResult = document.querySelector('#checker-result');
   const checkerAdvice = document.querySelector('#checker-advice');
-  
+
 
   checker.addEventListener('submit', event => {
     event.preventDefault();
@@ -119,7 +159,7 @@ const listenersPasswordStrengthChecker = () => {
     }
 
     // Appelez la fonction displayImage pour gérer le changement d'image
-    displayImage(passwordStrengthResult.value);
+    displayGif(passwordStrengthResult.value);
   });
 };
 
@@ -136,7 +176,7 @@ function toFrench(string) {
     return `<p style="color: orange; font-weight: bold;">Faible</p>`;
   }
   if (string === 'Medium') {
-    return `<p style="color: yellow; font-weight: bold;">Moyen</p>`;
+    return `<p style="color: #FFD700;  font-weight: bold;">Moyen</p>`;
   }
   return `<p style="color: green; font-weight: bold;">Fort</p>`;
 }
@@ -162,7 +202,7 @@ function advicesToArray(array, password, val) {
     advicesList.push('Ajouter des caractères spéciaux');
   }
   if (password.length < 8 || val !== 'Strong') {
-    advicesList.push('Ajouter des caractères');
+    advicesList.push('Ajouter plus de caractères');
   }
   return advicesList;
 }
@@ -177,5 +217,5 @@ const renderPasswordStrengthChecker = () => {
 };
 
 export {
-  renderPasswordStrengthChecker, displayImage
+  renderPasswordStrengthChecker, displayGif
 }
