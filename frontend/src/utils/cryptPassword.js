@@ -24,7 +24,7 @@ import { getAuthenticatedUser } from './auths';
     const response = await fetch('/api/auths/passwordCheck', option);
     console.log(response.ok);
     if(!response.ok)return undefined;
-    const encrypted = CryptoJS.Rabbit.encrypt(text,password);
+    const encrypted = CryptoJS.Rabbit.encrypt(text,password).toString(CryptoJS.enc.Utf8);
     return encrypted;
 };
 
@@ -33,7 +33,7 @@ import { getAuthenticatedUser } from './auths';
         method: 'POST',
         body: JSON.stringify({
             // eslint-disable-next-line no-undef
-            "username": getAuthenticatedUser(),
+            "username": getAuthenticatedUser().username,
             "password": password
         }),
         headers: {
@@ -43,10 +43,13 @@ import { getAuthenticatedUser } from './auths';
     const response = await fetch('/api/auths/comparePassword', option);
     if(!response.ok)return undefined;
     const data = await response.json();
+    
     if (data !== 1) {
         alert('Mot de passe maitre incorrect');
     } else {
-        const decrypted = CryptoJS.Rabbit.decrypt(encrypted, password).toString(CryptoJS.enc.Utf8);
+        const f= CryptoJS.enc.Utf8.parse(encrypted)
+        const decrypted = CryptoJS.Rabbit.decrypt(f, password).toString(CryptoJS.enc.Utf8);
+        console.log(decrypted);
          return decrypted;
     }
     return undefined

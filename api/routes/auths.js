@@ -67,6 +67,8 @@ router.post('/comparePassword', async (req, res) => {
   if (!username || !password) return res.sendStatus(400);
 
   const returned = await comparePassword(username, password);
+  console.log(await comparePassword(username, password));
+  console.log(returned);
 
   return res.json(returned);
 });

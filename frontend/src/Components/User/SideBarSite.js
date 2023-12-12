@@ -5,7 +5,7 @@ import checkPassword from './CheckPassword';
 
 import { encryption } from '../../utils/cryptPassword';
 import { getAuthenticatedUser } from '../../utils/auths';
-import { afficherSite } from './AfficherSite';
+import  afficherSite  from './AfficherSite';
 
 const sidebarToFill = `<!--Main Navigation-->
   <header>
@@ -193,17 +193,18 @@ async function showSideBar() {
     elem.addEventListener('click', async (e) => {
       e.preventDefault();
 
-      const masterPassowrd = await checkPassword(userId);
+      const masterPassword = await checkPassword(userId);
 
-      if (masterPassowrd !== null) {
+      if (masterPassword !== null) {
         // afficher mdp
+        const tab = document.querySelector('.right');
+      tab.innerHTML = '';
+      afficherSite(userId,elem.id,masterPassword);
       } else {
         // si le mot de passe est pas le bon
       }
 
-      const tab = document.querySelector('.right');
-      tab.innerHTML = '';
-      afficherSite(elem.id);
+      
     });
     listelem.appendChild(elem);
     sideBar.appendChild(listelem);
