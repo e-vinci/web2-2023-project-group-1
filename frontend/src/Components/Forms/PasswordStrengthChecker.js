@@ -13,6 +13,10 @@ const { passwordStrength } = require('check-password-strength');
 const checkerForm = `
 <section class="checker" style="background-color: white; width: 70%; margin: auto; padding: 1%; border-radius: 5px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);">
   <h1 class="text-center m-5">Vérificateur de mot de passe</h1>
+  <div id = "checkPassword" class = "pt-2 pb-2 shadow p-1 mb-5 bg-body-tertiary rounded border-top border-primary border-3">
+      <div class="pt-3 mb-2" src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js">
+        <h1  class="text-center pt-2 ">Vérification de mot de passe</h1>
+      </div>
 
   <div class="text-center">
     <p>Vous pensez que votre mot de passe est sécurisé ? </p>
@@ -52,6 +56,37 @@ const checkerForm = `
   </div>
 </div>
 </section>
+      <div class="text-center pt-3 m-4" style="font-size: 25px;">
+        <p>Vous pensez que votre mot de passe est sécurisé ? </p>
+        <p>Vérifiez le <span>\u{1F447}</span></p>
+       </div>
+
+      <div class="image-container" style="margin-left: 15%; position: absolute;">
+        <img id="tresfaible" src="${tente}" style="display: none;width: 20%; " >
+        <img id="faible" src="${Faible}" style="display: none; width: 20%;" >
+        <img id="moyen" src="${Moyen}" style="display: none; width: 20%;" >
+        <img id="fort" src="${Fort}" style="display: none; width: 20%;" >
+      </div>
+      <section class="d-flex justify-content-center p-5 "  style="margin-top: -40px;">
+        <form id="checker-form" style="text-align: center;">
+          <div bis_skin_checked="1">
+            <div class="pt-1 pb-1" bis_skin_checked="1">
+              <input type="text" class="form-control custom-input" id="checker-password" name="checker-password">
+            </div>
+          </div>
+          <div bis_skin_checked="1" class="pt-3 pb-3">
+            <input class="btn btn-primary" type="submit" value="Vérifier" >
+          </div>
+          <div class="d-flex justify-content-center">
+            <div id="checker-result" class="5px p-3" bis_skin_checked="1">La puissance de votre mot de passe : </div>
+            <div id="checker-advice" class="px-5 p-3" bis_skin_checked="1">Nos conseil pour améliorer votre mot de passe : </div>
+          </div>
+        </form>
+      </section>
+  </div>
+
+
+  
 `;
 
 const displayGif = (passwordStrengthValue) => {
