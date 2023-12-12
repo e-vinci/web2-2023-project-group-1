@@ -51,12 +51,12 @@ async function getlist() {
 }
 
 async function duplicate(list, elem, password) {
-  const password1 = await decryption(elem.mot_de_passe, password);
-  const password2 = await decryption(elem.mot_de_passe, password);
-  list.forEach((element) => {
+      const password1 = await decryption(elem.mot_de_passe, password);
+  list.forEach(async (element) => {
+    const password2 = await decryption(element.mot_de_passe, password);
     if (elem.id > element.id && password1 === password2) {
       const line = document.querySelector('#duplicatePassword');
-      const ligneDoublon = document.createElement('td');
+      const ligneDoublon = document.createElement('tr');
       ligneDoublon.innerHTML = `
         " ${elem.site}  "="  ${element.site} "    avec comme mot de passe : ${password1}
             `;
