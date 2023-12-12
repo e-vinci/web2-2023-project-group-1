@@ -22,14 +22,6 @@ async function afficherSite(userId,idSite, password){
 
    const mdp =await  decryption(site.mot_de_passe,password );
     
-/*
-    "url": "test.com",
-    "site": "test",
-    "login": "test",
-    "mot_de_passe": "[object Object]"
-
-*/
-
 
     const rightSide = document.querySelector('.right');
     rightSide.innerHTML= `

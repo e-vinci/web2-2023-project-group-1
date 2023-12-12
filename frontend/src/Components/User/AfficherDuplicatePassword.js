@@ -4,55 +4,29 @@ import { decryption } from '../../utils/cryptPassword';
 import { getAuthenticatedUser } from '../../utils/auths';
 
 const checkDuplicatePassword = `
-<section class="w-75 p-3 mx-auto">
+<section class="d-flex align-items-center justify-content-center">
   <table id="duplicatePassword" class="table table-striped table-hover">
     <thead>
-        <tr class="border border-dark">
-            <th id="nomSite1">Nom du site 1 </th>
-            <th id="password1">Mots de passe</th>
-            <th id="nomSite2">Nom du site 2</th>
-            <th id="password2">Mots de passe</th>
-
-        </tr>
+    <td> Liste des sites doublé :</td>
+        
     </thead>
-    <tbody id="duplicatePassword">
     </tbody>
   </table>
 </section>
 `;
 
-function afficherDuplicatePassword() {
-  const tab = document.querySelector('.leftSide');
-  const block = document.createElement('div');
-  const duplicata = document.createElement('button');
-  duplicata.innerHTML = 'Afficher les mot de passe dupliquer';
-  duplicata.setAttribute('type', 'button');
-  duplicata.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
-  block.appendChild(duplicata);
-  tab.appendChild(block);
-  const checker = document.createElement('div');
-  duplicata.addEventListener('click', async (event) => {
-    block.innerHTML = '';
-    checker.innerHTML = checkDuplicatePassword;
-    tab.appendChild(checker);
-    const list = getlist();
-    const password = 'patate';
-    for (const elem of list) {
-      for (const elem1 of list) {
-        if (elem.id < elem1.id) {
-          if (decryption(elem.mot_de_passe,password) === decryption(elem.mot_de_passe,password)) {
-            const ligneDoublon = document.createElement('div');
-            ligneDoublon.innerHTML = `Site doublé ${elem1.site}  =  ${elem.site}`;
-            tab.appendChild(ligneDoublon);
+async function afficherDuplicatePassword(password) {
+const rightDiv=document.querySelector('.right');
+rightDiv.innerHTML=checkDuplicatePassword;;
+    const list = await getlist();
+    console.log(list);
+    list.forEach(element => {
+      console.log(element);
+      duplicate(list,element,password)
+      
+    });
+  };
 
-          }
-        }
-      }
-    }
-
-    console.log('Button clicked:', event.site);
-  });
-}
 
 async function getlist() {
   const option = {
@@ -70,5 +44,24 @@ async function getlist() {
   const list = await response.json();
   return list;
 }
+
+async function duplicate(list, elem,password){  
+    const password1=await decryption(elem.mot_de_passe,password);
+    const password2=await decryption(elem.mot_de_passe,password)
+  list.forEach(element => {
+      if (elem.id>element.id && password1  === password2) {
+         const line=document.querySelector('#duplicatePassword')
+            const ligneDoublon = document.createElement('td');
+            ligneDoublon.innerHTML = `
+        " ${elem.site}  "="  ${element.site} "    avec comme mot de passe : ${password1}
+            `;
+            line.appendChild(ligneDoublon);
+          }
+  });
+
+
+
+}
+
 
 export default afficherDuplicatePassword ;

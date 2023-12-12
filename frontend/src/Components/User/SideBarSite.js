@@ -7,6 +7,8 @@ import { encryption } from '../../utils/cryptPassword';
 import { getAuthenticatedUser } from '../../utils/auths';
 import  afficherSite  from './AfficherSite';
 
+import afficherDuplicatePassword from './AfficherDuplicatePassword';
+
 const sidebarToFill = `<!--Main Navigation-->
   <header>
   <div class="container">
@@ -78,8 +80,29 @@ async function showSideBar() {
   elemAdd.setAttribute('id', 'addButton');
   sideBar.appendChild(elemAdd);
 
-  const addButton = document.querySelector('#addButton');
+
   const rightDiv = document.querySelector('.right');
+  const duplicata = document.createElement('button');
+  duplicata.innerHTML = 'Afficher les mot de passe dupliquer';
+  duplicata.setAttribute('type', 'button');
+  duplicata.setAttribute('class', 'btn btn-secondary btn-lg btn-block');
+  duplicata.setAttribute('id','afficherDuplicata');
+  rightDiv.appendChild(duplicata);
+
+  const afficherDuplicata=document.querySelector('#afficherDuplicata');
+
+  afficherDuplicata.addEventListener('click', async (e) => {
+    e.preventDefault();
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!');
+    const masterPassword = await checkPassword(userId);
+    afficherDuplicatePassword(masterPassword);
+  }
+  );
+
+
+
+  const addButton = document.querySelector('#addButton');
+
   let submitPasswordButton;
   addButton.addEventListener('click', () => {
     rightDiv.innerHTML = '';
@@ -197,8 +220,7 @@ async function showSideBar() {
 
       if (masterPassword !== null) {
         // afficher mdp
-        const tab = document.querySelector('.right');
-      tab.innerHTML = '';
+      rightDiv.innerHTML = '';
       afficherSite(userId,elem.id,masterPassword);
       } else {
         // si le mot de passe est pas le bon
