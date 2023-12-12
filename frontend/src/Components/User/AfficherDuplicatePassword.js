@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-self-compare */
 import { decryption } from '../../utils/cryptPassword';
 import { getAuthenticatedUser } from '../../utils/auths';
 
