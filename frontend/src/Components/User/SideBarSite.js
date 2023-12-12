@@ -14,7 +14,7 @@ const sidebarToFill = `<!--Main Navigation-->
   <header>
   <div class="container">
   <div class="row">
-    <div class="listSite">
+    <div class="col-md-6 listSite overflow-auto">
     </div>
     <div class="right">
     </div>
