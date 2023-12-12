@@ -106,3 +106,9 @@ width: fix;
     display: inline-block;
     line-height: 1em;
 }
+
+#checkPassword{
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
