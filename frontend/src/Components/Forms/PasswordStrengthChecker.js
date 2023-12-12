@@ -62,7 +62,7 @@ const checkerForm = `
        </div>
 
       <div class="image-container" style="margin-left: 15%; position: absolute;">
-        <img id="tresfaible" src="${tente}" style="display: none;width: 20%; " >
+        <img id="tresfaible" src="${TresFaible}" style="display: none;width: 20%; " >
         <img id="faible" src="${Faible}" style="display: none; width: 20%;" >
         <img id="moyen" src="${Moyen}" style="display: none; width: 20%;" >
         <img id="fort" src="${Fort}" style="display: none; width: 20%;" >
