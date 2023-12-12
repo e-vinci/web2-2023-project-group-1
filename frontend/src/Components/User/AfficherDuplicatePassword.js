@@ -19,12 +19,21 @@ async function afficherDuplicatePassword(password) {
 const rightDiv=document.querySelector('.right');
 rightDiv.innerHTML=checkDuplicatePassword;;
     const list = await getlist();
-    console.log(list);
-    list.forEach(element => {
+    console.log(list.length);
+    if(list.length!==0){
+      list.forEach(element => {
       console.log(element);
       duplicate(list,element,password)
       
-    });
+    });}else{
+           const line=document.querySelector('#duplicatePassword')
+            const ligneDoublon = document.createElement('td');
+            ligneDoublon.innerHTML = `
+              Aucun mot de passe en doublon.
+            `;
+            line.appendChild(ligneDoublon);
+    }
+    
   };
 
 
