@@ -7,7 +7,6 @@ const corsOptions = {
   origin: ['http://localhost:3000'],
 };
 
-const usersRouter = require('./routes/users');
 const authsRouter = require('./routes/auths');
 const sitesRouter = require('./routes/sitesPassword');
 const leaderboardRouter = require('./routes/leaderboard');
@@ -21,7 +20,6 @@ app.use(cookieParser());
 
 app.use(cors(corsOptions));
 
-app.use('/users', usersRouter);
 app.use('/auths', authsRouter);
 app.use('/sites', sitesRouter);
 app.use('/leaderboard', leaderboardRouter);
