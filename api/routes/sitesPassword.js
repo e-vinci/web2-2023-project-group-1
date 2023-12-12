@@ -20,6 +20,7 @@ router.post('/addSite', async (req, res) => {
   const {
     urlSite, siteName, userNameSite, passwordSite,
   } = req.body;
+  console.log(passwordSite);
   if (!siteName || !userNameSite || !passwordSite || usersId < 0) {
     return res.sendStatus(400);
   }
