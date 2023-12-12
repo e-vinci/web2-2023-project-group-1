@@ -5,11 +5,11 @@ const {
   updatePassword,
   filtreBySiteName,
   sortByDate,
-  filterByPasswordPower,
+  getSiteById,
 } = require('../models/sites');
 
 const {
-  readIdUserFromUsername,
+  readIdFromUsername,
 } = require('../models/users');
 
 const router = express();
@@ -80,7 +80,7 @@ router.patch('/updateSite', (req, res) => {
  * @param {object} res - The Express response object to send a JSON response or an error status.
  */
 router.post('/orderBySiteName', (req, res) => {
-  const userId = readIdUserFromUsername(req.body.username);
+  const userId = readIdFromUsername(req.body.username);
   const orderBy = filtreBySiteName(userId);
   if (!orderBy) {
     return res.sendStatus(404);
@@ -106,21 +106,23 @@ router.get('/orderByDate', (req, res) => {
   return res.json(orderBy);
 });
 
-router.get('/filterByPower', (req, res) => {
-  const userId = parseInt(req.body?.userId, 10);
-  const power = req.body?.power;
+router.post('/getSiteById', (req, res) => {
+  console.log(req.body);
+  const userId = parseInt(req?.body?.userId, 10);
+  const siteId = parseInt(req?.body?.siteId, 10);
+  console.log(userId);
+  console.log(siteId);
 
-  if (!userId || !power) {
+  if (!userId || !siteId) {
     return res.sendStatus(400);
   }
 
-  const filterByPower = filterByPasswordPower(userId, power);
+  const site = getSiteById(userId, siteId);
 
-  if (!filterByPower) {
+  if (!site) {
     return res.sendStatus(404);
   }
-
-  return res.json(filterByPower);
+  return res.json(site);
 });
 
 module.exports = router;

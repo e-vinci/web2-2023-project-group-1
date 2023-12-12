@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const path = require('node:path');
-const { passwordStrength } = require('check-password-strength');
+const escape = require('escape-html');
 
 const { parse, serialize } = require('../utils/json');
 
@@ -31,12 +31,12 @@ async function addPasswordOnSite(usersId, urlSite, siteName, usernameSite, passw
   const dateAdded = Date.now().toLocaleString();
 
   const newSite = {
-    id: idSite,
-    url: urlSite,
-    site: siteName,
-    dateSite: dateAdded,
-    login: usernameSite,
-    mot_de_passe: bcrypt.hashSync(passwordSite, saltRounds),
+    id: parseInt(escape(idSite), 10),
+    url: escape(urlSite),
+    site: escape(siteName),
+    dateSite: escape(dateAdded),
+    login: escape(usernameSite),
+    mot_de_passe: escape(passwordSite),
   };
   return toDatabaseSites(newSite, indexIndex, getLastIndexSite(indexIndex));
 }
@@ -56,7 +56,6 @@ function toDatabaseSites(usersite, indexUser, indexSite) {
   userFound.sites[indexSite + 1] = usersite;
 
   users[indexUser] = userFound;
-
   serialize(jsonDbPath, users);
   return userFound;
 }
@@ -84,9 +83,9 @@ function getNextIdSite(indexUser) {
   const id = users[indexUser].sites[lastItemIndex]?.id;
   if (!id) return 1;
 
-  const nextId = id + 1;
+  const nextId = parseInt(id, 10) + 1;
 
-  return nextId;
+  return parseInt(nextId, 10);
 }
 
 /**
@@ -217,21 +216,13 @@ function sortByDate(id) {
   return userListFound;
 }
 
-function filterByPasswordPower(id, power) {
+function getSiteById(userid, siteId) {
   const users = parse(jsonDbPath, defaultUsers);
-  const indexOfUserFound = users.findIndex((user) => user.id === id);
+  const indexOfUserFound = users.findIndex((user) => user.id === userid);
   if (indexOfUserFound < 0) return undefined;
-
-  const userListFound = users[indexOfUserFound].sites;
-  const sites = [];
-
-  userListFound.forEach((site) => {
-    const pswValue = passwordStrength(site.mot_de_passe).value;
-    if (pswValue === power) {
-      sites.push(site);
-    }
-  });
-  return sites;
+  const listeSite = users[indexOfUserFound].sites;
+  const indexOfSiteFound = listeSite.findIndex((site) => site.id === siteId);
+  return listeSite[indexOfSiteFound];
 }
 
 module.exports = {
@@ -240,5 +231,5 @@ module.exports = {
   updatePassword,
   filtreBySiteName,
   sortByDate,
-  filterByPasswordPower,
+  getSiteById,
 };

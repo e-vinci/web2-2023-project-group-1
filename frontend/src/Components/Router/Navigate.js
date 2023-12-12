@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /**
  * Navigate to a URI by triggering the popstate event in order for the router to deal with
  * a change of browser history.

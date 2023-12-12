@@ -1,4 +1,5 @@
 const path = require('node:path');
+const escape = require('escape-html');
 const { parse, serialize } = require('../utils/json');
 
 const jsonDbPath = path.join(__dirname, '/../data/leaderboards.json');
@@ -25,7 +26,7 @@ function addOrUpdateToLeaderboard(password) {
   if (indexOfPassword < 0) {
     const newPassword = {
       id: getNextId(),
-      password,
+      password: escape(password),
       count: 1,
     };
     leaderboards.push(newPassword);
