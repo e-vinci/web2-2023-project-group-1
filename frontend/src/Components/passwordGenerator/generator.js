@@ -60,8 +60,8 @@ const generatorForm = `
             <label for="generate-include-symbols">Avec des symboles</label>
         </div>
         <div bis_skin_checked="1">
-          <input type="submit" value="Générer">
-          <input type="button" value="Copier" name="copy" id="copy-button">
+          <input class="btn btn-primary" type="submit" value="Générer">
+          <input class="btn btn-success" type="button" value="Copier" name="copy" id="copy-button">
         </div>
         <div id="generate-password" bis_skin_checked="1" id="generate-button"></div>
       </div>
