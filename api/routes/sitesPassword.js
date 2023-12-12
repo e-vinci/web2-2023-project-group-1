@@ -20,7 +20,6 @@ router.post('/addSite', async (req, res) => {
   const {
     urlSite, siteName, userNameSite, passwordSite,
   } = req.body;
-  console.log(passwordSite);
   if (!siteName || !userNameSite || !passwordSite || usersId < 0) {
     return res.sendStatus(400);
   }
@@ -36,18 +35,13 @@ router.post('/addSite', async (req, res) => {
 router.delete('/deleteSite', (req, res) => {
   const userId = parseInt(req.body.userId, 10);
   const siteId = parseInt(req.body.siteId, 10);
-
   if (!userId || !siteId) {
     return res.sendStatus(400);
   }
-  console.log(userId);
-  console.log(siteId);
   const returned = removeSite(userId, siteId);
-  console.log(returned);
   if (!returned) {
     return res.sendStatus(404);
   }
-
   return res.json(returned);
 });
 
@@ -61,16 +55,13 @@ router.patch('/updateSite', (req, res) => {
   const url = req?.body?.url;
   const password = req?.body?.password;
   const userName = req?.body?.login;
-
   if (!userId || !siteId) {
     return res.sendStatus(400);
   }
   const updatedPassword = updatePassword(userId, siteId, password, url, siteName, userName);
-
   if (!updatedPassword) {
     return res.sendStatus(404);
   }
-
   return res.json(updatedPassword);
 });
 
@@ -109,11 +100,8 @@ router.get('/orderByDate', (req, res) => {
 });
 
 router.post('/getSiteById', (req, res) => {
-  console.log(req.body);
   const userId = parseInt(req?.body?.userId, 10);
   const siteId = parseInt(req?.body?.siteId, 10);
-  console.log(userId);
-  console.log(siteId);
 
   if (!userId || !siteId) {
     return res.sendStatus(400);

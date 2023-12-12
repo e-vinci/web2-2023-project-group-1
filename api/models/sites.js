@@ -7,14 +7,7 @@ const { parse, serialize } = require('../utils/json');
 const saltRounds = 10;
 
 const jsonDbPath = path.join(__dirname, '/../data/users.json');
-const defaultUsers = [
-  {
-    id: 1,
-    username: 'admin',
-    password: bcrypt.hashSync('admin', saltRounds),
-    sites: {},
-  },
-];
+const defaultUsers = [];
 
 /**
  * Prepare the data to add a password on a site

@@ -1,31 +1,27 @@
-import{decryption}from '../../utils/cryptPassword'
+import { decryption } from '../../utils/cryptPassword';
 import Navigate from '../Router/Navigate';
 
-async function afficherSite(userId,idSite, password){
+async function afficherSite(userId, idSite, password) {
+  let option = {
+    method: 'POST',
+    body: JSON.stringify({
+      userId,
+      siteId: idSite,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  let response = await fetch('/api/sites/getSiteById', option);
+  if (!response.ok) {
+    console.log("Error can't get the site because response is not ok");
+  }
+  const site = await response.json();
 
-    let option = {
-        method: 'POST',
-        body: JSON.stringify({
-            "userId": userId,
-            "siteId" : idSite,
+  const mdp = await decryption(site.mot_de_passe, password);
 
-        }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }
-    let response =await fetch('/api/sites/getSiteById', option);
-    if (!response.ok) {
-        console.log('Error can\'t get the site because response is not ok');
-    }
-   const site =await response.json();
-   console.log(site.mot_de_passe);
-
-   const mdp =await  decryption(site.mot_de_passe,password );
-    
-
-    const rightSide = document.querySelector('.right');
-    rightSide.innerHTML= `
+  const rightSide = document.querySelector('.right');
+  rightSide.innerHTML = `
     <div> <h1>Site Information</h1>  
             <div> <h2>voici l url de votre site : </h2> 
             <a> ${site.url} </a> 
@@ -45,33 +41,29 @@ async function afficherSite(userId,idSite, password){
   <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
 </svg>
 Supprimer les informations de ce site.
-    </div>` ;
+    </div>`;
 
+  const deleteButton = document.querySelector('#deleteButton');
+  deleteButton.addEventListener('click', async (e) => {
+    e.preventDefault();
 
-    const deleteButton=document.querySelector('#deleteButton');
-    deleteButton.addEventListener('click', async (e) =>{
-        e.preventDefault();
-        
-     option = {
-        method: 'DELETE',
-        body: JSON.stringify({
-            "userId": userId,
-            "siteId" : idSite,
-
-        }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }
-       response =await fetch('/api/sites/deleteSite', option);
+    option = {
+      method: 'DELETE',
+      body: JSON.stringify({
+        userId,
+        siteId: idSite,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    response = await fetch('/api/sites/deleteSite', option);
     if (!response) {
-        console.log('Error can\'t delete the site because response is not ok');
-    }else{
-        Navigate('/');
+      console.log("Error can't delete the site because response is not ok");
+    } else {
+      Navigate('/');
     }
-
-    } )
-    
+  });
 }
 
-export default  afficherSite;
+export default afficherSite;
