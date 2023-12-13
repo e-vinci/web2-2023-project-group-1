@@ -103,3 +103,8 @@ width: fix;
     display: inline-block;
     line-height: 1em;
 }
+
+#checkerForm{
+    margin-left: 15%;
+    margin-right: 15%;
+}
