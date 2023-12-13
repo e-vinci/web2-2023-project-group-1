@@ -107,7 +107,7 @@ width: fix;
 }
 
 
-.modifierBouton {
+.Bouton {
     border: none;
     color: #fff;
     padding: 10px 0;
@@ -118,7 +118,7 @@ width: fix;
     transition: all 0.2s ease;
 }
 
-.modifierBouton:hover{
+.Bouton:hover{
     background-color: #034bf1;
 }
 
