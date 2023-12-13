@@ -80,7 +80,7 @@ const registerListener = () => {
             }
         }
     
-        const response = await fetch('/api/auths/register', option);
+        const response = await fetch(`${process.env.API_BASE_URL}/auths/register`, option);
         const resultat = document.querySelector('#resultat');
         if (!response.ok) {
             resultat.className = 'text-danger';
