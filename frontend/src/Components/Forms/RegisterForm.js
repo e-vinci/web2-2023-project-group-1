@@ -10,7 +10,7 @@ const registerLogin = `
             <div id="messageErreurMail" class="form-text text-danger"></div>
         </div>
         <div class="mb-3">
-            <label for="pseudo" class="form-label">Pseudo</label>
+            <label for="pseudo" class="form-label">Username</label>
             <input type="text" class="form-control" id="pseudo" required>
             <div id="messageErreurPseudo" class="form-text text-danger"></div>
         </div>

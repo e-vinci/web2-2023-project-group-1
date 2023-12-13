@@ -98,9 +98,9 @@ function getNextId() {
   return nextId;
 }
 
-function passwordCheck(id, password) {
+async function passwordCheck(id, password) {
   const user = readOneUserFromId(id);
-  const passwordMatch = bcrypt.compare(password, user.password);
+  const passwordMatch = await bcrypt.compare(password, user.password);
   if (!passwordMatch) return 0;
   return 1;
 }

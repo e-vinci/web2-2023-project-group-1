@@ -106,6 +106,7 @@ width: fix;
     
 }
 
+
 .modifierBouton {
     border: none;
     color: #fff;
@@ -120,3 +121,14 @@ width: fix;
 .modifierBouton:hover{
     background-color: #034bf1;
 }
+
+#checkPassword{
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.modalGen {
+    
+}
+

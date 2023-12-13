@@ -7,6 +7,9 @@ const checkPassword = async (userId) => {
     const user = getAuthenticatedUser();
 
     const masterPassword = prompt('Entrez votre mot de passe maitre', '');
+    if(masterPassword === ''){
+        alert('Mot de passe maitre incorrect');
+    }else{
 
     const optionCompare = {
         method: 'POST',
@@ -25,7 +28,7 @@ const checkPassword = async (userId) => {
         alert('Mot de passe maitre incorrect');
     } else {
         return masterPassword;
-    }
+    }}
     
     return null; // Add a return statement at the end of the function.
 };
