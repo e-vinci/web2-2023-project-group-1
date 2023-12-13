@@ -217,7 +217,6 @@ async function showSideBar() {
       const masterPassword = await checkPassword(userId);
 
       if (masterPassword !== null) {
-        // afficher mdp
         rightDiv.innerHTML = '';
         afficherSite(userId, elem.id, masterPassword);
       } else {

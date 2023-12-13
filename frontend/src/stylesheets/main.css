@@ -129,7 +129,8 @@ width: fix;
     margin-right: 15%;
 }
 
-.modalGen {
-    
+.listSite {
+    background-color: white;
+    box-shadow: 1px 10px 5px grey;
 }
 
