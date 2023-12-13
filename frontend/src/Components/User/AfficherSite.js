@@ -82,5 +82,4 @@ async function copyToClipboard(text) {
 }
 
 
-
 export default afficherSite;
