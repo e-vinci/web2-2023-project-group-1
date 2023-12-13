@@ -4,6 +4,7 @@ import { checkleaderboard, afficherMdp, animationTitre } from '../Leaderboard/le
 
 const HomePage = () => {
   const main = document.querySelector('main');
+  main.className = '';
   main.innerHTML = checkerForm;
   main.innerHTML += checkleaderboard;
   afficherMdp();
