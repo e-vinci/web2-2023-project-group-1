@@ -16,7 +16,7 @@ const sidebarToFill = `<!--Main Navigation-->
   <div class="row">
     <div class="col-md-6 listSite overflow-auto">
     </div>
-    <div class="right" style="border-radius:30px;box-shadow: var(--bs-box-shadow);">
+    <div class="right ">
     </div>
     </div>
 </div>`;

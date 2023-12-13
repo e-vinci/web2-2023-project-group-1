@@ -1,10 +1,7 @@
-const bcrypt = require('bcrypt');
 const path = require('node:path');
 const escape = require('escape-html');
 
 const { parse, serialize } = require('../utils/json');
-
-const saltRounds = 10;
 
 const jsonDbPath = path.join(__dirname, '/../data/users.json');
 const defaultUsers = [];
@@ -164,7 +161,7 @@ function updatePassword(userId, siteId, password, url, siteName, userName) {
     copieSite.login = userName;
   }
   if (password !== undefined) {
-    copieSite.mot_de_passe = bcrypt.hashSync(password, saltRounds);
+    copieSite.mot_de_passe = password;
   }
   if (url !== undefined) {
     copieSite.url = url;
