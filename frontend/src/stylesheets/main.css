@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 #loginForm registerForm {
     background-color: rgb(235, 235, 235);
 }
@@ -102,6 +103,23 @@ width: fix;
 .ml12 .letter {
     display: inline-block;
     line-height: 1em;
+    
+}
+
+
+.modifierBouton {
+    border: none;
+    color: #fff;
+    padding: 10px 0;
+    border-radius: 4px;
+    background: #4070f4;
+    cursor: pointer;
+    width: calc(100% / 2 - 10px);
+    transition: all 0.2s ease;
+}
+
+.modifierBouton:hover{
+    background-color: #034bf1;
 }
 
 #checkPassword{
@@ -113,3 +131,4 @@ width: fix;
 .modalGen {
     
 }
+
