@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies, import/no-import-module-exports
 import CryptoJS from 'crypto-js';
+import { getAuthenticatedUser } from './auths';
 
 /**
  * Encrypt a password with crypto-js
@@ -23,28 +24,36 @@ import CryptoJS from 'crypto-js';
     const response = await fetch('/api/auths/passwordCheck', option);
     console.log(response.ok);
     if(!response.ok)return undefined;
-    const encrypted = CryptoJS.Rabbit.encrypt(text,password);
+    console.log(text);
+    const encrypted = CryptoJS.Rabbit.encrypt(text,password).toString();
+    console.log(encrypted);
     return encrypted;
 };
 
- const decryption =async (encrypted, password,id) => {
+ const decryption =async (encrypted, password) => {
     const option = {
         method: 'POST',
         body: JSON.stringify({
             // eslint-disable-next-line no-undef
-            "id": id,
+            "username": getAuthenticatedUser().username,
             "password": password
         }),
         headers: {
             'Content-Type': 'application/json'
         }
     }
-    const response = await fetch('/api/auths/passwordCheck', option);
+    const response = await fetch('/api/auths/comparePassword', option);
     if(!response.ok)return undefined;
     const data = await response.json();
-    if(parseInt(data.value,10)===1){
-   const decrypted = CryptoJS.Rabbit.decrypt(encrypted, password).toString(CryptoJS.enc.Utf8);
-    return decrypted;}
+    
+    if (data !== 1) {
+        alert('Mot de passe maitre incorrect');
+    } else {
+        console.log(encrypted);
+        const decrypted = CryptoJS.Rabbit.decrypt(encrypted, password).toString(CryptoJS.enc.Utf8);
+        console.log(decrypted)
+         return decrypted;
+    }
     return undefined
 };
 

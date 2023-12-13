@@ -8,7 +8,7 @@ const routes = {
   '/': HomePage,
   '/login': LoginRegister,
   '/generate': GeneratePassword,
-  '/user':UserPage,
+  '/user': UserPage,
   '/logout': Logout,
 };
 

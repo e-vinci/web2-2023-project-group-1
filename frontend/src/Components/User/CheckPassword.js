@@ -7,6 +7,9 @@ const checkPassword = async (userId) => {
     const user = getAuthenticatedUser();
 
     const masterPassword = prompt('Entrez votre mot de passe maitre', '');
+    if(masterPassword === ''){
+        alert('Mot de passe maitre incorrect');
+    }else{
 
     const optionCompare = {
         method: 'POST',
@@ -19,13 +22,13 @@ const checkPassword = async (userId) => {
         },
     };
 
-    const responseCompare = await fetch('/api/auths/comparePassword', optionCompare);
+    const responseCompare = await fetch(`${process.env.API_BASE_URL}/auths/comparePassword`, optionCompare);
     const compareData = await responseCompare.json();
     if (compareData !== 1) {
         alert('Mot de passe maitre incorrect');
     } else {
         return masterPassword;
-    }
+    }}
     
     return null; // Add a return statement at the end of the function.
 };

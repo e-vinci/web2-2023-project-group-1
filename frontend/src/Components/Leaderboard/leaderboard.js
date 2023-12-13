@@ -24,7 +24,7 @@ const checkleaderboard = `
 `;
 
 async function afficherMdp() {
-    const reponse = await fetch(`/api/leaderboard/leaderboard`);
+    const reponse = await fetch(`${process.env.API_BASE_URL}/leaderboard/leaderboard`);
 
     const tableau = document.querySelector('#tableau');
 

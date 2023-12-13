@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 #loginForm registerForm {
     background-color: rgb(235, 235, 235);
 }
@@ -102,6 +103,7 @@ width: fix;
 .ml12 .letter {
     display: inline-block;
     line-height: 1em;
+    
 }
 
 #checkerForm{

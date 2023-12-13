@@ -63,7 +63,7 @@ async function register(username, email, password) {
 
 function readOneUserFromUsername(username) {
   const users = parse(jsonDbPath, defaultUsers);
-  const indexOfUserFound = users.findIndex((user) => user.username === username);
+  const indexOfUserFound = users.findIndex((user) => user.login === username);
   if (indexOfUserFound < 0) return undefined;
 
   return users[indexOfUserFound];
@@ -98,9 +98,9 @@ function getNextId() {
   return nextId;
 }
 
-function passwordCheck(id, password) {
+async function passwordCheck(id, password) {
   const user = readOneUserFromId(id);
-  const passwordMatch = bcrypt.compare(password, user.password);
+  const passwordMatch = await bcrypt.compare(password, user.password);
   if (!passwordMatch) return 0;
   return 1;
 }
@@ -115,18 +115,17 @@ function readOneUserFromId(id) {
 
 function readIdFromUsername(username) {
   const users = parse(jsonDbPath, defaultUsers);
-  const indexOfUserFound = users.findIndex((user) => user.username === username);
+  const indexOfUserFound = users.findIndex((user) => user.login === username);
   if (indexOfUserFound < 0) return undefined;
-
   return users[indexOfUserFound].id;
 }
 
 async function comparePassword(username, password) {
   const users = parse(jsonDbPath, defaultUsers);
-  const userFound = users.find((user) => user.username === username);
+  const userFound = users.find((user) => user.login === username);
   if (!userFound) return undefined;
   const passwordMatch = await bcrypt.compare(password, userFound.password);
-  return passwordMatch;
+  return passwordMatch === true ? 1 : 0;
 }
 
 module.exports = {

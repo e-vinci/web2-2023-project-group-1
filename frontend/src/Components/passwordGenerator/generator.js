@@ -1,14 +1,14 @@
 /* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import Tente from '../../img/tente.png';
-import MaisonBois from '../../img/maisonBois.png';
-import Maison from '../../img/home.png';
-import Chateau from '../../img/Chateau.png';
+import Tent from '../../img/tente.png';
+import WoodenHouse from '../../img/maisonBois.png';
+import Home from '../../img/home.png';
+import Castle from '../../img/Chateau.png';
 
 const generator = require('generate-password-browser');
 
 const modalGenerator = `
-<div class="modal fade" id="modalGenerator" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalGeneratorLabel" aria-hidden="true">
+<div class="modal fade modal-lg" id="modalGenerator" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalGeneratorLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
@@ -29,10 +29,10 @@ const modalGenerator = `
 
 const generatorForm = `
 <div class="image-container" style=" margin-top: 30px; position: absolute; width: 20%;">
-            <img id="tente" src="${Tente}" style="width: 100%; " >
-            <img id="maisonBois" src="${MaisonBois}" style="display: none; width: 100%;" >
-            <img id="Maison" src="${Maison}" style="display: none; width: 100%;" >
-            <img id="Chateau" src="${Chateau}" style="display: none; width: 100%;" >
+            <img id="tent_id" src="${Tent}" style="width: 100%; " >
+            <img id="woodenHouse_id" src="${WoodenHouse}" style="display: none; width: 100%;" >
+            <img id="home_id" src="${Home}" style="display: none; width: 100%;" >
+            <img id="castle_id" src="${Castle}" style="display: none; width: 100%;" >
 </div>
 
 <section class="generate d-flex align-items-center justify-content-center">
@@ -60,8 +60,8 @@ const generatorForm = `
             <label for="generate-include-symbols">Avec des symboles</label>
         </div>
         <div bis_skin_checked="1">
-          <input type="submit" value="Générer">
-          <input type="button" value="Copier" name="copy" id="copy-button">
+          <input class="btn btn-primary" type="submit" value="Générer">
+          <input class="btn btn-success" type="button" value="Copier" name="copy" id="copy-button">
         </div>
         <div id="generate-password" bis_skin_checked="1" id="generate-button"></div>
       </div>
@@ -70,31 +70,31 @@ const generatorForm = `
 `;
 
 const displayImage = (rangeValue) => {
-    const tente = document.getElementById("tente");
-    const maisonBois = document.getElementById("MaisonBois");
-    const maison = document.getElementById("Maison");
-    const chateau = document.getElementById("Chateau");
+    const tent = document.getElementById("tent_id");
+    const woodenHouse = document.getElementById("woodenHouse_id");
+    const home = document.getElementById("home_id");
+    const castle = document.getElementById("castle_id");
 
-    if (rangeValue >=0 && rangeValue <= 10) {
-        tente.style.display = 'block';
-        maisonBois.style.display = 'none';
-        maison.style.display = 'none';
-        chateau.style.display = 'none';
+    if (rangeValue >= 0 && rangeValue <= 10) {
+        tent.style.display = 'block';
+        woodenHouse.style.display = 'none';
+        home.style.display = 'none';
+        castle.style.display = 'none';
     } else if (rangeValue <= 15) {
-        tente.style.display = 'none';
-        maisonBois.style.display = 'block';
-        maison.style.display = 'none';
-        chateau.style.display = 'none';
+        tent.style.display = 'none';
+        woodenHouse.style.display = 'block';
+        home.style.display = 'none';
+        castle.style.display = 'none';
     } else if (rangeValue <= 22) {
-        tente.style.display = 'none';
-        maisonBois.style.display = 'none';
-        maison.style.display = 'block';
-        chateau.style.display = 'none';
+        tent.style.display = 'none';
+        woodenHouse.style.display = 'none';
+        home.style.display = 'block';
+        castle.style.display = 'none';
     } else {
-        tente.style.display = 'none';
-        maisonBois.style.display = 'none';
-        maison.style.display = 'none';
-        chateau.style.display = 'block';
+        tent.style.display = 'none';
+        woodenHouse.style.display = 'none';
+        home.style.display = 'none';
+        castle.style.display = 'block';
     }
 };
 
@@ -109,7 +109,7 @@ const listenersGeneratorPassword = () => {
 
         displayImage(parseInt(rangeValue, 10));
     });
-    
+
 
     generateForm.addEventListener('submit', event => {
         event.preventDefault();

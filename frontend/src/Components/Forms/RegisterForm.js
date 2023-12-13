@@ -10,7 +10,7 @@ const registerLogin = `
             <div id="messageErreurMail" class="form-text text-danger"></div>
         </div>
         <div class="mb-3">
-            <label for="pseudo" class="form-label">Pseudo</label>
+            <label for="pseudo" class="form-label">Username</label>
             <input type="text" class="form-control" id="pseudo" required>
             <div id="messageErreurPseudo" class="form-text text-danger"></div>
         </div>
@@ -80,7 +80,7 @@ const registerListener = () => {
             }
         }
     
-        const response = await fetch('/api/auths/register', option);
+        const response = await fetch(`${process.env.API_BASE_URL}/auths/register`, option);
         const resultat = document.querySelector('#resultat');
         if (!response.ok) {
             resultat.className = 'text-danger';
