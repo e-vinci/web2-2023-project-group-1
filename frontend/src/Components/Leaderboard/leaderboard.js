@@ -5,7 +5,7 @@
 import anime from 'animejs';
 
 const checkleaderboard = `
-<h3 class="ml12">Les pires mots de passe</h3>
+<h3 class="ml12 mt-5 pt-5 text-center">Les pires mots de passe</h3>
 <div src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></div>
 <section class="w-75 p-3 mx-auto">
   <table id="leaderboard" class="table table-striped table-hover">
@@ -67,14 +67,9 @@ anime.timeline({loop: true})
   });
 }
 
-const leaderboardListener = () => {
-    const checker = document.querySelector('#leaderboard');
-    checker.innerHTML = checkleaderboard;
-    afficherMdp();
-}
-
 export {
-    leaderboardListener,
+  checkleaderboard,
+    afficherMdp,
     animationTitre,
 
 };

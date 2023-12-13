@@ -42,7 +42,7 @@ async function getlist() {
     body: JSON.stringify({ username: getAuthenticatedUser().username }),
   };
 
-  const response = await fetch(`${process.env.API_BASE_URL}/sites/orderBySiteName`, option);
+  const response = await fetch('/api/sites/orderBySiteName', option);
   if (!response.ok) {
     console.log("Error can't access the list because response is not ok");
   }
