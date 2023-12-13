@@ -1,6 +1,5 @@
 /* eslint-disable import/no-import-module-exports */
 /* eslint-disable import/no-unresolved */
-import Navigate from '../Router/Navigate';
 import checkPassword from './CheckPassword';
 // import passwordSecurity from '../../img/passwordSecurity.png';
 
@@ -197,7 +196,7 @@ async function showSideBar() {
         resultat.innerHTML = `Une erreur est survenue`;
       } else {
         resultat.innerHTML = `Enregistrement réussi`;
-        Navigate('/');
+        window.location.reload();
       }
     });
   });
