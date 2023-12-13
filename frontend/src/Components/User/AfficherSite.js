@@ -14,7 +14,7 @@ async function afficherSite(userId,idSite, password){
             'Content-Type': 'application/json'
         }
     }
-    let response =await fetch('/api/sites/getSiteById', option);
+    let response =await fetch(`${process.env.API_BASE_URL}/sites/getSiteById`, option);
     if (!response.ok) {
         console.log('Error can\'t get the site because response is not ok');
     }
@@ -63,7 +63,7 @@ Supprimer les informations de ce site.
             'Content-Type': 'application/json'
         }
     }
-       response =await fetch('/api/sites/deleteSite', option);
+       response =await fetch(`${process.env.API_BASE_URL}/sites/deleteSite`, option);
     if (!response) {
         console.log('Error can\'t delete the site because response is not ok');
     }else{

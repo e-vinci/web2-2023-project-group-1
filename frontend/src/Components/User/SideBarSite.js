@@ -69,7 +69,7 @@ async function showSideBar() {
     },
   };
 
-  const response1 = await fetch('/api/auths/readUserFromUsername', option1);
+  const response1 = await fetch(`${process.env.API_BASE_URL}/auths/readUserFromUsername`, option1);
   const userId = await response1.json();
 
   const main = document.querySelector('main');
@@ -158,7 +158,7 @@ async function showSideBar() {
         },
       };
 
-      const responseCompare = await fetch('/api/auths/comparePassword', optionCompare);
+      const responseCompare = await fetch(`${process.env.API_BASE_URL}/auths/comparePassword`, optionCompare);
       const compareData = await responseCompare.json();
       if (compareData !== 1) {
         const messageErreurMasterPassword = document.querySelector('#messageErreurMasterPassword');
@@ -190,7 +190,7 @@ async function showSideBar() {
         },
       };
 
-      const response2 = await fetch('/api/sites/addSite', option2);
+      const response2 = await fetch(`${process.env.API_BASE_URL}/sites/addSite`, option2);
       const resultat = document.querySelector('#resultat');
       if (!response2.ok) {
         resultat.className = 'text-danger';
@@ -239,7 +239,7 @@ async function getlist() {
     body: JSON.stringify({ username: getAuthenticatedUser().username }),
   };
 
-  const response = await fetch('/api/sites/orderBySiteName', option);
+  const response = await fetch(`${process.env.API_BASE_URL}/sites/orderBySiteName`, option);
   if (!response.ok) {
     console.log("Error can't access the list because response is not ok");
   }
