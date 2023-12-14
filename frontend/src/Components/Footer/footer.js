@@ -14,7 +14,8 @@ const Footer = () => {
   <footer id="footer">
         <div class="text-center p-2" style="background-color: #000000">
         © 2023-2024 Copyright - Droit d'auteur :
-         <a >Chen Wenlin - DeSmet Kilian - Johnen Thomas - Nicolas Luca - Mouayna Lotfi</a>
+         <a>Chen Wenlin - DeSmet Kilian - Johnen Thomas - Nicolas Luca - Mouayna Lotfi</a>
+         <a class="GDPR-link" href="#" data-bs-toggle="modal" data-bs-target="#modalGDPR"> | Politique de confidentialité </a>
         </div>
       </footer>
   `;
