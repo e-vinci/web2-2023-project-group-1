@@ -88,8 +88,8 @@ router.post('/orderBySiteName', (req, res) => {
  * @param {object} req - The Express request object containing the user ID in the request body.
  * @param {object} res - The Express response object to send a JSON response or an error status.
  */
-router.get('/orderByDate', (req, res) => {
-  const userId = parseInt(req.body.userId, 10);
+router.post('/orderByDate', (req, res) => {
+  const userId = readIdFromUsername(req.body.username);
 
   const orderBy = sortByDate(userId);
 

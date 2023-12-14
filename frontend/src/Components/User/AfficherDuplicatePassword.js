@@ -14,24 +14,61 @@ const checkDuplicatePassword = `
   </table>
 </section>
 `;
-
 async function afficherDuplicatePassword(password) {
   const rightDiv = document.querySelector('.right');
   rightDiv.innerHTML = checkDuplicatePassword;
   const list = await getlist();
+  console.log(list.length);
+
+  let hasDuplicates = true;
+
   if (list.length !== 0) {
-    list.forEach((element) => {
-      duplicate(list, element, password);
-    });
-  } else {
+    try {
+      await Promise.all(
+        list.map(async (elem) => {
+          const password1 = await decryption(elem.mot_de_passe, password);
+
+          await Promise.all(
+            list.map(async (element) => {
+              const password2 = await decryption(element.mot_de_passe, password);
+
+              if (elem.id > element.id && password1 === password2) {
+                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+                hasDuplicates = false;
+                console.log(hasDuplicates);
+
+                const line = document.querySelector('#duplicatePassword');
+                const ligneDoublon = document.createElement('tr');
+                ligneDoublon.innerHTML = `
+              " ${elem.site} "=" ${element.site}" avec comme mot de passe : ${password1}
+            `;
+                line.appendChild(ligneDoublon);
+              }
+            }),
+          );
+        }),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  console.log('?????????????????????????????????????');
+  console.log(hasDuplicates);
+
+  if (hasDuplicates) {
+    console.log('?????????????????????????????????????');
+    console.log(hasDuplicates);
+
     const line = document.querySelector('#duplicatePassword');
     const ligneDoublon = document.createElement('td');
     ligneDoublon.innerHTML = `
-              Aucun mot de passe en doublon.
-            `;
+      Aucun mot de passe en doublon.
+    `;
     line.appendChild(ligneDoublon);
   }
 }
+
 
 async function getlist() {
   const option = {
@@ -48,21 +85,6 @@ async function getlist() {
   }
   const list = await response.json();
   return list;
-}
-
-async function duplicate(list, elem, password) {
-      const password1 = await decryption(elem.mot_de_passe, password);
-  list.forEach(async (element) => {
-    const password2 = await decryption(element.mot_de_passe, password);
-    if (elem.id > element.id && password1 === password2) {
-      const line = document.querySelector('#duplicatePassword');
-      const ligneDoublon = document.createElement('tr');
-      ligneDoublon.innerHTML = `
-        " ${elem.site}  "="  ${element.site} "    avec comme mot de passe : ${password1}
-            `;
-      line.appendChild(ligneDoublon);
-    }
-  });
 }
 
 export default afficherDuplicatePassword;
