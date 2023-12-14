@@ -197,7 +197,7 @@ async function showSideBar() {
         resultat.innerHTML = `Une erreur est survenue`;
       } else {
         resultat.innerHTML = `Enregistrement réussi`;
-        Navigate('/');
+        window.location.reload();
       }
     });
   });
