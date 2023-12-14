@@ -22,7 +22,7 @@ const checkPassword = async (userId) => {
         },
     };
 
-    const responseCompare = await fetch('/api/auths/comparePassword', optionCompare);
+    const responseCompare = await fetch(`${process.env.API_BASE_URL}/auths/comparePassword`, optionCompare);
     const compareData = await responseCompare.json();
     if (compareData !== 1) {
         alert('Mot de passe maitre incorrect');
