@@ -36,7 +36,8 @@ const checkerForm = `
           <form id="checker-form" class="mb-3 justify-content-center">
             <div class="mb-4">
               <div class="pt-1 pb-1">
-                <input type="text" class="form-control custom-input" id="checker-password" name="checker-password">
+                <input type="password" class="form-control custom-input" id="checker-password" name="checker-password">
+                <input type="checkbox" id="checkbox-checker" ><label for="checker-password">Afficher le mot de passe</label>
               </div>
             </div>
             <div class="d-flex align-items-center justify-content-center">
@@ -88,9 +89,21 @@ const listenersPasswordStrengthChecker = () => {
   const checkerResult = document.querySelector('#checker-result');
   const checkerAdvice = document.querySelector('#checker-advice');
 
+  const checkbox = document.querySelector('#checkbox-checker');
+
+  checkbox.addEventListener('click', () => {
+    if (checkbox.checked) {
+      document.querySelector('#checker-password').type = 'text';
+    } else {
+      document.querySelector('#checker-password').type = 'password';
+    }
+  });
+
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const passwordToCheck = event.target['checker-password'].value;
+
+    const passwordToCheck = document.querySelector('#checker-password').value;
 
     if (passwordToCheck === '') {
       alert('Veuillez entrer un mot de passe');
