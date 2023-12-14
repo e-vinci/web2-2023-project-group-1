@@ -12,12 +12,24 @@ import afficherDuplicatePassword from './AfficherDuplicatePassword';
 const sidebarToFill = `<!--Main Navigation-->
   <header>
   <div class="container">
-  <div class="row">
-    <div class="col-md-6 listSite overflow-auto" id="listSite">
+    <div class="row">
+      <div class="col-md-6 listSite overflow-auto" id="listSite">
+        <div class="col-md-6 UpperlistSite overflow-auto">  
+          <div class="d-flex justify-content-center" >
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+              <input type="radio" class="btn-check" name="btnradio" id="OrdreName" autocomplete="off" checked >
+                <label class="btn btn-outline-secondary" for="OrdreName">Nom</label>
+              <input type="radio" class="btn-check" name="btnradio" id="OrderDate" autocomplete="off" >
+                <label class="btn btn-outline-secondary" for="OrderDate">Date</label>
+            </div>
+          </div>
+        </div>
+      <div  id="liste">
+      </div>
     </div>
     <div class="right">
     </div>
-    </div>
+  </div>
 </div>`;
 
 const addPasswordForm = `
@@ -74,14 +86,17 @@ async function showSideBar() {
   const main = document.querySelector('main');
   main.className = 'd-flex align-items-center justify-content-center';
   main.innerHTML = sidebarToFill;
-  const sideBar = document.querySelector('.listSite');
+  
+ const UppersideBar = document.querySelector('.UpperlistSite');
+
   const buttonaddSit = document.createElement('tr');
   const elemAdd = document.createElement('button');
   elemAdd.innerHTML = 'Ajouter un site';
   elemAdd.setAttribute('type', 'button');
   elemAdd.setAttribute('class', 'btn btn-secondary btn-lg btn-block m-1');
   elemAdd.setAttribute('id', 'addButton');
-  sideBar.appendChild(elemAdd);
+  UppersideBar.appendChild(elemAdd);
+
 
   const rightDiv = document.querySelector('.right');
   const duplicata = document.createElement('button');
@@ -202,9 +217,78 @@ async function showSideBar() {
   });
 
   buttonaddSit.appendChild(elemAdd);
-  sideBar.appendChild(buttonaddSit);
-  const list = await getlist();
-  list.forEach((element) => {
+  UppersideBar.appendChild(buttonaddSit);
+  let list = await getlistName();
+  affichageList(list, userId);
+
+
+  const name = document.querySelector('#OrdreName');
+  const date = document.querySelector('#OrderDate');
+
+  name.addEventListener('click', async (e) => { 
+    e.preventDefault();
+  list = await getlistName();
+  affichageList(list,userId);
+ name.checked = true;
+  date.checked = false;
+
+});
+
+date.addEventListener('click', async (e) => { 
+    e.preventDefault();
+  list = await getlistDate();
+  affichageList(list,userId);
+date.checked = true;
+name.checked = false;
+
+
+
+
+});
+
+
+
+}
+
+async function getlistName() {
+  const option = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username: getAuthenticatedUser().username }),
+  };
+
+  const response = await fetch(`${process.env.API_BASE_URL}/sites/orderBySiteName`, option);
+  if (!response.ok) {
+    console.log("Error can't access the list because response is not ok");
+  }
+  const list = await response.json();
+  return list;
+}
+
+async function getlistDate() {
+  const option = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username: getAuthenticatedUser().username }),
+  };
+
+  const response = await fetch(`${process.env.API_BASE_URL}/sites/orderByDate`, option);
+  if (!response.ok) {
+    console.log("Error can't access the list because response is not ok");
+  }
+  const list = await response.json();
+  return list;
+}
+
+async function affichageList(list,userId) {
+   const sideBar = document.querySelector('#liste');
+    const rightDiv = document.querySelector('.right');
+    sideBar.innerHTML='';
+    list.forEach((element) => {
     const listelem = document.createElement('tr');
     const elem = document.createElement('button');
     elem.id = element.id;
@@ -227,23 +311,6 @@ async function showSideBar() {
     listelem.appendChild(elem);
     sideBar.appendChild(listelem);
   });
-}
 
-async function getlist() {
-  const option = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ username: getAuthenticatedUser().username }),
-  };
-
-  const response = await fetch(`${process.env.API_BASE_URL}/sites/orderBySiteName`, option);
-  if (!response.ok) {
-    console.log("Error can't access the list because response is not ok");
-  }
-  const list = await response.json();
-  return list;
-}
-
+};
 export default showSideBar;
