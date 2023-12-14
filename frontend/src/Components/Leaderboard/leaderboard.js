@@ -7,7 +7,7 @@ import anime from 'animejs';
 const checkleaderboard = `
 <h3 class="ml12 mt-5 pt-5 text-center">Les pires mots de passe</h3>
 <div src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></div>
-<section class="w-75 p-3 mx-auto">
+<section class="w-75 p-3 mx-auto" id="leaderboard-sec">
   <table id="leaderboard" class="table table-striped table-hover">
   
     <thead>

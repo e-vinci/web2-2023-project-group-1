@@ -21,7 +21,7 @@ import { getAuthenticatedUser } from './auths';
             'Content-Type': 'application/json'
         }
     }
-    const response = await fetch('/api/auths/passwordCheck', option);
+    const response = await fetch(`${process.env.API_BASE_URL}/auths/passwordCheck`, option);
     console.log(response.ok);
     if(!response.ok)return undefined;
     console.log(text);
@@ -42,7 +42,7 @@ import { getAuthenticatedUser } from './auths';
             'Content-Type': 'application/json'
         }
     }
-    const response = await fetch('/api/auths/comparePassword', option);
+    const response = await fetch(`${process.env.API_BASE_URL}/auths/comparePassword`, option);
     if(!response.ok)return undefined;
     const data = await response.json();
     

@@ -4,7 +4,7 @@ const logger = require('morgan');
 const cors = require('cors');
 
 const corsOptions = {
-  origin: ['http://localhost:3000'],
+  origin: ['http://localhost:3000', 'https://iwezix.github.io'],
 };
 
 const authsRouter = require('./routes/auths');
