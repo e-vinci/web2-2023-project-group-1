@@ -294,9 +294,8 @@ async function affichageList(list,userId) {
       const masterPassword = await checkPassword(userId);
 
       if (masterPassword !== null) {
-        // afficher mdp
         rightDiv.innerHTML = '';
-        afficherSite(userId, elem.id, masterPassword);
+        afficherSite(userId, element.id, masterPassword);
       } else {
         // si le mot de passe est pas le bon
       }
