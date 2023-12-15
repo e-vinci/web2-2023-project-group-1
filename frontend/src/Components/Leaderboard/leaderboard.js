@@ -3,6 +3,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
 import anime from 'animejs';
+import Navigate from '../Router/Navigate';
 
 const checkleaderboard = `
 <h3 class="ml12 mt-5 pt-5 text-center">Les pires mots de passe</h3>
@@ -25,6 +26,11 @@ const checkleaderboard = `
 
 async function afficherMdp() {
     const reponse = await fetch(`${process.env.API_BASE_URL}/leaderboard/leaderboard`);
+
+    if (!reponse.ok) {
+        Navigate('/500');
+        return;
+    }
 
     const tableau = document.querySelector('#tableau');
 

@@ -1,5 +1,7 @@
 import { decryption, encryption } from '../../utils/cryptPassword';
 
+import Navigate from '../Router/Navigate';
+
 async function afficherSite(userId, idSite, password) {
   let option = {
     method: 'POST',
@@ -13,7 +15,7 @@ async function afficherSite(userId, idSite, password) {
   };
   let response = await fetch(`${process.env.API_BASE_URL}/sites/getSiteById`, option);
   if (!response.ok) {
-    console.log("Error can't get the site because response is not ok");
+    Navigate('/500');
   }
   const site = await response.json();
 
@@ -93,7 +95,7 @@ async function afficherSite(userId, idSite, password) {
     };
     response = await fetch(`${process.env.API_BASE_URL}/sites/deleteSite`, option);
     if (!response) {
-      console.log("Error can't delete the site because response is not ok");
+      Navigate('/500');
     } else {
       window.location.reload();
     }
@@ -139,7 +141,7 @@ async function afficherSite(userId, idSite, password) {
     };
     response = await fetch(`${process.env.API_BASE_URL}/sites/updateSite`, option);
     if (!response) {
-      console.log("Error can't delete the site because response is not ok");
+      Navigate('/500');
     } else {
       window.location.reload();
     }

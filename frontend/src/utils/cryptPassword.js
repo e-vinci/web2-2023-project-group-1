@@ -9,7 +9,6 @@ import { getAuthenticatedUser } from './auths';
  * @returns password encrypted
  */
  const   encryption = async (text, password,id)=>{
-    console.log('ici');
     const option = {
         method: 'POST',
         body: JSON.stringify({
@@ -22,11 +21,8 @@ import { getAuthenticatedUser } from './auths';
         }
     }
     const response = await fetch(`${process.env.API_BASE_URL}/auths/passwordCheck`, option);
-    console.log(response.ok);
     if(!response.ok)return undefined;
-    console.log(text);
     const encrypted = CryptoJS.Rabbit.encrypt(text,password).toString();
-    console.log(encrypted);
     return encrypted;
 };
 
@@ -49,9 +45,7 @@ import { getAuthenticatedUser } from './auths';
     if (data !== 1) {
         alert('Mot de passe maitre incorrect');
     } else {
-        console.log(encrypted);
         const decrypted = CryptoJS.Rabbit.decrypt(encrypted, password).toString(CryptoJS.enc.Utf8);
-        console.log(decrypted)
          return decrypted;
     }
     return undefined

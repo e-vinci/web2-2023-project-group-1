@@ -102,7 +102,7 @@ router.post('/orderByDate', (req, res) => {
 router.post('/getSiteById', (req, res) => {
   const userId = parseInt(req?.body?.userId, 10);
   const siteId = parseInt(req?.body?.siteId, 10);
-  
+
   if (!userId || !siteId) {
     return res.sendStatus(400);
   }

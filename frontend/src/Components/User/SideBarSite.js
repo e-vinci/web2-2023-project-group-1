@@ -8,6 +8,7 @@ import { getAuthenticatedUser } from '../../utils/auths';
 import afficherSite from './AfficherSite';
 
 import afficherDuplicatePassword from './AfficherDuplicatePassword';
+import Navigate from '../Router/Navigate';
 
 const sidebarToFill = `<!--Main Navigation-->
 <header>
@@ -253,7 +254,7 @@ async function getlistName() {
 
   const response = await fetch(`${process.env.API_BASE_URL}/sites/orderBySiteName`, option);
   if (!response.ok) {
-    console.log("Error can't access the list because response is not ok");
+    Navigate('/500');
   }
   const list = await response.json();
   return list;
@@ -270,7 +271,7 @@ async function getlistDate() {
 
   const response = await fetch(`${process.env.API_BASE_URL}/sites/orderByDate`, option);
   if (!response.ok) {
-    console.log("Error can't access the list because response is not ok");
+    Navigate('/500');
   }
   const list = await response.json();
   return list;

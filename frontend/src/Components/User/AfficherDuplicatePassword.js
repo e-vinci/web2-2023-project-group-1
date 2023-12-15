@@ -3,6 +3,8 @@
 import { decryption } from '../../utils/cryptPassword';
 import { getAuthenticatedUser } from '../../utils/auths';
 
+import Navigate from '../Router/Navigate';
+
 const checkDuplicatePassword = `
 <section class="d-flex align-items-center justify-content-center">
   <table id="duplicatePassword" class="table table-striped table-hover">
@@ -46,7 +48,7 @@ async function afficherDuplicatePassword(password) {
         }),
       );
     } catch (error) {
-      console.error(error);
+      Navigate('/500');
     }
   }
 
@@ -74,7 +76,7 @@ async function getlist() {
 
   const response = await fetch(`${process.env.API_BASE_URL}/sites/orderBySiteName`, option);
   if (!response.ok) {
-    console.log("Error can't access the list because response is not ok");
+    Navigate('/500');
   }
   const list = await response.json();
   return list;
