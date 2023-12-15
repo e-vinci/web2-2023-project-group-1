@@ -94,9 +94,9 @@ async function showSideBar() {
 
   const buttonaddSit = document.createElement('tr');
   const elemAdd = document.createElement('button');
-  elemAdd.innerHTML = 'Ajouter un site';
+  elemAdd.innerHTML = '+';
   elemAdd.setAttribute('type', 'button');
-  elemAdd.setAttribute('class', 'btn btn-secondary btn-lg btn-block m-1');
+  elemAdd.setAttribute('class', 'btn btn-secondary btn-lg btn-block m-1 rounded-circle');
   elemAdd.setAttribute('id', 'addButton');
   UppersideBar.appendChild(elemAdd);
 
@@ -287,6 +287,7 @@ async function affichageList(list,userId) {
     elem.innerHTML = element.site;
     elem.setAttribute('type', 'button');
     elem.setAttribute('class', 'btn btn-secondary btn-lg btn-block m-1');
+    elem.setAttribute('id', 'siteButton');
     elem.addEventListener('click', async (e) => {
       e.preventDefault();
 
