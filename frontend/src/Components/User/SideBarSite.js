@@ -10,20 +10,23 @@ import afficherSite from './AfficherSite';
 import afficherDuplicatePassword from './AfficherDuplicatePassword';
 
 const sidebarToFill = `<!--Main Navigation-->
-  <header>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 listSite overflow-auto" id="listSite">
-        <div class="UpperlistSite overflow-auto m-1">  
-          <div class="d-flex justify-content-center">
-            <div class="btn-group" id="btnGroup" role="group" aria-label="Basic radio toggle button group">
-              <input type="radio" class="btn-check" name="btnradio" id="OrdreName" autocomplete="off" checked >
-                <label class="btn btn-outline-secondary" for="OrdreName">Nom</label>
-              <input type="radio" class="btn-check" name="btnradio" id="OrderDate" autocomplete="off" >
-                <label class="btn btn-outline-secondary" for="OrderDate">Date</label>
+<header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 listSite overflow-auto" id="listSite">
+      <div class="UpperlistSite ">  
+        <div class="d-flex justify-content-center" >
+          <div class="dropdown">
+          <a type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+           Filtrer
+          </a>
+            <div class="dropdown-menu">
+              <button class="dropdown-item" href="#" id="filterByName">Nom</button>
+              <button class="dropdown-item" href="#" id="filterByDate">Date</button>
             </div>
           </div>
         </div>
+      </div>
       <div  id="liste">
       </div>
     </div>
@@ -218,35 +221,24 @@ async function showSideBar() {
 
   buttonaddSit.appendChild(elemAdd);
   UppersideBar.appendChild(buttonaddSit);
-  let list = await getlistName();
+  const list = await getlistName();
   affichageList(list, userId);
 
 
-  const name = document.querySelector('#OrdreName');
-  const date = document.querySelector('#OrderDate');
+  const nameFilter = document.querySelector('#filterByName');
+  const dateFilter = document.querySelector('#filterByDate');
 
-  name.addEventListener('click', async (e) => { 
+  nameFilter.addEventListener('click', async (e) => {
     e.preventDefault();
-  list = await getlistName();
-  affichageList(list,userId);
- name.checked = true;
-  date.checked = false;
+    const liste = await getlistName();
+    affichageList(liste, userId);
+  });
 
-});
-
-date.addEventListener('click', async (e) => { 
+  dateFilter.addEventListener('click', async (e) => {
     e.preventDefault();
-  list = await getlistDate();
-  affichageList(list,userId);
-date.checked = true;
-name.checked = false;
-
-
-
-
-});
-
-
+    const liste = await getlistDate();
+    affichageList(liste, userId);
+  });
 
 }
 
