@@ -124,3 +124,7 @@ body {
     width: 230px;
     text-align: justify;
 }
+
+#reload {
+    width: 20px;
+}
