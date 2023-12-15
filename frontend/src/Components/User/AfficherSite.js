@@ -16,7 +16,6 @@ async function afficherSite(userId, idSite, password) {
     console.log("Error can't get the site because response is not ok");
   }
   const site = await response.json();
-  console.log(site.mot_de_passe);
 
   const mdp = await decryption(site.mot_de_passe, password);
 
@@ -118,14 +117,12 @@ async function afficherSite(userId, idSite, password) {
   const modifyButton = document.querySelector('#modifyButton');
   modifyButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    console.log('ici');
 
     const updatedLogin = document.querySelector('#loginInput').value;
     const updatedUrl = document.querySelector('#urlInput').value;
     const updatedSite = document.querySelector('#siteInput').value;
     let updatepassword = document.querySelector('#passwordInput').value;
     updatepassword = await encryption(updatepassword, password, userId);
-    console.log(updatepassword);
     option = {
       method: 'PATCH',
       body: JSON.stringify({

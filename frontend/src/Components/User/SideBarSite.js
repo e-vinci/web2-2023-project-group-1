@@ -14,9 +14,9 @@ const sidebarToFill = `<!--Main Navigation-->
   <div class="container">
     <div class="row">
       <div class="col-md-6 listSite overflow-auto" id="listSite">
-        <div class="col-md-6 UpperlistSite overflow-auto">  
-          <div class="d-flex justify-content-center" >
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <div class="UpperlistSite overflow-auto m-1">  
+          <div class="d-flex justify-content-center">
+            <div class="btn-group" id="btnGroup" role="group" aria-label="Basic radio toggle button group">
               <input type="radio" class="btn-check" name="btnradio" id="OrdreName" autocomplete="off" checked >
                 <label class="btn btn-outline-secondary" for="OrdreName">Nom</label>
               <input type="radio" class="btn-check" name="btnradio" id="OrderDate" autocomplete="off" >
@@ -91,9 +91,9 @@ async function showSideBar() {
 
   const buttonaddSit = document.createElement('tr');
   const elemAdd = document.createElement('button');
-  elemAdd.innerHTML = 'Ajouter un site';
+  elemAdd.innerHTML = '+';
   elemAdd.setAttribute('type', 'button');
-  elemAdd.setAttribute('class', 'btn btn-secondary btn-lg btn-block m-1');
+  elemAdd.setAttribute('class', 'btn btn-secondary btn-lg btn-block m-1 rounded-circle');
   elemAdd.setAttribute('id', 'addButton');
   UppersideBar.appendChild(elemAdd);
 
@@ -295,6 +295,7 @@ async function affichageList(list,userId) {
     elem.innerHTML = element.site;
     elem.setAttribute('type', 'button');
     elem.setAttribute('class', 'btn btn-secondary btn-lg btn-block m-1');
+    elem.setAttribute('id', 'siteButton');
     elem.addEventListener('click', async (e) => {
       e.preventDefault();
 

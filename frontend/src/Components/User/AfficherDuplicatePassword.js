@@ -18,7 +18,6 @@ async function afficherDuplicatePassword(password) {
   const rightDiv = document.querySelector('.right');
   rightDiv.innerHTML = checkDuplicatePassword;
   const list = await getlist();
-  console.log(list.length);
 
   let hasDuplicates = true;
 
@@ -33,9 +32,7 @@ async function afficherDuplicatePassword(password) {
               const password2 = await decryption(element.mot_de_passe, password);
 
               if (elem.id > element.id && password1 === password2) {
-                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
                 hasDuplicates = false;
-                console.log(hasDuplicates);
 
                 const line = document.querySelector('#duplicatePassword');
                 const ligneDoublon = document.createElement('tr');
@@ -53,12 +50,8 @@ async function afficherDuplicatePassword(password) {
     }
   }
 
-  console.log('?????????????????????????????????????');
-  console.log(hasDuplicates);
 
   if (hasDuplicates) {
-    console.log('?????????????????????????????????????');
-    console.log(hasDuplicates);
 
     const line = document.querySelector('#duplicatePassword');
     const ligneDoublon = document.createElement('td');
