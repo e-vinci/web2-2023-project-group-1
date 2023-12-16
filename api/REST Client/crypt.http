@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
 
-### Try to login an unknow user
+### Try to login an unknow user OK
 POST {{baseUrl}}/auths/passwordCheck
 Content-Type: application/json
 

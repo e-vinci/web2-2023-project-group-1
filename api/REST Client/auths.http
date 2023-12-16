@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
 
-### Try to login an unknow user
+### Try to login an unknow user KO
 POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
@@ -9,16 +9,8 @@ Content-Type: application/json
     "password":"admin"
 }
 
-### Try to login an unknow user
-POST {{baseUrl}}/auths/login
-Content-Type: application/json
 
-{
-    "username":"unknown",
-    "password":"admin"
-}
-
-### Login the default admin
+### Login the default admin OK
 POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
@@ -28,45 +20,37 @@ Content-Type: application/json
 }
 
 
-### Create the manager user
+### Create the manager user OK
 POST {{baseUrl}}/auths/register
 Content-Type: application/json
 
 {
-    "login":"kilian",
-    "email":"kilian.desmet@student.vinci.be",
+    "login":"azerty",
+    "email":"azerty.abc@student.vinci.be",
     "password":"azerty"
 }
 
-### Login the manager user
-POST {{baseUrl}}/auths/login
+### Create an already existing user KO
+POST {{baseUrl}}/auths/register
 Content-Type: application/json
 
 {
-    "username":"manager",
-    "password":"manager"
+    "login":"azerty",
+    "email":"azerty.abc@student.vinci.be",
+    "password":"azerty"
 }
 
-
-### Get id from username (5)
+### Get id from username OK
 POST {{baseUrl}}/auths/readUserFromUsername
 Content-Type: application/json
 
 {
     "username": "admin"
+
 }
 
 
-<<<<<<< HEAD
-### Get id from username (5)
-POST {{baseUrl}}/auths/readUserFromUsername
-Content-Type: application/json
-
-{
-    "username": "admin"
-}
-
-### Compare a password
+### Compare a password OK
 POST {{baseUrl}}/auths/comparePassword
 Content-Type: application/json
 
@@ -74,53 +58,3 @@ Content-Type: application/json
     "username": "admin",
     "password": "admin"
 }
-
-### Compare a password
-POST {{baseUrl}}/auths/comparePassword
-Content-Type: application/json
-
-{
-    "username": "admin2",
-    "password": "admin"
-}
-
-
-=======
->>>>>>> 674c4db (add: start add new password)
-### Get id from username
-GET {{baseUrl}}/auths/readUserFromUsername
-Content-Type: application/json
-
-{
-    "username": "admin"
-}
-
-<<<<<<< HEAD
-
-### Get id from username (5)
-POST {{baseUrl}}/auths/readUserFromUsername
-Content-Type: application/json
-
-{
-    "username": "admin"
-}
-
-### Compare a password
-POST {{baseUrl}}/auths/comparePassword
-Content-Type: application/json
-
-{
-    "username": "admin",
-    "password": "admin"
-}
-
-### Compare a password
-POST {{baseUrl}}/auths/comparePassword
-Content-Type: application/json
-
-{
-    "username": "admin2",
-    "password": "admin"
-}
-=======
->>>>>>> 674c4db (add: start add new password)
