@@ -1,6 +1,9 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable object-curly-newline */
 const express = require('express');
+const nodeMailer = require('nodemailer');
+require('dotenv').config();
+
 const { register, login, passwordCheck, readIdFromUsername, comparePassword } = require('../models/users');
 
 const router = express.Router();
@@ -16,6 +19,12 @@ router.post('/register', async (req, res) => {
   const authenticatedUser = await register(username, email, password);
 
   if (!authenticatedUser) return res.sendStatus(409); // 409 Conflict
+
+  try {
+    await sendMail(email);
+  } catch (err) {
+    console.log(err);
+  }
 
   return res.json(authenticatedUser);
 });
@@ -70,5 +79,29 @@ router.post('/comparePassword', async (req, res) => {
 
   return res.json(returned);
 });
+
+async function sendMail(email) {
+  const html = `
+    <h1>Test</h1>
+    <p>Test</p>
+  `;
+
+  const transporter = nodeMailer.createTransport({
+    host: 'smtp.gmail.email',
+    secure: false,
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASS,
+    },
+  });
+
+  await transporter.sendMail({
+    from: 'DontHackMe <donthackme.vinci@gmail.com>',
+    to: email,
+    subject: 'Test',
+    html,
+  });
+}
 
 module.exports = router;
