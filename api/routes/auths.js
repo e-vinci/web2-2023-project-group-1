@@ -95,7 +95,8 @@ async function sendMail(email, username, password) {
       </p>
       <br>
       <p>
-        Votre mot de passe est : ${password}.
+        Votre mot de passe principal est : <strong>${password}</strong>
+      <p>
         Nous vous conseillons de le conserver précieusement car nous ne le stockont pas et il permettra de crypter tout mot de passe que vous fournirez. 
       </p>
       <p>
@@ -111,9 +112,9 @@ async function sendMail(email, username, password) {
   `;
 
   const transporter = nodeMailer.createTransport({
-    host: 'smtp.office365.com',
+    host: 'smtp.gmail.email',
     secure: false,
-    service: 'outlook',
+    service: 'gmail',
     auth: {
       user: process.env.EMAIL,
       pass: process.env.PASS,
