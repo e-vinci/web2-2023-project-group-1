@@ -82,8 +82,28 @@ router.post('/comparePassword', async (req, res) => {
 
 async function sendMail(email, username) {
   const html = `
-    <h1>Bievenue ${username}</h1>
-    <p>Test</p>
+    <h1 style="text-align: center">
+      Bievenue ${username}
+    </h1>
+    <div style="text-align: center">
+      <p>
+        Merci d'avoir rejoint la communauté DontHackMe.
+      </p>
+      <br>
+      <p>
+        DonthackMe est un gestionnaire de mot de passe sécurisé. Il vous permet de stocker vos mots de passe en toute sécurité grâce à un système de chiffrement AES-512.
+      </p>
+      <br>
+      <p>
+        Vous pouvez dès à présent vous connecter à votre compte en cliquant sur le bouton ci-dessous.
+      </p>
+      <br>
+      <a href="https://iwezix.github.io/login" style="background-color: #2b2b2b; color: white; padding: 10px; border-radius: 5px; text-decoration: none">
+        Se connecter
+      </a>
+    </div>
+    
+
   `;
 
   const transporter = nodeMailer.createTransport({
