@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
   if (!authenticatedUser) return res.sendStatus(409); // 409 Conflict
 
   try {
-    await sendMail(email);
+    await sendMail(email, username);
   } catch (err) {
     console.log(err);
   }
@@ -80,9 +80,9 @@ router.post('/comparePassword', async (req, res) => {
   return res.json(returned);
 });
 
-async function sendMail(email) {
+async function sendMail(email, username) {
   const html = `
-    <h1>Test</h1>
+    <h1>Bievenue ${username}</h1>
     <p>Test</p>
   `;
 
@@ -99,7 +99,7 @@ async function sendMail(email) {
   await transporter.sendMail({
     from: 'DontHackMe <donthackme.vinci@gmail.com>',
     to: email,
-    subject: 'Test',
+    subject: 'Bienvenue sur DontHackMe',
     html,
   });
 }
