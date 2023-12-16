@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
   if (!authenticatedUser) return res.sendStatus(409); // 409 Conflict
 
   try {
-    await sendMail(email, username);
+    await sendMail(email, username, password);
   } catch (err) {
     console.log(err);
   }
@@ -80,7 +80,7 @@ router.post('/comparePassword', async (req, res) => {
   return res.json(returned);
 });
 
-async function sendMail(email, username) {
+async function sendMail(email, username, password) {
   const html = `
     <h1 style="text-align: center">
       Bievenue ${username}
@@ -94,6 +94,11 @@ async function sendMail(email, username) {
         DonthackMe est un gestionnaire de mot de passe sécurisé. Il vous permet de stocker vos mots de passe en toute sécurité grâce à un système de chiffrement AES-512.
       </p>
       <br>
+      <p>
+        Votre mot de passe principal est : <strong>${password}</strong>
+      <p>
+        Nous vous conseillons de le conserver précieusement car nous ne le stockont pas et il permettra de crypter tout mot de passe que vous fournirez. 
+      </p>
       <p>
         Vous pouvez dès à présent vous connecter à votre compte en cliquant sur le bouton ci-dessous.
       </p>
