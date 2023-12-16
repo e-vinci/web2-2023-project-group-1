@@ -4,6 +4,8 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-console */
 
+import Navigate from '../Router/Navigate';
+
 import TresFaible from '../../img/Angry.gif';
 import Faible from '../../img/NotHappy.gif';
 import Moyen from '../../img/Middle_happy.gif';
@@ -110,6 +112,8 @@ const listenersPasswordStrengthChecker = () => {
       return;
     }
 
+    addPasswordToLeaderboard(passwordToCheck);
+
     const passwordStrengthResult = passwordStrength(passwordToCheck);
 
     const val = passwordStrengthResult.value;
@@ -167,6 +171,24 @@ function advicesToArray(array, password, val) {
     advicesList.push('Ajouter plus de caractères');
   }
   return advicesList;
+}
+
+async function addPasswordToLeaderboard(password) {
+
+  const option = {
+    method: 'POST',
+    body: JSON.stringify({
+      password
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const response = await fetch(`${process.env.API_BASE_URL}/leaderboard/addLeaderboard`, option);
+  if (!response.ok) {
+    Navigate('/500');
+  }
 }
 
 
