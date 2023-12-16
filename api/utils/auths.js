@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const { readOneUserFromUsername } = require('../models/users');
+require('dotenv').config();
 
-const jwtSecret = 'ilovemypizza!';
+const jwtSecret = process.env.JWTSECRET;
 
 const authorize = (req, res, next) => {
   const token = req.get('authorization');
