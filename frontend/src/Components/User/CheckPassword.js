@@ -9,8 +9,10 @@ const checkPassword = async (userId) => {
     const masterPassword = prompt('Entrez votre mot de passe maitre', '');
     if (masterPassword === null) {
         alert('Veillez entrer votre mot de passe maitre');
+        window.location.reload();
     } else if(masterPassword === ''){
         alert('Mot de passe maitre incorrect');
+        window.location.reload();
     }else{
 
     const optionCompare = {
