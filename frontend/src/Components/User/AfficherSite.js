@@ -23,7 +23,9 @@ async function afficherSite(userId, idSite, password) {
 
   const rightSide = document.querySelector('.right');
   rightSide.innerHTML = `
-<div class="container-fluid p-5 shadow p-3 mb-5 bg-body-tertiary rounded border-top border-primary border-3">
+<div class="container-fluid p-5 shadow p-3 mb-5 bg-body-tertiary rounded border-top border-primary border-3" style="width: 115%;">
+<button type="button" class="btn-close float-end" id="CLOSE" aria-label="Close"></button>
+
     <h1 style="font-family:Poppins, sans-serif;color:#4070f4">Site Information <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAkBJREFUWEftWFtOwzAQnAh+kNI7tCfBPQn0BrkB5Qa+AeUkmJOQOzQSP0WBTRx17dhemxZRISIhPvLw7OzMPlrhwq7qwvDgbwBSzfsSONwD1S2Apf1rLdv0vwX6Z6MXpjQDRQypZr8FqoeCQyZg29x3sgCpZq+A6skykftt/lw2MBFQhJXhAAAGuG6NvmnHNNJ1WALV3dc9NQ+gfzR6kWQrCUg13Yv98BRtdqRMZwTOgh0+szO63sRojgIKMGOMrtel+WLAmPbiTAUBWc0QO9OVjEoCGQaFjdH1zn83Aqh7YzQnmRnBD3qhy8SsPoL6IJbup/JgdL0SAammoxfIUeMJuhZ0xktBWrQWFDFvNTV/fnaYahx2grTyqFytyS7yAm59lhxApewQsNyUTUFYligDNs39mqfZB0QPTjk+ScgpoadY9QHxuiOmS3JX7L7nYsc0PiDmrqsVVWDp0NKUjWkeHEdn0eXoyAfU57rrqIl8l3k6uhxAI0tdMPhzpIyNJLLtS1PGRO3aMSHQbwByim9K1M4AlmX70sJo0xUtL17KhkFsaqqzKhpi6ZuAmJsThdEXGxDuyGdsHbNeGeplvLmKLJUyJPXKAKChaLGOnJ7wSgqjN4EGg43NQ84IAuTZOd2/Oi5kAGEX//gIa3XpzeaFI2y4LYx9xy6AWXtWZGNJTqAnrEG0AtEqFFqDaNYJLZRy6kVAxyHs5EVxk7NaZwE69p9hn//9Vdp3j/xjQ/+a2kBSbsxmSBrUznX/H5DE5CeBvY40mQg3gQAAAABJRU5ErkJggg=="/></h1>
    
     <div class="d-flex justify-content-between align-items-center"> 
@@ -146,6 +148,13 @@ async function afficherSite(userId, idSite, password) {
       window.location.reload();
     }
   });
+
+  const closeButton = document.querySelector('#CLOSE');
+  closeButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+    window.location.reload()
+  });
+
 }
 
 export default afficherSite;
