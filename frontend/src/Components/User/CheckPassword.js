@@ -7,7 +7,9 @@ const checkPassword = async (userId) => {
     const user = getAuthenticatedUser();
 
     const masterPassword = prompt('Entrez votre mot de passe maitre', '');
-    if(masterPassword === ''){
+    if (masterPassword === null) {
+        alert('Veillez entrer votre mot de passe maitre');
+    } else if(masterPassword === ''){
         alert('Mot de passe maitre incorrect');
     }else{
 

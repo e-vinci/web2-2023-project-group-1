@@ -150,8 +150,7 @@ async function afficherSite(userId, idSite, password) {
   });
 
   const closeButton = document.querySelector('#CLOSE');
-  closeButton.addEventListener('click', async (e) => {
-    e.preventDefault();
+  closeButton.addEventListener('click', async () => {
     window.location.reload()
   });
 

@@ -38,6 +38,7 @@ const sidebarToFill = `<!--Main Navigation-->
 
 const addPasswordForm = `
 <section class="p-5 shadow p-3 mb-5 bg-body-tertiary rounded border-top border-primary border-3">
+<button type="button" class="btn-close float-end" id="closeAddForm" aria-label="Close"></button>
   <h1>Ajouter un mot de passe</h1>
     <form id="registrationForm" class="mt-3">
       <div class="mb-3">
@@ -125,6 +126,11 @@ async function showSideBar() {
     rightDiv.innerHTML = '';
     rightDiv.innerHTML = addPasswordForm;
     submitPasswordButton = document.querySelector('#submitPassword');
+    const closeAddForm = document.querySelector('#closeAddForm');
+
+    closeAddForm.addEventListener('click', () => {
+      window.location.reload();
+    });
 
     submitPasswordButton.addEventListener('click', async (e) => {
       e.preventDefault();
