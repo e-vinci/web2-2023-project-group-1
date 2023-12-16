@@ -16,7 +16,7 @@ const defaultUsers = [
     id: 1,
     username: 'admin',
     password: bcrypt.hashSync('admin', saltRounds),
-    sites: {},
+    sites: [],
   },
 ];
 
