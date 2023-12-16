@@ -80,7 +80,7 @@ router.post('/comparePassword', async (req, res) => {
   return res.json(returned);
 });
 
-async function sendMail(email, username,password) {
+async function sendMail(email, username, password) {
   const html = `
     <h1 style="text-align: center">
       Bievenue ${username}
@@ -111,9 +111,9 @@ async function sendMail(email, username,password) {
   `;
 
   const transporter = nodeMailer.createTransport({
-    host: 'smtp.gmail.email',
+    host: 'smtp.office365.com',
     secure: false,
-    service: 'gmail',
+    service: 'outlook',
     auth: {
       user: process.env.EMAIL,
       pass: process.env.PASS,
