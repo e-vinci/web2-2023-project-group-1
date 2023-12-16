@@ -17,7 +17,7 @@ const modalGDPR = `
     </div>
 `;
 const text = `
-<h5>Dernière mise à jour : [15/12/2023]</h5>
+<h5>Dernière mise à jour : [17/12/2023]</h5>
 <p>
     Bienvenue sur Don't Hack Me, le service de vérification de mots de passe. Chez Don't Hack Me, 
     nous accordons une grande importance à la protection de vos données personnelles et nous nous engageons à respecter votre vie privée conformément au Règlement général sur la protection des données (RGPD).
