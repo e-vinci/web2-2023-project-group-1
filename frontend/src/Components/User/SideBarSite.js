@@ -14,8 +14,8 @@ const sidebarToFill = `<!--Main Navigation-->
 <header>
 <div class="container">
   <div class="row">
-    <div class="col-md-6 listSite overflow-auto" id="listSite">
-      <div class="UpperlistSite ">  
+    <div class="col-md-6 listSite overflow-auto" id="listSite" style="overflow-x: hidden;">
+      <div class="UpperlistSite">  
         <div class="d-flex justify-content-center" >
           <div class="dropdown">
           <a type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
