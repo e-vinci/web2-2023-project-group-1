@@ -1,0 +1,14 @@
+@baseUrl = http://localhost:3000
+
+### add or update a leaderboard OK
+POST {{baseUrl}}/leaderboard/addLeaderboard
+Content-Type: application/json
+
+{
+    "password": "password12"
+}
+
+### get leaderboard OK
+GET {{baseUrl}}/leaderboard/leaderboard
+Content-Type: application/json
+

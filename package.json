@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "check-password-strength": "^2.0.7",
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.1.1",
+    "escape-html": "^1.0.3"
+  }
+}
