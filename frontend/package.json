@@ -8,7 +8,7 @@
     "build": "webpack --mode production --config webpack.config.prod.js && cp dist/index.html dist/404.html",
     "start": "webpack serve --mode development --config webpack.config.base.js"
   },
-  "author": "e-baron",
+  "author": "Chen Wenlin, Desmet Killian,  Nicolas Luca, Thomas Johnen, Mouayna Lotfi ",
   "license": "CC-BY-SA-4.0",
   "devDependencies": {
     "@babel/core": "^7.14.3",
