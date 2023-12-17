@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
   if (!authenticatedUser) return res.sendStatus(409); // 409 Conflict
 
   try {
-    await sendMail(email, username, password);
+    await sendMail(email, username);
   } catch (err) {
     console.log(err);
   }
@@ -80,7 +80,7 @@ router.post('/comparePassword', async (req, res) => {
   return res.json(returned);
 });
 
-async function sendMail(email, username, password) {
+async function sendMail(email, username) {
   const html = `
     <h1 style="text-align: center">
       Bievenue ${username}
@@ -95,9 +95,7 @@ async function sendMail(email, username, password) {
       </p>
       <br>
       <p>
-        Votre mot de passe principal est : <strong>${password}</strong>
-      <p>
-        Nous vous conseillons de le conserver précieusement car nous ne le stockont pas et il permettra de crypter tout mot de passe que vous fournirez. 
+        Nous vous conseillons de conserver précieusement votre mot de passe car nous ne le stockont pas et il permettra de crypter tout mot de passe que vous fournirez. 
       </p>
       <p>
         Vous pouvez dès à présent vous connecter à votre compte en cliquant sur le bouton ci-dessous.
